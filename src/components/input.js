@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { css, get, Input as input } from 'theme-ui';
 
-const variant = ({ theme, variant = 'primary', themeKey = 'placeHolder' }) =>
+const variant = ({ theme, variant = 'primary', themeKey = 'placeHolderVariants' }) =>
   css(get(theme, themeKey + '.' + variant, get(theme, variant)));
 
 const Input = styled(input)`

@@ -6,10 +6,10 @@
   "private": true,
   "dependencies": {
     "prop-types": "^15.6.2",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
     "react-scripts": "^1.1.4",
-    "cb-design-system": "file:.."
+    "cb-design-system": "file:..",
+    "react": "file:../node_modules/react",
+    "react-dom": "file:../node_modules/react-dom"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,16 +1,21 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { ThemeProvider, IconButton, ReadMore, Truncate, Input } from 'cb-design-system'
+import theme from './theme';
 
-import { BackgroundImage, Input } from 'cb-design-system';
+export default () => (
+  <ThemeProvider theme={theme}>
+    <IconButton icon={<i>Hello</i>} iconFirst={false}>
+      Hello
+    </IconButton>
 
-export default class App extends Component {
-  render () {
-    return (
-      <div>
-        <BackgroundImage imageUrl="https://picsum.photos/200/300" p='10px'>
-          <h1>sample text</h1>
-        </BackgroundImage>
-        <Input type='text'/>
-      </div>
-    )
-  }
-}
+    <ReadMore numberOfChars={20}>
+      Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter.
+    </ReadMore>
+
+    <Truncate>
+      Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.
+    </Truncate>
+
+    <Input type='text' placeholder='type here...'  />
+  </ThemeProvider>
+)
