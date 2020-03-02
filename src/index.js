@@ -12,7 +12,7 @@ export default class ExampleComponent extends Component {
     } = this.props
 
     return (
-      <div className={styles.test}>
+      <div>
         Example Component: {text}
       </div>
     )
