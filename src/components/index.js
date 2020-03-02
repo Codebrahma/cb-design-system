@@ -1,10 +1,8 @@
-import BackgroundImage from './backgroundImage';
-import Input from './input';
+export * from 'theme-ui';
 
 export * from './position';
-export * from 'theme-ui';
-export { BackgroundImage, Input };
-
+export BackgroundImage from './backgroundImage';
+export Input from './input';
 export IconButton from './iconButton';
 export Truncate from './truncate';
 export ReadMore from './readMore';
