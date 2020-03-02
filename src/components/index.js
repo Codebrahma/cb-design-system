@@ -1,1 +1,1 @@
-export LinkButton from './linkButton';
+export IconButton from './iconButton';
