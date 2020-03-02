@@ -1,6 +1,7 @@
 export default {
   colors: {
-    text: 'white',
+    text: '#000',
+    white: '#fff',
     primaryLight: '#4791db',
     primary: '#1976d2',
     primaryDark: '#115293',
@@ -24,7 +25,7 @@ export default {
 
   buttons: {
     primary: {
-      color: 'text',
+      color: 'white',
     }
-  }
+  },
 };
