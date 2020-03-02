@@ -12,8 +12,8 @@ IconButton.propTypes = {
   icon: PropTypes.element.isRequired,
   iconFirst: PropTypes.bool.isRequired,
   children: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.node,
+    PropTypes.arrayOf(PropTypes.node),
   ]).isRequired,
 };
 
