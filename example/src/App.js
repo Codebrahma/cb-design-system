@@ -1,13 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { ThemeProvider, IconButton } from 'cb-design-system'
 
-import ExampleComponent from 'cb-design-system'
-
-export default class App extends Component {
-  render () {
-    return (
-      <div>
-        <ExampleComponent text='Modern React component module' />
-      </div>
-    )
-  }
-}
+export default () => (
+  <ThemeProvider>
+    <IconButton icon={<i>Hello</i>} iconFirst={false}>Hello</IconButton>
+  </ThemeProvider>
+)
