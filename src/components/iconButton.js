@@ -4,7 +4,9 @@ import { Button } from 'theme-ui';
 
 const IconButton = ({ icon, iconFirst, children, ...otherProps }) => (
   <Button {...otherProps}>
-    {iconFirst ? [icon, children] : [children, icon]}
+    { iconFirst ? icon : null }
+    { children }
+    { iconFirst ? null : icon }
   </Button>
 );
 
