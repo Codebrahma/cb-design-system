@@ -1,4 +1,3 @@
-// import LinkButton from './linkButton';
 import BackgroundImage from './backgroundImage';
 import Input from './input';
 
