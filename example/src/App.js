@@ -47,7 +47,7 @@ export default () => (
     <br/>
     <Input type='text' placeholder='type here........'  />
   
-    <Hide when={2}><h1>asdasdsd</h1></Hide>
+    <Hide md><h1>asdasdsd</h1></Hide>
     
     <BoxWithBeforeAndAfter>Hello</BoxWithBeforeAndAfter>
 
