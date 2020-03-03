@@ -3,19 +3,17 @@ import PropTypes from 'prop-types';
 import { Box } from 'theme-ui';
 
 const withPosition = (comp, position) => {
-  const Positioning = ({top, bottom, left, right, zIndex}) => {
-    return `top: ${top};
-      bottom: ${bottom};
-      left: ${left};
-      right: ${right};
-      z-index: ${zIndex}
-    `;
-  };
+  const component = styled(comp)(
+    ({ top, bottom, left, right, zIndex }) => ({
+      position,
+      top,
+      bottom,
+      left,
+      right,
+      zIndex,
+    })
+  );
 
-  const component = styled(comp)`
-    position: ${position};
-    ${Positioning}
-  `;
   component.propTypes = {
     top: PropTypes.string,
     bottom: PropTypes.string,
@@ -23,6 +21,7 @@ const withPosition = (comp, position) => {
     left: PropTypes.string,
     zIndex: PropTypes.string,
   };
+
   component.defaultProps = {
     top: 'unset',
     bottom: 'unset',
@@ -34,27 +33,9 @@ const withPosition = (comp, position) => {
   return component;
 };
 
-const Position = styled(Box)``;
+const Relative = styled(Box)({ position: 'relative' });
+const Absolute = withPosition(Box, 'absolute');
+const Fixed = withPosition(Box, 'fixed');
+const Sticky = withPosition(Box, 'sticky');
 
-const Relative = styled(Position)`
-  position: relative;
-`;
-
-const Absolute = withPosition(Position, 'absolute');
-
-const Fixed = withPosition(Position, 'fixed');
-
-const Sticky = withPosition(Position, 'sticky');
-
-Position.relative = Relative;
-Position.absolute = Absolute;
-Position.fixed = Fixed;
-Position.sticky = Sticky;
-
-export {
-  Position,
-  Relative,
-  Absolute,
-  Fixed,
-  Sticky,
-};
+export { Relative, Absolute, Fixed, Sticky };

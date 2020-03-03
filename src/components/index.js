@@ -1,7 +1,6 @@
 export * from 'theme-ui';
 
 export {
-  Position,
   Relative,
   Absolute,
   Fixed,

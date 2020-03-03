@@ -11,7 +11,7 @@ import {
   withBeforeAfter,
   Background,
   Absolute,
-  Relative
+  Relative,
 } from 'cb-design-system'
 import theme from './theme';
 
@@ -50,7 +50,6 @@ export default () => (
     <Hide md><h1>asdasdsd</h1></Hide>
     
     <BoxWithBeforeAndAfter>Hello</BoxWithBeforeAndAfter>
-
 
     <Relative>
       <Background bgColor='red'>background</Background>
