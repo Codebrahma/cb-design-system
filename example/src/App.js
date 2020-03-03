@@ -1,6 +1,29 @@
 import React from 'react'
-import { ThemeProvider, IconButton, ReadMore, Truncate, Input, Hide } from 'cb-design-system'
+import {
+  ThemeProvider,
+  Box,
+  Hide,
+  IconButton,
+  Input,
+  ReadMore,
+  Truncate,
+  withBeforeAfter,
+} from 'cb-design-system'
 import theme from './theme';
+
+const BoxWithBeforeAndAfter = withBeforeAfter(Box, {
+  content: '""',
+  display: 'inline-block',
+  width: 10,
+  height: 10,
+  backgroundColor: 'tomato',
+}, {
+  content: '""',
+  display: 'inline-block',
+  width: 10,
+  height: 10,
+  backgroundColor: 'primary',
+});
 
 export default () => (
   <ThemeProvider theme={theme}>
@@ -15,11 +38,11 @@ export default () => (
     <Truncate>
       Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.
     </Truncate>
-
+  
     <Input type='text' placeholder='type here...'  />
-    <br/>
-
+  
     <Hide when={2}><h1>asdasdsd</h1></Hide>
     
+    <BoxWithBeforeAndAfter>Hello</BoxWithBeforeAndAfter>
   </ThemeProvider>
 )
