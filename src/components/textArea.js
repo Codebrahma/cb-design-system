@@ -1,33 +1,6 @@
-import styled from '@emotion/styled';
-import {
-  Textarea as textarea,
-} from 'theme-ui';
+import { Textarea as textarea } from 'theme-ui';
+import { withPlaceHolderVariant } from '../utils/placeholderVariant';
 
-import {
-  applyVariation,
-} from './../utils/getVariations';
-
-const variant = ({
-  theme,
-  variant = 'primary',
-  themeKey = 'placeholderVariants',
-}) => applyVariation(theme, variant, themeKey);
-
-const Textarea = styled(textarea)`
-  max-width: 100%;
-  
-  ::-webkit-input-placeholder {
-    ${variant}
-  }
-  ::-moz-placeholder {
-    ${variant}
-  }
-  :-ms-input-placeholder {
-    ${variant}
-  }
-  :-moz-placeholder {
-    ${variant}
-  }
-`;
+const Textarea = withPlaceHolderVariant(textarea);
 
 export default Textarea;

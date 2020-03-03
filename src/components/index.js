@@ -9,7 +9,7 @@ export {
 } from './position';
 export Background from './background';
 export Input from './input';
-export TextArea from './textArea';
+export Textarea from './textArea';
 export Select from './select';
 export IconButton from './iconButton';
 export Truncate from './truncate';

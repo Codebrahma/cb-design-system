@@ -5,6 +5,7 @@ import {
   Hide,
   IconButton,
   Input,
+  Textarea,
   ReadMore,
   Truncate,
   withBeforeAfter,
@@ -43,6 +44,8 @@ export default () => (
     </Truncate>
   
     <Input type='text' placeholder='type here...'  />
+    <br/>
+    <Input type='text' placeholder='type here........'  />
   
     <Hide when={2}><h1>asdasdsd</h1></Hide>
     
@@ -51,9 +54,12 @@ export default () => (
 
     <Relative>
       <Background bgColor='red'>background</Background>
-      <Absolute left={'250px'}>
+      <Absolute left={'250px'} top='0'>
         absolute
       </Absolute>
     </Relative>
+    <br/>
+    <Textarea placeholder='type heree...' />
+    <br/>
   </ThemeProvider>
 )
