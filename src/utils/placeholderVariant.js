@@ -3,14 +3,14 @@ import {
   applyVariation,
 } from './getVariations';
 
-const withPlaceHolderVariant = (comp) => {
+export default (comp) => {
   const variantStyles = ({
     theme,
     variant = 'primary',
     themeKey = 'placeholderVariants',
   }) => applyVariation(theme, variant, themeKey);
 
-  const Component = styled(comp)`
+  return styled(comp)`
     ::-webkit-input-placeholder {
       ${variantStyles}
     }
@@ -24,8 +24,4 @@ const withPlaceHolderVariant = (comp) => {
       ${variantStyles}
     }
   `;
-
-  return Component;
 };
-
-export { withPlaceHolderVariant };

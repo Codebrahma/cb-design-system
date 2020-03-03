@@ -1,4 +1,4 @@
 import { Textarea } from 'theme-ui';
-import { withPlaceHolderVariant } from '../utils/placeholderVariant';
+import withPlaceholderVariant from '../utils/placeholderVariant';
 
-export default withPlaceHolderVariant(Textarea);
+export default withPlaceholderVariant(Textarea);

@@ -4,26 +4,28 @@ import { Box } from 'theme-ui';
 const getValue = val => typeof val === 'string' ? val : val + 'px';
 
 const breakpoints = props => {
+  const { theme: { breakpoints } } = props;
+
   return {
-    xs: `@media screen and (min-width: ${getValue(props.theme.breakpoints[0])})`,
+    xs: `@media screen and (min-width: ${getValue(breakpoints[0])})`,
 
     sm: `@media screen and (min-width: ${
-      props.theme.breakpoints[0]
-    }) and (max-width: ${getValue(props.theme.breakpoints[1])})`,
+      breakpoints[0]
+    }) and (max-width: ${getValue(breakpoints[1])})`,
 
     md: `@media screen and (min-width: ${
-      props.theme.breakpoints[1]
-    }) and (max-width: ${getValue(props.theme.breakpoints[2])})`,
+      breakpoints[1]
+    }) and (max-width: ${getValue(breakpoints[2])})`,
 
     lg: `@media screen and (min-width: ${
-      props.theme.breakpoints[2]
-    }) and (max-width: ${getValue(props.theme.breakpoints[3])})`,
+      breakpoints[2]
+    }) and (max-width: ${getValue(breakpoints[3])})`,
 
     xl: `@media screen and (min-width: ${
-      props.theme.breakpoints[3]
+      breakpoints[3]
     })`,
 
-    xxl: `@media screen and (min-width: ${getValue(props.theme.breakpoints[4])})`,
+    xxl: `@media screen and (min-width: ${getValue(breakpoints[4])})`,
 
   };
 };

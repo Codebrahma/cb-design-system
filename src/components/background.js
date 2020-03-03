@@ -32,6 +32,8 @@ Background.propTypes = {
   position: PropTypes.string,
   attachment: PropTypes.string,
   clip: PropTypes.string,
+  url: PropTypes.string,
+  image: PropTypes.node,
 };
 
 Background.defaultProps = {
@@ -41,6 +43,8 @@ Background.defaultProps = {
   position: null,
   attachment: null,
   clip: null,
+  url: null,
+  image: null,
 };
 
 export default Background;

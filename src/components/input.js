@@ -1,4 +1,4 @@
 import { Input } from 'theme-ui';
-import { withPlaceHolderVariant } from '../utils/placeholderVariant';
+import withPlaceholderVariant from '../utils/placeholderVariant';
 
-export default withPlaceHolderVariant(Input);
+export default withPlaceholderVariant(Input);
