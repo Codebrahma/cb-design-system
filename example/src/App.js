@@ -1,5 +1,5 @@
 import React from 'react'
-import { ThemeProvider, IconButton, ReadMore, Truncate, Input } from 'cb-design-system'
+import { ThemeProvider, IconButton, ReadMore, Truncate, Input, Hide } from 'cb-design-system'
 import theme from './theme';
 
 export default () => (
@@ -17,5 +17,9 @@ export default () => (
     </Truncate>
 
     <Input type='text' placeholder='type here...'  />
+    <br/>
+
+    <Hide when={2}><h1>asdasdsd</h1></Hide>
+    
   </ThemeProvider>
 )
