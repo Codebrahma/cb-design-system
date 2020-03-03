@@ -1,31 +1,6 @@
-import styled from '@emotion/styled';
-import {
-  Input as input,
-} from 'theme-ui';
+import { Input as input } from 'theme-ui';
+import { withPlaceHolderVariant } from '../utils/placeholderVariant';
 
-import {
-  applyVariation,
-} from './../utils/getVariations';
-
-const variant = ({
-  theme,
-  variant = 'primary',
-  themeKey = 'placeholderVariants',
-}) => applyVariation(theme, variant, themeKey);
-
-const Input = styled(input)`
-  ::-webkit-input-placeholder {
-    ${variant}
-  }
-  ::-moz-placeholder {
-    ${variant}
-  }
-  :-ms-input-placeholder {
-    ${variant}
-  }
-  :-moz-placeholder {
-    ${variant}
-  }
-`;
+const Input = withPlaceHolderVariant(input);
 
 export default Input;
