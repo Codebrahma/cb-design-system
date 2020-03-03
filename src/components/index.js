@@ -1,7 +1,7 @@
 export * from 'theme-ui';
 
 export * from './position';
-export BackgroundImage from './background';
+export Background from './background';
 export Input from './input';
 export TextArea from './textArea';
 export Select from './select';

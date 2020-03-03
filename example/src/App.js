@@ -8,6 +8,7 @@ import {
   ReadMore,
   Truncate,
   withBeforeAfter,
+  Background,
 } from 'cb-design-system'
 import theme from './theme';
 
@@ -44,5 +45,6 @@ export default () => (
     <Hide when={2}><h1>asdasdsd</h1></Hide>
     
     <BoxWithBeforeAndAfter>Hello</BoxWithBeforeAndAfter>
+    <Background bgColor='red'>background</Background>
   </ThemeProvider>
 )
