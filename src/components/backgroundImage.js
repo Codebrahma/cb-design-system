@@ -5,7 +5,7 @@ const BackgroundImage = styled(Box)`
   ${({ imageUrl, image, size, repeat }) => ({
     backgroundImage: imageUrl ? `url(${imageUrl})` : image,
     backgroundSize: size || 'cover',
-    backgroundRepeat: repeat || 'no-repeat'
+    backgroundRepeat: repeat || 'no-repeat',
   })}
 `;
 
