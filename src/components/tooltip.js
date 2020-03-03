@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { Box, css } from 'theme-ui';
 
-const TooltipContainer = styled(Box)(
-  css({
-    position: 'relative',
-    display: 'inline-flex',
-  })
-);
+import { Absolute, Relative } from './position';
+
+const TooltipContainer = styled(Relative)({
+  display: 'inline-flex',
+});
 
 const TooltipToggler = styled(Box)(
   css({
@@ -18,14 +17,13 @@ const TooltipToggler = styled(Box)(
   })
 );
 
-const TooltipMessage = styled(Box)(
+const TooltipMessage = styled(Absolute)(
   ({ theme, bg = 'background', color = 'text' }) =>
     css({
       bg,
       color,
       px: 5,
       py: 4,
-      position: 'relative',
       whiteSpace: 'pre',
       textDecoration: 'none',
       zIndex: 2000,
@@ -46,7 +44,6 @@ const TooltipMessage = styled(Box)(
           mr: 2,
           top: '50%',
           right: '100%',
-          position: 'absolute',
           boxShadow: '0.5rem 0.5rem 1.5rem 0 rgba(0, 0, 0, 0.1)',
           '::after': {
             borderLeftColor: bg,
@@ -62,7 +59,6 @@ const TooltipMessage = styled(Box)(
           ml: 2,
           top: '50%',
           left: '100%',
-          position: 'absolute',
           boxShadow: '-0.5rem 0.5rem 1.5rem 0 rgba(0, 0, 0, 0.1)',
           '::after': {
             borderRightColor: bg,
@@ -78,7 +74,6 @@ const TooltipMessage = styled(Box)(
           mb: 2,
           bottom: '100%',
           left: '0%',
-          position: 'absolute',
           transform: 'translate(-50%)',
           boxShadow: '0 0.5rem 1.5rem 0 rgba(0, 0, 0, 0.1)',
           '::after': {
@@ -95,7 +90,6 @@ const TooltipMessage = styled(Box)(
         return css({
           mt: 2,
           top: '100%',
-          position: 'absolute',
           transform: 'translate(-50%)',
           boxShadow: '0 -0.5rem 1.5rem 0 rgba(0, 0, 0, 0.1)',
           '::after': {
