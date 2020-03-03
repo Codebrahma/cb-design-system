@@ -1,11 +1,7 @@
 export * from 'theme-ui';
 
-export {
-  Relative,
-  Absolute,
-  Fixed,
-  Sticky,
-} from './position';
+export { Relative, Absolute, Fixed, Sticky } from './position';
+export { Inline, InlineBlock, InlineFlex } from './layout';
 export Background from './background';
 export Input from './input';
 export Textarea from './textArea';
