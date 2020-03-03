@@ -1,6 +1,12 @@
 export * from 'theme-ui';
 
-export * from './position';
+export {
+  Position,
+  Relative,
+  Absolute,
+  Fixed,
+  Sticky,
+} from './position';
 export Background from './background';
 export Input from './input';
 export TextArea from './textArea';

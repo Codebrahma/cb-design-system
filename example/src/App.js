@@ -9,6 +9,8 @@ import {
   Truncate,
   withBeforeAfter,
   Background,
+  Absolute,
+  Relative
 } from 'cb-design-system'
 import theme from './theme';
 
@@ -45,6 +47,13 @@ export default () => (
     <Hide when={2}><h1>asdasdsd</h1></Hide>
     
     <BoxWithBeforeAndAfter>Hello</BoxWithBeforeAndAfter>
-    <Background bgColor='red'>background</Background>
+
+
+    <Relative>
+      <Background bgColor='red'>background</Background>
+      <Absolute left={'250px'}>
+        absolute
+      </Absolute>
+    </Relative>
   </ThemeProvider>
 )
