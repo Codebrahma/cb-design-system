@@ -21,6 +21,7 @@ export default {
     success: '#4caf50',
     successDark: '#388e3c',
     background: 'white',
+    border: '#ddd',
   },
 
   buttons: {
@@ -36,4 +37,5 @@ export default {
   breakpoints: [
     '320px','425px', '768px', '1024px',
   ],
+  space: [0, 2, 4, 8, 16, 32, 64, 128],
 };

@@ -12,6 +12,7 @@ import {
   Background,
   Absolute,
   Relative,
+  Tooltip,
 } from 'cb-design-system'
 import theme from './theme';
 
@@ -60,5 +61,9 @@ export default () => (
     <br/>
     <Textarea placeholder='type heree...' />
     <br/>
+
+    <Tooltip message="haiiii" bg="primary" color="warning">
+      <BoxWithBeforeAndAfter>HelloHelloHelloHelloHelloHelloHelloHello</BoxWithBeforeAndAfter>
+    </Tooltip>
   </ThemeProvider>
 )
