@@ -5,7 +5,6 @@ const Position = styled(Box)``;
 
 const Relative = styled(Position)`
   position: relative;
-  z-index: 0;
 `;
 
 const Absolute = styled(Position)`
@@ -30,5 +29,5 @@ export {
   Relative,
   Absolute,
   Fixed,
-  Sticky
+  Sticky,
 };
