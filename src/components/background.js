@@ -1,17 +1,28 @@
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import { Box } from 'theme-ui';
+import { Box, css } from 'theme-ui';
 
 const Background = styled(Box)`
-  ${({ url, image, size, repeat, bgColor, position, attachment, clip }) => ({
-    backgroundImage: url ? `url(${url})` : image,
-    backgroundSize: size,
-    backgroundRepeat: repeat,
-    backgroundColor: bgColor,
-    backgroundPosition: position,
-    backgroundAttachment: attachment,
-    backgroundClip: clip,
-  })}
+  ${({
+    url,
+    image,
+    size,
+    repeat,
+    bgColor,
+    position,
+    attachment,
+    clip,
+    theme,
+  }) =>
+    css({
+      backgroundImage: url ? `url(${url})` : image,
+      backgroundSize: size,
+      backgroundRepeat: repeat,
+      bg: bgColor,
+      backgroundPosition: position,
+      backgroundAttachment: attachment,
+      backgroundClip: clip,
+    })(theme)}
 `;
 
 Background.propTypes = {
