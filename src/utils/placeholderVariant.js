@@ -4,7 +4,7 @@ import {
 } from './getVariations';
 
 const withPlaceHolderVariant = (comp) => {
-  const variant = ({
+  const variantStyles = ({
     theme,
     variant = 'primary',
     themeKey = 'placeholderVariants',
@@ -12,16 +12,16 @@ const withPlaceHolderVariant = (comp) => {
 
   const Component = styled(comp)`
     ::-webkit-input-placeholder {
-      ${variant}
+      ${variantStyles}
     }
     ::-moz-placeholder {
-      ${variant}
+      ${variantStyles}
     }
     :-ms-input-placeholder {
-      ${variant}
+      ${variantStyles}
     }
     :-moz-placeholder {
-      ${variant}
+      ${variantStyles}
     }
   `;
 

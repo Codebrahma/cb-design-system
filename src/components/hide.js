@@ -1,29 +1,29 @@
 import styled from '@emotion/styled';
-import { Box, get } from 'theme-ui';
+import { Box } from 'theme-ui';
 
-const getValue = (val, unit = 'px') => typeof val === 'string' ? val : val + unit;
+const getValue = val => typeof val === 'string' ? val : val + 'px';
 
 const breakpoints = props => {
   return {
-    xs: `@media screen and (min-width: ${getValue(props.theme.breakpoints[0], get(props.theme.unit))})`,
+    xs: `@media screen and (min-width: ${getValue(props.theme.breakpoints[0])})`,
 
     sm: `@media screen and (min-width: ${
       props.theme.breakpoints[0]
-    }) and (max-width: ${getValue(props.theme.breakpoints[1], get(props.theme.unit))})`,
+    }) and (max-width: ${getValue(props.theme.breakpoints[1])})`,
 
     md: `@media screen and (min-width: ${
       props.theme.breakpoints[1]
-    }) and (max-width: ${getValue(props.theme.breakpoints[2], get(props.theme.unit))})`,
+    }) and (max-width: ${getValue(props.theme.breakpoints[2])})`,
 
     lg: `@media screen and (min-width: ${
       props.theme.breakpoints[2]
-    }) and (max-width: ${getValue(props.theme.breakpoints[3], get(props.theme.unit))})`,
+    }) and (max-width: ${getValue(props.theme.breakpoints[3])})`,
 
     xl: `@media screen and (min-width: ${
       props.theme.breakpoints[3]
     })`,
 
-    xxl: `@media screen and (min-width: ${getValue(props.theme.breakpoints[4], get(props.theme.unit))})`,
+    xxl: `@media screen and (min-width: ${getValue(props.theme.breakpoints[4])})`,
 
   };
 };
