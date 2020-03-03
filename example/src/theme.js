@@ -28,7 +28,7 @@ export default {
       color: 'white',
     }
   },
-  placeHolderVariants: {
+  placeholderVariants: {
     primary: {
       color: 'red',
     }

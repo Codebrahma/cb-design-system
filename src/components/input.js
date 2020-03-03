@@ -1,22 +1,56 @@
 import styled from '@emotion/styled';
-import { css, get, Input as input } from 'theme-ui';
+import { css, get, Input as input, Select as select, Textarea as textarea } from 'theme-ui';
 
-const variant = ({ theme, variant = 'primary', themeKey = 'placeHolderVariants' }) =>
+const variant = ({ theme, variant = 'primary', themeKey = 'placeholderVariants' }) =>
   css(get(theme, themeKey + '.' + variant, get(theme, variant)));
 
 const Input = styled(input)`
-  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  ::-webkit-input-placeholder {
     ${variant}
   }
-  ::-moz-placeholder { /* Firefox 19+ */
+  ::-moz-placeholder {
     ${variant}
   }
-  :-ms-input-placeholder { /* IE 10+ */
+  :-ms-input-placeholder {
     ${variant}
   }
-  :-moz-placeholder { /* Firefox 18- */
+  :-moz-placeholder {
     ${variant}
   }
 `;
 
-export default Input;
+const Select = styled(select)`
+  ::-webkit-input-placeholder {
+    ${variant}
+  }
+  ::-moz-placeholder {
+    ${variant}
+  }
+  :-ms-input-placeholder {
+    ${variant}
+  }
+  :-moz-placeholder {
+    ${variant}
+  }
+`;
+
+const Textarea = styled(textarea)`
+  ::-webkit-input-placeholder {
+    ${variant}
+  }
+  ::-moz-placeholder {
+    ${variant}
+  }
+  :-ms-input-placeholder {
+    ${variant}
+  }
+  :-moz-placeholder {
+    ${variant}
+  }
+`;
+
+export {
+  Input,
+  Select,
+  Textarea,
+};
