@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import { Box } from 'theme-ui';
 
 const withPosition = (comp, position) => {
-  const Positioning = ({top, bottom, left, right}) => {
+  const Positioning = ({top, bottom, left, right, zIndex}) => {
     return `top: ${top};
       bottom: ${bottom};
       left: ${left};
       right: ${right};
+      z-index: ${zIndex}
     `;
   };
 
@@ -20,12 +21,14 @@ const withPosition = (comp, position) => {
     bottom: PropTypes.string,
     right: PropTypes.string,
     left: PropTypes.string,
+    zIndex: PropTypes.string,
   };
   component.defaultProps = {
     top: 'unset',
     bottom: 'unset',
     right: 'unset',
     left: 'unset',
+    zIndex: 'unset',
   };
 
   return component;
