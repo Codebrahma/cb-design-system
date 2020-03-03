@@ -29,6 +29,13 @@ export default {
       color: 'white',
     }
   },
-
+  placeholderVariants: {
+    primary: {
+      color: 'red',
+    }
+  },
+  breakpoints: [
+    '320px','425px', '768px', '1024px',
+  ],
   space: [0, 2, 4, 8, 16, 32, 64, 128],
 };
