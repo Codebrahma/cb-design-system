@@ -21,6 +21,7 @@ export default {
     success: '#4caf50',
     successDark: '#388e3c',
     background: 'white',
+    border: '#ddd',
   },
 
   buttons: {
@@ -28,4 +29,6 @@ export default {
       color: 'white',
     }
   },
+
+  space: [0, 2, 4, 8, 16, 32, 64, 128],
 };
