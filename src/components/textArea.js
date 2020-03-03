@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import {
-  Input as input,
+  Textarea as textarea,
 } from 'theme-ui';
 
 import {
@@ -13,7 +13,9 @@ const variant = ({
   themeKey = 'placeholderVariants',
 }) => applyVariation(theme, variant, themeKey);
 
-const Input = styled(input)`
+const Textarea = styled(textarea)`
+  max-width: 100%;
+  
   ::-webkit-input-placeholder {
     ${variant}
   }
@@ -28,4 +30,4 @@ const Input = styled(input)`
   }
 `;
 
-export default Input;
+export default Textarea;

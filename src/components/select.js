@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import {
-  Input as input,
+  Select as select,
 } from 'theme-ui';
 
 import {
@@ -13,7 +13,7 @@ const variant = ({
   themeKey = 'placeholderVariants',
 }) => applyVariation(theme, variant, themeKey);
 
-const Input = styled(input)`
+const Select = styled(select)`
   ::-webkit-input-placeholder {
     ${variant}
   }
@@ -28,4 +28,4 @@ const Input = styled(input)`
   }
 `;
 
-export default Input;
+export default Select;
