@@ -1,33 +1,6 @@
 import styled from '@emotion/styled';
-import { keyframes } from '@emotion/core';
 import { Box, css } from 'theme-ui';
 import { Absolute, Fixed } from './../position';
-
-const fadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-`;
-
-const fadeOut = keyframes`
-  0% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-  }
-`;
-
-const modalAnimation = ({ isClosed }) => ({
-  display: (isClosed ? 'none' : 'block'),
-  opacity: (isClosed ? 0 : 1),
-  animation: `${isClosed ? fadeOut : fadeIn} 500ms`,
-});
 
 export const Overlay = styled(Fixed)(
   {
@@ -36,8 +9,24 @@ export const Overlay = styled(Fixed)(
     width: '100%',
     height: '100%',
     background: 'rgba(0, 0, 0, 0.5)',
+    '&.modal-enter': {
+      opacity: 0,
+      transform: 'scale(1)',
+    },
+    '&.modal-enter-active': {
+      opacity: 1,
+      transform: 'translateX(0)',
+      transition: 'opacity 300ms, transform 300ms',
+    },
+    '&.modal-exit': {
+      opacity: 1,
+    },
+    '&.modal-exit-active': {
+      opacity: 0,
+      transform: 'scale(1)',
+      transition: 'opacity 300ms, transform 300ms',
+    },
   },
-  modalAnimation,
 );
 
 export const Content = styled(Fixed)(
@@ -51,7 +40,6 @@ export const Content = styled(Fixed)(
     transform: 'translate(-50%, -50%)',
     borderRadius: 1,
   })(theme),
-  modalAnimation,
 );
 
 export const CloseButton = styled(Absolute)(

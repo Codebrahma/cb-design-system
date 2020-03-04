@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { CSSTransition } from 'react-transition-group';
 import {
   Overlay,
   Content,
@@ -29,22 +30,19 @@ const Modal = ({
   body,
   footer,
 }) => {
-  const [isClosed, setIsClosed] = useState(!open);
+  const [isOpen, setIsOpen] = useState(open);
   const closeModal = () => {
-    setIsClosed(true);
+    setIsOpen(false);
     onClose && onClose();
-    setTimeout(() => {
-      const element = document.querySelector(`#app-modal-${id}`);
-      if (!element) {
-        return;
-      }
+    const element = document.querySelector(`#app-modal-${id}`);
+    if (!element) {
+      return;
+    }
 
-      element.parentNode.removeChild(element);
-      instances.pop();
-      if (instances.length === 0) {
-        document.removeEventListener('keydown', onKeyDown, false);
-      }
-    }, 250);
+    instances.pop();
+    if (instances.length === 0) {
+      document.removeEventListener('keydown', onKeyDown, false);
+    }
   };
   const onOverlayClick = () => {
     if (overlayClickable) {
@@ -60,19 +58,23 @@ const Modal = ({
   });
 
   return (
-    <Overlay
-      isClosed={isClosed}
-      onClick={onOverlayClick}
+    <CSSTransition
+      in={isOpen}
+      timeout={300}
+      classNames='modal'
+      unmountOnExit
     >
-      <Content isClosed={isClosed}>
-        <CloseButton color='text' onClick={closeModal}>
-          &times;
-        </CloseButton>
-        {header ? <Header>{header}</Header> : null}
-        {body ? <Body>{body}</Body> : null}
-        {footer ? <Footer>{footer}</Footer> : null}
-      </Content>
-    </Overlay>
+      <Overlay onClick={onOverlayClick}>
+        <Content>
+          <CloseButton color='text' onClick={closeModal}>
+            &times;
+          </CloseButton>
+          {header ? <Header>{header}</Header> : null}
+          {body ? <Body>{body}</Body> : null}
+          {footer ? <Footer>{footer}</Footer> : null}
+        </Content>
+      </Overlay>
+    </CSSTransition>
   );
 };
 
