@@ -12,3 +12,4 @@ export ReadMore from './readMore';
 export Hide from './hide';
 export withBeforeAfter from './withBeforeAfter';
 export Tooltip from './tooltip';
+export { Modal, openModal, closeModal } from './modal';

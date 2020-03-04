@@ -13,6 +13,8 @@ import {
   Absolute,
   Relative,
   Tooltip,
+  Button,
+  openModal,
 } from 'cb-design-system'
 import theme from './theme';
 
@@ -65,5 +67,7 @@ export default () => (
     <Tooltip message="haiiii" bg="primary" color="warning">
       <BoxWithBeforeAndAfter>HelloHelloHelloHelloHelloHelloHelloHello</BoxWithBeforeAndAfter>
     </Tooltip>
+
+    <Button onClick={() => openModal({ header: 'Hello' })}>Open Modal</Button>    
   </ThemeProvider>
 )
