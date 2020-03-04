@@ -24,6 +24,7 @@ const fadeOut = keyframes`
 `;
 
 const modalAnimation = ({ isClosed }) => ({
+  display: (isClosed ? 'none' : 'block'),
   opacity: (isClosed ? 0 : 1),
   animation: `${isClosed ? fadeOut : fadeIn} 500ms`,
 });

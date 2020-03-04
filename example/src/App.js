@@ -15,6 +15,7 @@ import {
   Tooltip,
   Button,
   openModal,
+  Modal,
 } from 'cb-design-system'
 import theme from './theme';
 
@@ -68,6 +69,13 @@ export default () => (
       <BoxWithBeforeAndAfter>HelloHelloHelloHelloHelloHelloHelloHello</BoxWithBeforeAndAfter>
     </Tooltip>
 
-    <Button onClick={() => openModal({ header: 'Hello' })}>Open Modal</Button>    
+    <div id='modal-container'></div>
+
+    <Button
+      onClick={() => openModal({ header: 'Hello', containerId: 'modal-container' })}
+    >
+      Open Modal
+    </Button>
+    <Modal header="Hello" />
   </ThemeProvider>
 )
