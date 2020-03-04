@@ -16,28 +16,23 @@ export const generateContainer = (modalId, containerId) => {
   return { containerDomNode, id };
 };
 
-export const openModal = (contents) => {
-  const {
-    header,
-    body,
-    footer,
-    closeOnEscape,
-    containerId,
-    modalId,
-    overlayClickable,
-  } = contents;
+export const openModal = ({
+  header,
+  body,
+  footer,
+  closeOnEscape,
+  containerId,
+  modalId,
+  overlayClickable,
+}) => {
   const { containerDomNode, id } = generateContainer(modalId, containerId);
-  let componentMode = true;
-  if (contents) componentMode = false;
-
-  ReactDOM.render(
+  return ReactDOM.render(
     <Modal
       id={id}
       header={header}
       body={body}
       footer={footer}
       closeOnEscape={closeOnEscape === undefined ? true : closeOnEscape}
-      componentMode={componentMode}
       overlayClickable={overlayClickable}
     />,
     containerDomNode,

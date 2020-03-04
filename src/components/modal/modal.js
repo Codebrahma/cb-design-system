@@ -14,7 +14,7 @@ const ESCAPE_KEY_CODE = 27;
 
 const onKeyDown = event => {
   const lastInstance = instances[instances.length - 1] || {};
-  if (event.keyCode === ESCAPE_KEY_CODE || lastInstance.closeOnEscape) {
+  if (event.keyCode === ESCAPE_KEY_CODE && lastInstance.closeOnEscape) {
     lastInstance.closeModal();
   }
 };
@@ -30,7 +30,6 @@ const Modal = ({
   footer,
 }) => {
   const [isClosed, setIsClosed] = useState(!open);
-
   const closeModal = () => {
     setIsClosed(true);
     onClose && onClose();
@@ -47,7 +46,6 @@ const Modal = ({
       }
     }, 250);
   };
-
   const onOverlayClick = () => {
     if (overlayClickable) {
       closeModal();
