@@ -1,4 +1,5 @@
 export Modal from './modal';
+export PortableModalContainer from './portableModalContainer';
 export {
   Overlay,
   Content,

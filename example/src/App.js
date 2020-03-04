@@ -1,81 +1,12 @@
-import React from 'react'
-import {
-  ThemeProvider,
-  Box,
-  Hide,
-  IconButton,
-  Input,
-  Textarea,
-  ReadMore,
-  Truncate,
-  withBeforeAfter,
-  Background,
-  Absolute,
-  Relative,
-  Tooltip,
-  Button,
-  openModal,
-  Modal,
-} from 'cb-design-system'
-import theme from './theme';
-
-const BoxWithBeforeAndAfter = withBeforeAfter(Box, {
-  content: '""',
-  display: 'inline-block',
-  width: 10,
-  height: 10,
-  backgroundColor: 'tomato',
-}, {
-  content: '""',
-  display: 'inline-block',
-  width: 10,
-  height: 10,
-  backgroundColor: 'primary',
-});
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Components from './components';
 
 export default () => (
-  <ThemeProvider theme={theme}>
-    <IconButton icon={<i>Hello</i>} iconFirst={false}>
-      Hello
-    </IconButton>
-
-    <ReadMore numberOfChars={20}>
-      Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter.
-    </ReadMore>
-
-    <Truncate>
-      Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.
-    </Truncate>
-  
-    <Input type='text' placeholder='type here...'  />
-    <br/>
-    <Input type='text' placeholder='type here........'  />
-  
-    <Hide md><h1>asdasdsd</h1></Hide>
-    
-    <BoxWithBeforeAndAfter>Hello</BoxWithBeforeAndAfter>
-
-    <Relative>
-      <Background bgColor='red'>background</Background>
-      <Absolute left={'250px'} top='0'>
-        absolute
-      </Absolute>
-    </Relative>
-    <br/>
-    <Textarea placeholder='type heree...' />
-    <br/>
-
-    <Tooltip message="haiiii" bg="primary" color="warning">
-      <BoxWithBeforeAndAfter>HelloHelloHelloHelloHelloHelloHelloHello</BoxWithBeforeAndAfter>
-    </Tooltip>
-
-    <div id='modal-container'></div>
-
-    <Button
-      onClick={() => openModal({ header: 'Hello', containerId: 'modal-container' })}
-    >
-      Open Modal
-    </Button>
-    <Modal header="Hello" />
-  </ThemeProvider>
+  <Router>
+    <Switch>
+      <Route path="/" component={() => "Welcome to CB Design System"} exact />
+      <Route path="/components" component={Components} />
+    </Switch>
+  </Router>
 )

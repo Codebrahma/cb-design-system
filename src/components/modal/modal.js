@@ -21,7 +21,6 @@ const onKeyDown = event => {
 };
 
 const Modal = ({
-  id,
   open,
   closeOnEscape,
   overlayClickable,
@@ -30,32 +29,34 @@ const Modal = ({
   body,
   footer,
 }) => {
-  const [isOpen, setIsOpen] = useState(open);
-  const closeModal = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const closeModal = (event) => {
+    event && event.stopPropagation();
     setIsOpen(false);
-    onClose && onClose();
-    const element = document.querySelector(`#app-modal-${id}`);
-    if (!element) {
-      return;
-    }
 
     instances.pop();
     if (instances.length === 0) {
       document.removeEventListener('keydown', onKeyDown, false);
     }
   };
-  const onOverlayClick = () => {
-    if (overlayClickable) {
-      closeModal();
-    }
-  };
+
+  const onOverlayClick = (event) => (
+    event.target.id === 'overlay' && overlayClickable
+      ? closeModal(event)
+      : null
+  );
 
   useEffect(() => {
-    instances.push({ id, closeOnEscape, closeModal });
+    instances.push({ closeOnEscape, closeModal });
+    setIsOpen(open);
     if (instances.length === 1) {
       document.addEventListener('keydown', onKeyDown, false);
     }
-  });
+
+    return () => onClose && onClose();
+  }, []);
+
+  useEffect(() => setIsOpen(open), [open]);
 
   return (
     <CSSTransition
@@ -64,7 +65,10 @@ const Modal = ({
       classNames='modal'
       unmountOnExit
     >
-      <Overlay onClick={onOverlayClick}>
+      <Overlay
+        onClick={onOverlayClick}
+        id='overlay'
+      >
         <Content>
           <CloseButton color='text' onClick={closeModal}>
             &times;
@@ -81,10 +85,6 @@ const Modal = ({
 Modal.instances = instances;
 
 Modal.propTypes = {
-  id: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]).isRequired,
   open: PropTypes.bool.isRequired,
   closeOnEscape: PropTypes.bool,
   overlayClickable: PropTypes.bool,
@@ -104,7 +104,7 @@ Modal.propTypes = {
 };
 
 Modal.defaultProps = {
-  open: true,
+  open: false,
   closeOnEscape: true,
   overlayClickable: true,
   onClick: null,

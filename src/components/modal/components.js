@@ -11,19 +11,20 @@ export const Overlay = styled(Fixed)(
     background: 'rgba(0, 0, 0, 0.5)',
     '&.modal-enter': {
       opacity: 0,
-      transform: 'scale(1)',
+      transform: 'scale(0)',
     },
     '&.modal-enter-active': {
       opacity: 1,
-      transform: 'translateX(0)',
+      transform: 'scale(1)',
       transition: 'opacity 300ms, transform 300ms',
     },
     '&.modal-exit': {
       opacity: 1,
+      transform: 'scale(1)',
     },
     '&.modal-exit-active': {
       opacity: 0,
-      transform: 'scale(1)',
+      transform: 'scale(0)',
       transition: 'opacity 300ms, transform 300ms',
     },
   },
