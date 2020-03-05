@@ -65,7 +65,7 @@ const openModal = ({
             document.body.removeChild(container);
             modalInstances.pop();
             modalData.update(modalInstances);
-          }, 300);
+          }, 200);
           onClose && onClose();
         }}
       />,

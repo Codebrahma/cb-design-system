@@ -61,7 +61,7 @@ const Modal = ({
   return (
     <CSSTransition
       in={isOpen}
-      timeout={300}
+      timeout={200}
       classNames='modal'
       unmountOnExit
     >

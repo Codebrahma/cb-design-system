@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { Box, css } from 'theme-ui';
-import { Absolute, Fixed } from './../position';
+import { Absolute, Fixed, Relative } from './../position';
 
 export const Overlay = styled(Fixed)(
   {
@@ -9,36 +9,32 @@ export const Overlay = styled(Fixed)(
     width: '100%',
     height: '100%',
     background: 'rgba(0, 0, 0, 0.5)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     '&.modal-enter': {
       opacity: 0,
-      transform: 'scale(0)',
     },
     '&.modal-enter-active': {
       opacity: 1,
-      transform: 'scale(1)',
-      transition: 'opacity 300ms, transform 300ms',
+      transition: 'all 200ms ease-in',
     },
     '&.modal-exit': {
       opacity: 1,
-      transform: 'scale(1)',
     },
     '&.modal-exit-active': {
       opacity: 0,
-      transform: 'scale(0)',
-      transition: 'opacity 300ms, transform 300ms',
+      transition: 'all 200ms ease-out',
     },
   },
 );
 
-export const Content = styled(Fixed)(
+export const Content = styled(Relative)(
   ({ theme }) => css({
     bg: 'white',
     p: 4,
     width: '60%',
     minHeight: '60%',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
     borderRadius: 1,
   })(theme),
 );
