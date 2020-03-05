@@ -60,5 +60,8 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "rollup-plugin-filesize": "^6.2.1"
+  }
 }
