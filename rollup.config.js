@@ -2,7 +2,6 @@ import babel from 'rollup-plugin-babel';
 import external from 'rollup-plugin-peer-deps-external';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
-import { uglify } from 'rollup-plugin-uglify';
 import pkg from './package.json';
 
 export default {
@@ -11,6 +10,11 @@ export default {
     {
       file: pkg.main,
       format: 'cjs',
+      sourcemap: true,
+    },
+    {
+      file: pkg.module,
+      format: 'es',
       sourcemap: true,
     },
   ],
@@ -22,6 +26,5 @@ export default {
     }),
     resolve(),
     commonjs(),
-    uglify(),
   ],
 };
