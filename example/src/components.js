@@ -17,7 +17,10 @@ import {
   Button,
   openModal,
   Modal,
-  PortableModalContainer
+  PortableModalContainer,
+  Toast,
+  openToast,
+  PortableToastContainer,
 } from "cb-design-system";
 
 import theme from "./theme";
@@ -45,6 +48,7 @@ export default () => {
   return (
     <ThemeProvider theme={theme}>
       <PortableModalContainer />
+      <PortableToastContainer />
       <IconButton icon={<i>Hello</i>} iconFirst={false}>
         Hello
       </IconButton>
@@ -106,7 +110,8 @@ export default () => {
       })}>
         Open Modal
       </Button>
-      <Modal open={true} header="Rendered" />
+      <Modal open={false} header="Rendered" />
+      <Toast open={true} body="hello" />
     </ThemeProvider>
   );
 };
