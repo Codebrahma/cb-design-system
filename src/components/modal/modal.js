@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 import {
@@ -30,21 +30,24 @@ const Modal = ({
   footer,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  let isOpenRef = useRef(isOpen);
+
   const closeModal = (event) => {
     event && event.stopPropagation();
-    setIsOpen(false);
 
+    setIsOpen(false);
+    onClose && onClose();
     instances.pop();
+
     if (instances.length === 0) {
       document.removeEventListener('keydown', onKeyDown, false);
     }
   };
 
-  const onOverlayClick = (event) => (
+  const onOverlayClick = (event) =>
     event.target.id === 'overlay' && overlayClickable
       ? closeModal(event)
-      : null
-  );
+      : null;
 
   useEffect(() => {
     instances.push({ closeOnEscape, closeModal });
@@ -53,9 +56,12 @@ const Modal = ({
       document.addEventListener('keydown', onKeyDown, false);
     }
 
-    return () => onClose && onClose();
+    return () => isOpenRef.current && onClose && onClose();
   }, []);
 
+  useEffect(() => {
+    isOpenRef.current = isOpen;
+  }, [isOpen]);
   useEffect(() => setIsOpen(open), [open]);
 
   return (
