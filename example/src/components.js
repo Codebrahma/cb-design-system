@@ -110,8 +110,7 @@ export default () => {
       })}>
         Open Modal
       </Button>
-      <Modal open={false} header="Rendered" />
-      <Toast open={true} body="hello" />
+      <Button onClick={() => openToast({ body: "Action done successfully!", timeout: 2000 })}>Open Toast</Button>
     </ThemeProvider>
   );
 };

@@ -1,27 +1,39 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 import { ToastContainer, Content, CloseButton } from './components';
 
 const Toast = ({
   open,
+  timeout,
   onClose,
   body,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const closeToast = () => setIsOpen(false);
+  const isOpenRef = useRef(isOpen);
+  const closeToast = () => {
+    setIsOpen(false);
+    onClose && onClose();
+  };
 
   useEffect(() => {
     setIsOpen(open);
-    return () => onClose && onClose();
-  }, []);
 
+    if (timeout) {
+      setTimeout(closeToast, timeout);
+    }
+
+    return () => isOpenRef.current && onClose && onClose();
+  }, []);
   useEffect(() => setIsOpen(open), [open]);
+  useEffect(() => {
+    isOpenRef.current = isOpen;
+  }, [isOpen]);
 
   return (
     <CSSTransition
       in={isOpen}
-      timeout={200}
+      timeout={400}
       classNames='toast'
       unmountOnExit
     >
@@ -40,6 +52,7 @@ const Toast = ({
 
 Toast.propTypes = {
   open: PropTypes.bool.isRequired,
+  timeout: PropTypes.number,
   onClose: PropTypes.func,
   body: PropTypes.oneOfType([
     PropTypes.string,
@@ -49,6 +62,7 @@ Toast.propTypes = {
 
 Toast.defaultProps = {
   open: false,
+  timeout: null,
   onClose: PropTypes.func,
   body: null,
 };

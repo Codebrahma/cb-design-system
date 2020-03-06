@@ -7,6 +7,7 @@ const toastState = getState('toast');
 
 const openToast = ({
   body,
+  timeout,
   onClose,
 }) => {
   const { toastInstances = [] } = toastState.get();
@@ -18,6 +19,7 @@ const openToast = ({
       <Toast
         open={true}
         body={body}
+        timeout={timeout}
         onClose={() => {
           setTimeout(() => {
             document.body.removeChild(container);
@@ -25,7 +27,7 @@ const openToast = ({
             toastState.update({
               toastInstances: Array.from(toastInstances),
             });
-          }, 200);
+          }, 400);
           onClose && onClose();
         }}
       />,

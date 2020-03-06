@@ -13,6 +13,20 @@ export const ToastContainer = styled(Flex)(
     left: '50%',
     transform: 'translateX(-50%)',
     bg: 'white',
+    '&.toast-enter': {
+      opacity: 0,
+    },
+    '&.toast-enter-active': {
+      opacity: 1,
+      transition: 'all 400ms ease-in',
+    },
+    '&.toast-exit': {
+      opacity: 1,
+    },
+    '&.toast-exit-active': {
+      opacity: 0,
+      transition: 'all 400ms ease-out',
+    },
   })(theme),
 );
 
