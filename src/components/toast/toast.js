@@ -1,37 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
 import { CSSTransition } from 'react-transition-group';
-import { Flex, Box, css } from 'theme-ui';
-
-const ToastContainer = styled(Flex)(
-  (theme) => css({
-    p: 4,
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: 'border',
-    position: 'fixed',
-    top: '10px',
-    width: '80%',
-    left: '50%',
-    transform: 'translateX(-50%)',
-    bg: 'white',
-  })(theme),
-);
-
-const CloseButton = styled(Box)(
-  css({
-    cursor: 'pointer',
-    bg: 'none',
-    outline: 'none',
-  }),
-);
-
-const Content = styled(Box)(
-  css({
-    width: '100%',
-  }),
-);
+import { ToastContainer, Content, CloseButton } from './components';
 
 const Toast = ({
   open,
@@ -59,11 +29,10 @@ const Toast = ({
         <Content>
           {body}
         </Content>
-        <Box>
-          <CloseButton color='text' onClick={closeToast}>
-            &times;
-          </CloseButton>
-        </Box>
+
+        <CloseButton color='text' onClick={closeToast}>
+          &times;
+        </CloseButton>
       </ToastContainer>
     </CSSTransition>
   );
