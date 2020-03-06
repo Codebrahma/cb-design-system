@@ -1,43 +1,9 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
 import Modal from './modal';
+import getState from './../../utils/getState';
 
-class ModalData {
-  constructor() {
-    this.observer = null;
-    this.modalInstances = [];
-  }
-
-  update(data = []) {
-    this.modalInstances = Array.from(data);
-    this.notify(this.modalInstances);
-  }
-
-  get() {
-    return this.modalInstances;
-  }
-
-  setObserver(observer) {
-    this.observer = observer;
-  }
-
-  unsetObserver() {
-    this.observer = null;
-  }
-
-  notify(data) {
-    this.observer && this.observer(data);
-  }
-}
-
-const getModalData = () => {
-  if (!ModalData.instance) {
-    ModalData.instance = new ModalData();
-  }
-  return ModalData.instance;
-};
-
-const modalData = getModalData();
+const modalState = getState('modal');
 
 const openModal = ({
   header,
@@ -47,7 +13,7 @@ const openModal = ({
   overlayClickable,
   onClose,
 }) => {
-  const modalInstances = modalData.get();
+  const { modalInstances = [] } = modalState.get();
   const container = document.createElement('div');
   document.body.append(container);
 
@@ -64,7 +30,9 @@ const openModal = ({
           setTimeout(() => {
             document.body.removeChild(container);
             modalInstances.pop();
-            modalData.update(modalInstances);
+            modalState.update({
+              modalInstances: Array.from(modalInstances),
+            });
           }, 200);
           onClose && onClose();
         }}
@@ -73,7 +41,9 @@ const openModal = ({
     )
   );
 
-  modalData.update(modalInstances);
+  modalState.update({
+    modalInstances: Array.from(modalInstances),
+  });
 };
 
 const closeModal = () => {
@@ -81,8 +51,4 @@ const closeModal = () => {
   lastInstance.closeModal();
 };
 
-export {
-  getModalData,
-  openModal,
-  closeModal,
-};
+export { openModal, closeModal };

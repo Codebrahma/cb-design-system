@@ -1,14 +1,17 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { getModalData } from './utils';
+import getState from './../../utils/getState';
 
 export default () => {
   const [modalInstances, setModalInstances] = useState([]);
 
   useEffect(() => {
-    const modalData = getModalData();
-    modalData.setObserver(setModalInstances);
+    const modalState = getState('modal');
 
-    return () => modalData.unsetObserver();
+    modalState.setObserver(
+      ({ modalInstances = [] }) => setModalInstances(modalInstances)
+    );
+
+    return () => modalState.unsetObserver();
   }, []);
 
   return modalInstances.map((modalInstance, key) => (
