@@ -89,6 +89,7 @@ Toast.propTypes = {
     PropTypes.string,
     PropTypes.element,
   ]),
+  variant: PropTypes.string,
 };
 
 Toast.defaultProps = {
@@ -96,6 +97,7 @@ Toast.defaultProps = {
   timeout: null,
   onClose: PropTypes.func,
   body: null,
+  variant: 'primary',
 };
 
 export default Toast;
