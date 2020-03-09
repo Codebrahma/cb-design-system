@@ -22,6 +22,7 @@ export default {
     successDark: '#388e3c',
     background: 'white',
     border: '#ddd',
+    borderDark: '#888',
   },
 
   buttons: {
@@ -64,5 +65,12 @@ export default {
       bg: 'success',
       color: 'white',
     },
+  },
+  forms: {
+    input: {
+      p: 3,
+      borderRadius: 2,
+      borderColor: 'borderDark'
+    }
   }
 };
