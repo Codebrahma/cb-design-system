@@ -44,9 +44,6 @@ const Toast = ({
         __themeKey='toast'
         __css={{
           p: 4,
-          borderWidth: 1,
-          borderStyle: 'solid',
-          borderColor: 'border',
           position: 'fixed',
           top: '10px',
           width: '80%',
