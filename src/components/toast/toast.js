@@ -73,7 +73,7 @@ const Toast = ({
           {body}
         </Content>
 
-        <CloseButton color='text' onClick={closeToast}>
+        <CloseButton onClick={closeToast}>
           &times;
         </CloseButton>
       </Flex>
