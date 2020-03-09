@@ -95,7 +95,7 @@ Toast.propTypes = {
 Toast.defaultProps = {
   open: false,
   timeout: null,
-  onClose: PropTypes.func,
+  onClose: null,
   body: null,
   variant: 'primary',
 };
