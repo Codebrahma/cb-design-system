@@ -39,4 +39,30 @@ export default {
   ],
   space: [0, 2, 4, 8, 16, 32, 64, 128],
   radii: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
+  toast: {
+    primary: {
+      bg: 'primary',
+      color: 'white',
+    },
+    secondary: {
+      bg: 'secondary',
+      color: 'white',
+    },
+    error: {
+      bg: 'error',
+      color: 'white',
+    },
+    warn: {
+      bg: 'warn',
+      color: 'white',
+    },
+    info: {
+      bg: 'info',
+      color: 'white',
+    },
+    success: {
+      bg: 'success',
+      color: 'white',
+    },
+  }
 };

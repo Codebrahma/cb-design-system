@@ -1,19 +1,23 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
-import { ToastContainer, Content, CloseButton } from './components';
+import { Flex } from 'theme-ui';
+import { Content, CloseButton } from './components';
 
 const Toast = ({
   open,
   timeout,
   onClose,
   body,
+  ...otherProps
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const isOpenRef = useRef(isOpen);
   const closeToast = () => {
+    if (!isOpen) { return; }
+
     setIsOpen(false);
-    onClose && onClose();
+    return onClose && onClose();
   };
 
   useEffect(() => {
@@ -37,7 +41,36 @@ const Toast = ({
       classNames='toast'
       unmountOnExit
     >
-      <ToastContainer>
+      <Flex
+        {...otherProps}
+        __themeKey='toast'
+        __css={{
+          p: 4,
+          borderWidth: 1,
+          borderStyle: 'solid',
+          borderColor: 'border',
+          position: 'fixed',
+          top: '10px',
+          width: '80%',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          bg: 'primary',
+          '&.toast-enter': {
+            opacity: 0,
+          },
+          '&.toast-enter-active': {
+            opacity: 1,
+            transition: 'all 400ms ease-in',
+          },
+          '&.toast-exit': {
+            opacity: 1,
+          },
+          '&.toast-exit-active': {
+            opacity: 0,
+            transition: 'all 400ms ease-out',
+          },
+        }}
+      >
         <Content>
           {body}
         </Content>
@@ -45,7 +78,7 @@ const Toast = ({
         <CloseButton color='text' onClick={closeToast}>
           &times;
         </CloseButton>
-      </ToastContainer>
+      </Flex>
     </CSSTransition>
   );
 };

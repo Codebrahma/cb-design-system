@@ -5,11 +5,7 @@ import getState from './../../utils/getState';
 
 const toastState = getState('toast');
 
-const openToast = ({
-  body,
-  timeout,
-  onClose,
-}) => {
+const openToast = ({ onClose, ...toastProps }) => {
   const { toastInstances = [] } = toastState.get();
   const container = document.createElement('div');
   document.body.append(container);
@@ -17,9 +13,8 @@ const openToast = ({
   toastInstances.push(
     createPortal(
       <Toast
+        {...toastProps}
         open={true}
-        body={body}
-        timeout={timeout}
         onClose={() => {
           setTimeout(() => {
             document.body.removeChild(container);
