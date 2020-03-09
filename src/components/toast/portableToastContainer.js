@@ -14,8 +14,6 @@ export default () => {
     return () => modalState.unsetObserver();
   }, []);
 
-
-  console.log({ toastInstances });
   return Object.keys(toastInstances).map((key) => (
     <Fragment key={key}>
       {toastInstances[key]}
