@@ -130,8 +130,8 @@ export default () => (
       onClick={() =>
         openToast({
           body: "Action done successfully!",
-          timeout: 1000,
-          variant: "success"
+          timeout: 4000,
+          variant: "success",
         })
       }
     >
