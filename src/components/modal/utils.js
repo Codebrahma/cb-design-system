@@ -4,6 +4,7 @@ import Modal from './modal';
 import getState from './../../utils/getState';
 
 const modalState = getState('modal');
+const getCurrentModalInstances = () => (modalState.get().modalInstances || []);
 
 const openModal = ({
   header,
@@ -13,36 +14,41 @@ const openModal = ({
   overlayClickable,
   onClose,
 }) => {
-  const { modalInstances = [] } = modalState.get();
   const container = document.createElement('div');
+  const modalId = Math.random()
+    .toString()
+    .slice(-10);
   document.body.append(container);
 
-  modalInstances.push(
-    createPortal(
-      <Modal
-        open={true}
-        header={header}
-        body={body}
-        footer={footer}
-        closeOnEscape={closeOnEscape}
-        overlayClickable={overlayClickable}
-        onClose={() => {
-          setTimeout(() => {
-            document.body.removeChild(container);
-            modalInstances.pop();
-            modalState.update({
-              modalInstances: Array.from(modalInstances),
-            });
-          }, 200);
-          onClose && onClose();
-        }}
-      />,
-      container
-    )
+  const modalInstance = createPortal(
+    <Modal
+      open={true}
+      header={header}
+      body={body}
+      footer={footer}
+      closeOnEscape={closeOnEscape}
+      overlayClickable={overlayClickable}
+      onClose={() => {
+        setTimeout(() => {
+          const {
+            [modalId]: currentInstance,
+            ...toastInstances
+          } = getCurrentModalInstances();
+
+          document.body.removeChild(container);
+          modalState.update({ toastInstances });
+        }, 200);
+        onClose && onClose();
+      }}
+    />,
+    container
   );
 
   modalState.update({
-    modalInstances: Array.from(modalInstances),
+    modalInstances: {
+      ...getCurrentModalInstances(),
+      [modalId]: modalInstance,
+    },
   });
 };
 

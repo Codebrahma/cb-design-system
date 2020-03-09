@@ -34,6 +34,7 @@ const Modal = ({
 
   const closeModal = (event) => {
     event && event.stopPropagation();
+    if (!isOpenRef.current) { return; }
 
     setIsOpen(false);
     onClose && onClose();
