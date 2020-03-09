@@ -111,12 +111,12 @@ export default () => {
         Open Modal
       </Button>
       <Button
-        onClick={() => openToast({ body: "Action done successfully!", timeout: 10000, variant: 'primary' })}
+        onClick={() => openToast({ body: "Action done successfully!", timeout: 1000, variant: 'primary' })}
       >
         Open Toast
       </Button>
       <Button
-        onClick={() => openToast({ body: "Action done successfully!", timeout: 10000, variant: 'success' })}
+        onClick={() => openToast({ body: "Action done successfully!", timeout: 1000, variant: 'success' })}
       >
         Open success Toast
       </Button>

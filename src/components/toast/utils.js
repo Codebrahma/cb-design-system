@@ -22,7 +22,7 @@ const openToast = ({ onClose, ...toastProps }) => {
             toastState.update({
               toastInstances: Array.from(toastInstances),
             });
-          }, 400);
+          }, 300);
           onClose && onClose();
         }}
       />,

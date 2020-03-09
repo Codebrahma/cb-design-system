@@ -14,7 +14,7 @@ const Toast = ({
   const [isOpen, setIsOpen] = useState(false);
   const isOpenRef = useRef(isOpen);
   const closeToast = () => {
-    if (!isOpen) { return; }
+    if (!isOpenRef.current) { return; }
 
     setIsOpen(false);
     return onClose && onClose();
@@ -30,14 +30,12 @@ const Toast = ({
     return () => isOpenRef.current && onClose && onClose();
   }, []);
   useEffect(() => setIsOpen(open), [open]);
-  useEffect(() => {
-    isOpenRef.current = isOpen;
-  }, [isOpen]);
+  useEffect(() => { isOpenRef.current = isOpen; }, [isOpen]);
 
   return (
     <CSSTransition
       in={isOpen}
-      timeout={400}
+      timeout={300}
       classNames='toast'
       unmountOnExit
     >
@@ -60,14 +58,14 @@ const Toast = ({
           },
           '&.toast-enter-active': {
             opacity: 1,
-            transition: 'all 400ms ease-in',
+            transition: 'all 300ms ease-in',
           },
           '&.toast-exit': {
             opacity: 1,
           },
           '&.toast-exit-active': {
             opacity: 0,
-            transition: 'all 400ms ease-out',
+            transition: 'all 300ms ease-out',
           },
         }}
       >
