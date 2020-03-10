@@ -69,8 +69,8 @@ export default {
   forms: {
     input: {
       p: 3,
+      borderColor: 'border',
       borderRadius: 2,
-      borderColor: 'borderDark'
     }
   }
 };
