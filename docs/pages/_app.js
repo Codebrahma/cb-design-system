@@ -7,15 +7,16 @@ import {
   Pagination
 } from 'mdx-docs'
 import * as designSystem from 'cb-design-system';
+import ModalDemo from './_modalDemo';
 import theme from './../theme';
 
 const routes = [
   { name: 'Home', path: '/' },
   { name: 'Getting Started', path: '/getting-started' },
   { name: 'Components', path: '/components' },
-  { name: 'Button', path: '/components/Button' },
+  { name: 'Modal', path: '/components/Modal' },
 ];
-const { ThemeProvider, ...components } = designSystem;
+const { ThemeProvider, PortableModalContainer, ...components } = designSystem;
 
 export default class MyApp extends App {
   static async getInitialProps ({ Component, router, ctx }) {
@@ -43,6 +44,7 @@ export default class MyApp extends App {
             {...props}
             components={{
               ...components,
+              ModalDemo,
               a: ({ href, ...props }) => (
                 <Link href={href}>
                   <a {...props} />
@@ -55,6 +57,7 @@ export default class MyApp extends App {
               <NavLinks />
             </Layout.Sidebar>
             <Layout.Main>
+              <PortableModalContainer />
               <Component {...page} />
               <Pagination />
             </Layout.Main>
