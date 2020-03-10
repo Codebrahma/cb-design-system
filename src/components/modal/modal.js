@@ -125,17 +125,21 @@ Modal.propTypes = {
   onClose: PropTypes.func,
   header: PropTypes.oneOfType([
     PropTypes.string,
+    PropTypes.func,
     PropTypes.node,
   ]),
   body: PropTypes.oneOfType([
     PropTypes.string,
+    PropTypes.func,
     PropTypes.node,
   ]),
   footer: PropTypes.oneOfType([
     PropTypes.string,
+    PropTypes.func,
     PropTypes.node,
   ]),
   closeButton: PropTypes.node,
+  variant: PropTypes.string,
 };
 
 Modal.defaultProps = {
@@ -148,6 +152,7 @@ Modal.defaultProps = {
   body: null,
   footer: null,
   closeButton: null,
+  variant: null,
 };
 
 export default Modal;
