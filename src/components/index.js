@@ -14,3 +14,4 @@ export withBeforeAfter from './withBeforeAfter';
 export Tooltip from './tooltip';
 export { Modal, openModal, closeModal, PortableModalContainer } from './modal';
 export { Toast, openToast, PortableToastContainer } from './toast';
+export Switch from './switch';

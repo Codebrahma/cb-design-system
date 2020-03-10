@@ -19,7 +19,8 @@ import {
   PortableModalContainer,
   Toast,
   openToast,
-  PortableToastContainer
+  PortableToastContainer,
+  Switch,
 } from "cb-design-system";
 
 import theme from "./theme";
@@ -138,5 +139,9 @@ export default () => (
       Open success Toast
     </Button>
     <Toast open={true} body="Hello" />
+
+    <Switch variant='sm'/><br/>
+    <Switch variant='md'/><br/>
+    <Switch variant='lg'/><br/>
   </ThemeProvider>
 );

@@ -64,5 +64,26 @@ export default {
       bg: 'success',
       color: 'white',
     },
+  },
+  switch: {
+    sm: {
+      width: '30px',
+      height: '15px',
+      border: 'border',
+      bg: 'border',
+      color: 'white',
+    },
+    md: {
+      border: 'none',
+      bg: 'success',
+      color: 'error',
+    },
+    lg: {
+      width: '100px',
+      height: '50px',
+      border: 'border',
+      bg: 'warning',
+      color: 'white',
+    },
   }
 };
