@@ -68,8 +68,8 @@ export const Header = styled(Box)(
 
 export const Body = styled(Box)(
   ({ theme }) => css({
-    px: 3,
-    py: 0,
+    px: 0,
+    py: 3,
   })(theme),
   getStyleForVariant('body'),
 );
