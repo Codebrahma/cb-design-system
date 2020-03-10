@@ -47,6 +47,7 @@ const ModalDemo = () => {
 | `body`                       | String or ReactComponent  | Body component for modal                                                                              |
 | `footer`                     | String or ReactComponent  | Footer component for modal                                                                            |
 | `closeButton`                | ReactComponent            | `Close` button to override default close button of modal                                              |
+| `variant`                    | string                    | Property to apply customize modal styles with theme.json                                              |
 
 ## Using `openModal` helper method
 
