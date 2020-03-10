@@ -9,9 +9,6 @@
     "@mdx-js/mdx": "^0.15.0",
     "mdx-docs": "^2.0.0-alpha.0",
     "next": "^7.0.1",
-    "prop-types": "^15.6.2",
-    "react": "file:../node_modules/react",
-    "react-dom": "file:../node_modules/react-dom",
     "remark-autolink-headings": "^5.1.0",
     "remark-emoji": "^2.0.2",
     "remark-images": "^0.16.1",
@@ -20,7 +17,12 @@
     "cb-design-system": "file:.."
   },
   "devDependencies": {
-    "@mdx-js/loader": "^0.16.6"
+    "@emotion/styled": "^10.0.27",
+    "@mdx-js/loader": "^0.16.6",
+    "prop-types": "^15.7.2",
+    "react": "file:../node_modules/react",
+    "react-dom": "file:../node_modules/react-dom",
+    "theme-ui": "^0.3.1"
   },
   "name": "docs"
 }

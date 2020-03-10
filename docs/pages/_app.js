@@ -6,22 +6,16 @@ import {
   NavLinks,
   Pagination
 } from 'mdx-docs'
-import * as designSystemComponents from 'cb-design-system';
+import * as designSystem from 'cb-design-system';
+import theme from './../theme';
 
 const routes = [
   { name: 'Home', path: '/' },
   { name: 'Getting Started', path: '/getting-started' },
   { name: 'Components', path: '/components' },
   { name: 'Button', path: '/components/Button' },
-]
-
-const components = {
-  a: ({ href, ...props }) =>
-    <Link href={href}>
-      <a {...props} />
-    </Link>,
-  ...designSystemComponents
-}
+];
+const { ThemeProvider, ...components } = designSystem;
 
 export default class MyApp extends App {
   static async getInitialProps ({ Component, router, ctx }) {
@@ -44,19 +38,28 @@ export default class MyApp extends App {
 
     return (
       <Container>
-        <Layout
-          {...props}
-          components={components}
-          routes={routes}>
-          <Layout.MenuToggle />
-          <Layout.Sidebar>
-            <NavLinks />
-          </Layout.Sidebar>
-          <Layout.Main>
-            <Component {...page} />
-            <Pagination />
-          </Layout.Main>
-        </Layout>
+        <ThemeProvider theme={theme}>
+          <Layout
+            {...props}
+            components={{
+              ...components,
+              a: ({ href, ...props }) => (
+                <Link href={href}>
+                  <a {...props} />
+                </Link>
+              ),
+            }}
+            routes={routes}>
+            <Layout.MenuToggle />
+            <Layout.Sidebar>
+              <NavLinks />
+            </Layout.Sidebar>
+            <Layout.Main>
+              <Component {...page} />
+              <Pagination />
+            </Layout.Main>
+          </Layout>
+        </ThemeProvider>
       </Container>
     )
   }
