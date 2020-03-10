@@ -6,7 +6,7 @@ import {
   NavLinks,
 } from 'mdx-docs'
 import * as designSystem from 'cb-design-system';
-import ModalDemo from './_modalDemo';
+import ModalDemo from './../src/components/modalDemo';
 import theme from './../theme';
 
 const routes = [
