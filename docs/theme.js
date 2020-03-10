@@ -97,4 +97,11 @@ export default {
       color: 'white',
     },
   },
+  modal: {
+    app: {
+      overlay: {
+        background: 'rgba(4, 62, 30, 0.5)',
+      },
+    },
+  },
 };

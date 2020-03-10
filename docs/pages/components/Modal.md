@@ -56,6 +56,7 @@ const ModalDemo = () => {
       header: () => <h2>Hello!</h2>,
       body: () => <h5>This modal is opened via 'openModal' method</h5>,
       closeOnEscape: true,
+      variant: 'app'
     })}
   >
     Open Modal

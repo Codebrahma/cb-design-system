@@ -20,16 +20,6 @@ const onKeyDown = event => {
   }
 };
 
-const renderComponent = (Comp, Capsule) => {
-  if (!Comp) {
-    return null;
-  }
-
-  return typeof Comp === 'string'
-    ? React.cloneElement(<Capsule />, {}, Comp)
-    : <Comp />;
-};
-
 const Modal = ({
   open,
   dismissOnEscape,
@@ -39,6 +29,7 @@ const Modal = ({
   header,
   body,
   footer,
+  variant,
   closeButton: CloseButton,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -61,6 +52,16 @@ const Modal = ({
     event.target.id === 'overlay' && dismissOnBackdropClick
       ? closeModal(event)
       : null;
+
+  const renderComponent = (Comp, Capsule) => {
+    if (!Comp) {
+      return null;
+    }
+
+    return typeof Comp === 'string'
+      ? React.cloneElement(<Capsule variant={variant} />, {}, Comp)
+      : <Comp />;
+  };
 
   const renderCloseButton = () => {
     if (noCloseButton) {
@@ -100,9 +101,10 @@ const Modal = ({
     >
       <Overlay
         onClick={onOverlayClick}
+        variant={variant}
         id='overlay'
       >
-        <Content>
+        <Content variant={variant}>
           { renderCloseButton() }
           { renderComponent(header, Header) }
           { renderComponent(body, Body) }
