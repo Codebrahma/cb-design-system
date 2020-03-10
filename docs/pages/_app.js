@@ -6,6 +6,7 @@ import {
   NavLinks,
   Pagination
 } from 'mdx-docs'
+import * as designSystemComponents from 'cb-design-system';
 
 const routes = [
   { name: 'Home', path: '/' },
@@ -18,7 +19,8 @@ const components = {
   a: ({ href, ...props }) =>
     <Link href={href}>
       <a {...props} />
-    </Link>
+    </Link>,
+  ...designSystemComponents
 }
 
 export default class MyApp extends App {
