@@ -32,7 +32,7 @@ export default {
   },
   placeholderVariants: {
     primary: {
-      color: 'red',
+      color: 'borderDark',
     }
   },
   breakpoints: [
