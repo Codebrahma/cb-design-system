@@ -4,7 +4,6 @@ import Link from 'next/link'
 import {
   Layout,
   NavLinks,
-  Pagination
 } from 'mdx-docs'
 import * as designSystem from 'cb-design-system';
 import ModalDemo from './_modalDemo';
@@ -59,7 +58,6 @@ export default class MyApp extends App {
             <Layout.Main>
               <PortableModalContainer />
               <Component {...page} />
-              <Pagination />
             </Layout.Main>
           </Layout>
         </ThemeProvider>
