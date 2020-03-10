@@ -14,6 +14,7 @@ const routes = [
   { name: 'Getting Started', path: '/getting-started' },
   { name: 'Components', path: '/components' },
   { name: 'Modal', path: '/components/Modal' },
+  { name: 'Button', path: '/components/Button' },
 ];
 const { ThemeProvider, PortableModalContainer, ...components } = designSystem;
 
