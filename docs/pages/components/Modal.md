@@ -36,16 +36,17 @@ const ModalDemo = () => {
 
 ### Props
 
-| Prop                         | Type                   | Description                                                                                           |
-| ---------------------------- | ---------------------- | ----------------------------------------------------------------------------------------------------- |
-| `open`                       | boolean                | Controls visibility of modal                                                                          |
-| `onClose`                    | function               | Executed when modal is closed                                                                         |
-| `dismissOnEscape`            | boolean                | Pressing `Esc` key should close the modal or not                                                      |
-| `dismissOnBackdropClick`     | boolean                | Clicking modal backdrop should close the modal or not                                                 |
-| `noCloseButton`              | boolean                | Controls the existence of close button                                                                |
-| `header`                     | String or ReactElement | Header component for modal                                                                            |
-| `body`                       | String or ReactElement | Body component for modal                                                                              |
-| `footer`                     | String or ReactElement | Footer component for modal                                                                            |
+| Prop                         | Type                      | Description                                                                                           |
+| ---------------------------- | ------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `open`                       | boolean                   | Controls visibility of modal                                                                          |
+| `onClose`                    | function                  | Executed when modal is closed                                                                         |
+| `dismissOnEscape`            | boolean                   | Pressing `Esc` key should close the modal or not                                                      |
+| `dismissOnBackdropClick`     | boolean                   | Clicking modal backdrop should close the modal or not                                                 |
+| `noCloseButton`              | boolean                   | Controls the existence of close button                                                                |
+| `header`                     | String or ReactComponent  | Header component for modal                                                                            |
+| `body`                       | String or ReactComponent  | Body component for modal                                                                              |
+| `footer`                     | String or ReactComponent  | Footer component for modal                                                                            |
+| `closeButton`                | ReactComponent            | `Close` button to override default close button of modal                                              |
 
 ## Using `openModal` helper method
 

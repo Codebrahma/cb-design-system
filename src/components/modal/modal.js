@@ -4,7 +4,7 @@ import { CSSTransition } from 'react-transition-group';
 import {
   Overlay,
   Content,
-  CloseButton,
+  CloseButton as DefaultCloseButton,
   Header,
   Body,
   Footer,
@@ -20,6 +20,16 @@ const onKeyDown = event => {
   }
 };
 
+const renderComponent = (Comp, Capsule) => {
+  if (!Comp) {
+    return null;
+  }
+
+  return typeof Comp === 'string'
+    ? React.cloneElement(<Capsule />, {}, Comp)
+    : <Comp />;
+};
+
 const Modal = ({
   open,
   dismissOnEscape,
@@ -29,6 +39,7 @@ const Modal = ({
   header,
   body,
   footer,
+  closeButton: CloseButton,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   let isOpenRef = useRef(isOpen);
@@ -51,14 +62,18 @@ const Modal = ({
       ? closeModal(event)
       : null;
 
-  const renderComponent = (Comp, Capsule) => {
-    if (!Comp) {
+  const renderCloseButton = () => {
+    if (noCloseButton) {
       return null;
+    } else if (CloseButton) {
+      return <CloseButton onClick={closeModal} />;
+    } else {
+      return (
+        <DefaultCloseButton color='text' onClick={closeModal}>
+          &times;
+        </DefaultCloseButton>
+      );
     }
-
-    return typeof Comp === 'string'
-      ? React.cloneElement(<Capsule />, {}, Comp)
-      : <Comp />;
   };
 
   useEffect(() => {
@@ -88,13 +103,7 @@ const Modal = ({
         id='overlay'
       >
         <Content>
-          {
-            noCloseButton ? null : (
-              <CloseButton color='text' onClick={closeModal}>
-                &times;
-              </CloseButton>
-            )
-          }
+          { renderCloseButton() }
           { renderComponent(header, Header) }
           { renderComponent(body, Body) }
           { renderComponent(footer, Footer) }
@@ -124,6 +133,7 @@ Modal.propTypes = {
     PropTypes.string,
     PropTypes.node,
   ]),
+  closeButton: PropTypes.node,
 };
 
 Modal.defaultProps = {
@@ -135,6 +145,7 @@ Modal.defaultProps = {
   header: null,
   body: null,
   footer: null,
+  closeButton: null,
 };
 
 export default Modal;
