@@ -15,15 +15,16 @@ const ESCAPE_KEY_CODE = 27;
 
 const onKeyDown = event => {
   const lastInstance = instances[instances.length - 1] || {};
-  if (event.keyCode === ESCAPE_KEY_CODE && lastInstance.closeOnEscape) {
+  if (event.keyCode === ESCAPE_KEY_CODE && lastInstance.dismissOnEscape) {
     lastInstance.closeModal();
   }
 };
 
 const Modal = ({
   open,
-  closeOnEscape,
-  overlayClickable,
+  dismissOnEscape,
+  dismissOnBackdropClick,
+  noCloseButton,
   onClose,
   header,
   body,
@@ -46,12 +47,12 @@ const Modal = ({
   };
 
   const onOverlayClick = (event) =>
-    event.target.id === 'overlay' && overlayClickable
+    event.target.id === 'overlay' && dismissOnBackdropClick
       ? closeModal(event)
       : null;
 
   useEffect(() => {
-    instances.push({ closeOnEscape, closeModal });
+    instances.push({ dismissOnEscape, closeModal });
     setIsOpen(open);
     if (instances.length === 1) {
       document.addEventListener('keydown', onKeyDown, false);
@@ -77,9 +78,13 @@ const Modal = ({
         id='overlay'
       >
         <Content>
-          <CloseButton color='text' onClick={closeModal}>
-            &times;
-          </CloseButton>
+          {
+            noCloseButton ? null : (
+              <CloseButton color='text' onClick={closeModal}>
+                &times;
+              </CloseButton>
+            )
+          }
           {header ? <Header>{header}</Header> : null}
           {body ? <Body>{body}</Body> : null}
           {footer ? <Footer>{footer}</Footer> : null}
@@ -93,8 +98,9 @@ Modal.instances = instances;
 
 Modal.propTypes = {
   open: PropTypes.bool.isRequired,
-  closeOnEscape: PropTypes.bool,
-  overlayClickable: PropTypes.bool,
+  dismissOnEscape: PropTypes.bool,
+  dismissOnBackdropClick: PropTypes.bool,
+  noCloseButton: PropTypes.bool,
   onClose: PropTypes.func,
   header: PropTypes.oneOfType([
     PropTypes.string,
@@ -112,8 +118,9 @@ Modal.propTypes = {
 
 Modal.defaultProps = {
   open: false,
-  closeOnEscape: true,
-  overlayClickable: true,
+  dismissOnEscape: true,
+  dismissOnBackdropClick: true,
+  noCloseButton: false,
   onClick: null,
   header: null,
   body: null,
