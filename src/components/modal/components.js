@@ -36,7 +36,7 @@ export const Overlay = styled(Fixed)(
   getStyleForVariant('overlay'),
 );
 
-export const Content = styled(Relative)(
+export const ContentContainer = styled(Relative)(
   ({ theme }) => css({
     bg: 'white',
     p: 4,
@@ -44,7 +44,7 @@ export const Content = styled(Relative)(
     minHeight: '40%',
     borderRadius: 1,
   })(theme),
-  getStyleForVariant('content'),
+  getStyleForVariant('contentContainer'),
 );
 
 export const CloseButton = styled(Absolute)(

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 import {
   Overlay,
-  Content,
+  ContentContainer,
   CloseButton as DefaultCloseButton,
   Header,
   Body,
@@ -104,12 +104,12 @@ const Modal = ({
         variant={variant}
         id='overlay'
       >
-        <Content variant={variant}>
+        <ContentContainer variant={variant}>
           { renderCloseButton() }
           { renderComponent(header, Header) }
           { renderComponent(body, Body) }
           { renderComponent(footer, Footer) }
-        </Content>
+        </ContentContainer>
       </Overlay>
     </CSSTransition>
   );
