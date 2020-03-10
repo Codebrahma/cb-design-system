@@ -8,8 +8,8 @@ export default () => {
     <Box>
       <Modal
         open={isOpen}
-        header={<h3>Title</h3>}
-        body={<p>This is body</p>}
+        header={() => <h3>Title</h3>}
+        body={() => <p>This is body</p>}
         onClose={() => setIsOpen(false)}
       />
       <Button onClick={() => setIsOpen(true)}>

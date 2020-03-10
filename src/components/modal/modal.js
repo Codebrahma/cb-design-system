@@ -51,6 +51,16 @@ const Modal = ({
       ? closeModal(event)
       : null;
 
+  const renderComponent = (Comp, Capsule) => {
+    if (!Comp) {
+      return null;
+    }
+
+    return typeof Comp === 'string'
+      ? React.cloneElement(<Capsule />, {}, Comp)
+      : <Comp />;
+  };
+
   useEffect(() => {
     instances.push({ dismissOnEscape, closeModal });
     setIsOpen(open);
@@ -85,9 +95,9 @@ const Modal = ({
               </CloseButton>
             )
           }
-          {header ? <Header>{header}</Header> : null}
-          {body ? <Body>{body}</Body> : null}
-          {footer ? <Footer>{footer}</Footer> : null}
+          { renderComponent(header, Header) }
+          { renderComponent(body, Body) }
+          { renderComponent(footer, Footer) }
         </Content>
       </Overlay>
     </CSSTransition>
@@ -104,15 +114,15 @@ Modal.propTypes = {
   onClose: PropTypes.func,
   header: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.element,
+    PropTypes.node,
   ]),
   body: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.element,
+    PropTypes.node,
   ]),
   footer: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.element,
+    PropTypes.node,
   ]),
 };
 

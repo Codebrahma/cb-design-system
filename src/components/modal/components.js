@@ -34,7 +34,7 @@ export const Content = styled(Relative)(
     bg: 'white',
     p: 4,
     width: '60%',
-    minHeight: '60%',
+    minHeight: '40%',
     borderRadius: 1,
   })(theme),
 );

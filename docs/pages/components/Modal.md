@@ -11,13 +11,15 @@ Modal can be created in two ways.
 ```react
 const ModalDemo = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const header = () => (<h3>Title</h3>);
+  const body = () => (<p>This is body</p>);
 
   return (
     <Box>
       <Modal
         open={isOpen}
-        header={<h3>Title</h3>}
-        body={<p>This is body</p>}
+        header={header}
+        body={body}
         onClose={() => setIsOpen(false)}
       />
       <Button onClick={() => setIsOpen(true)}>
@@ -50,8 +52,9 @@ const ModalDemo = () => {
 ```.jsx
   <Button
     onClick={() => openModal({
-      header: (<h2>Hello!</h2>),
-      body: (<h5>This modal is opened via 'openModal' method</h5>)
+      header: () => <h2>Hello!</h2>,
+      body: () => <h5>This modal is opened via 'openModal' method</h5>,
+      closeOnEscape: true,
     })}
   >
     Open Modal
