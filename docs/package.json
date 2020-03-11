@@ -7,14 +7,14 @@
   },
   "dependencies": {
     "@mdx-js/mdx": "^0.15.0",
+    "cb-design-system": "file:..",
     "mdx-docs": "^2.0.0-alpha.0",
-    "next": "^7.0.1",
+    "next": "^9.3.0",
     "remark-autolink-headings": "^5.1.0",
     "remark-emoji": "^2.0.2",
     "remark-images": "^0.16.1",
     "remark-slug": "^5.1.1",
-    "remark-unwrap-images": "^0.1.0",
-    "cb-design-system": "file:.."
+    "remark-unwrap-images": "^0.1.0"
   },
   "devDependencies": {
     "@emotion/styled": "^10.0.27",
