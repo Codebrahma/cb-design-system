@@ -19,7 +19,7 @@ Modal overlay, content container, header, body, footer and close button can be s
 | `footer`                     | modal.variantName.footer             | Styles for the `modal` footer for your variant                                                        |
 | `closeButton`                | modal.variantName.closeButton        | Styles for the `modal` closeButton for your variant                                                   |
 
-For example, find the custom styling of modal building blocks with a variant named 'rich'
+For example, the below theme object creates a modal variant named 'rich' and applies styles for its `overlay`, `contentContainer`, `closeButton` and `body`.
 ```
   {
     modal: {
