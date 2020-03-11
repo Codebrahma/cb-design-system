@@ -64,5 +64,20 @@ export default {
       bg: 'success',
       color: 'white',
     },
+  },
+  pill:{
+    primary: {
+      color: 'error',
+      bg: 'info',
+    }
+  },
+  images: {
+    pillCloseIcon: {
+      p: 3,
+    },
+    pillIcon: {
+      width: '15px',
+      height: '15px'
+    }
   }
 };

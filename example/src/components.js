@@ -19,7 +19,8 @@ import {
   PortableModalContainer,
   Toast,
   openToast,
-  PortableToastContainer
+  PortableToastContainer,
+  Pill
 } from "cb-design-system";
 
 import theme from "./theme";
@@ -138,5 +139,17 @@ export default () => (
       Open success Toast
     </Button>
     <Toast open={true} body="Hello" />
+    <Box m='4'>
+      <Pill
+        label={{
+          content: 'test label test label test label ',
+          title: 'test Title'
+        }}
+        // icon={//node}
+        // closeIcon={//node}
+        onClick={() =>console.log('Clicked')}
+        onRemove={() =>console.log('Removed')}
+      />
+    </Box>
   </ThemeProvider>
 );
