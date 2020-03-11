@@ -1,8 +1,8 @@
 const mdPlugins = [
-  require('remark-autolink-headings'),
   require('remark-emoji'),
   require('remark-images'),
   require('remark-slug'),
+  require('remark-autolink-headings'),
   require('remark-unwrap-images'),
 ]
 
