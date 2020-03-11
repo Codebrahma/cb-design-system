@@ -17,7 +17,8 @@ const themeForModalVariantDemo = {
         maxWidth: '450px',
       },
       closeButton: {
-        fontSize: 6,
+        fontSize: 'h1',
+        top: 0,
         right: '15px',
       },
       body: {

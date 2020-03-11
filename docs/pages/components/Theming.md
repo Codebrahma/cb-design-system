@@ -34,7 +34,7 @@ For example, the below theme object creates a modal variant named 'rich' and app
           maxWidth: '450px',
         },
         closeButton: {
-          fontSize: 6,
+          fontSize: 'h1',
           right: '15px',
         },
         body: {

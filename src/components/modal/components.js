@@ -61,6 +61,7 @@ export const Header = styled(Box)(
     p: 4,
     borderBottom: '1px solid',
     borderBottomColor: 'borderGray',
+    fontSize: 'h2',
   })(theme),
   getStyleForVariant('header'),
 );

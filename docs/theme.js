@@ -72,7 +72,14 @@ export default {
   ],
   space: [0, 2, 4, 8, 16, 32, 64, 128],
   radii: [0, 1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
-  fontSizes: [4, 8, 12, 16, 20, 24, 28, 32],
+  fontSizes: {
+    h1: '28px',
+    h2: '24px',
+    h3: '22px',
+    h4: '20px',
+    h5: '18px',
+    text: '16px',
+  },
   toast: {
     primary: {
       bg: 'primary',
@@ -97,13 +104,6 @@ export default {
     success: {
       bg: 'success',
       color: 'white',
-    },
-  },
-  modal: {
-    app: {
-      overlay: {
-        background: 'rgba(4, 62, 30, 0.5)',
-      },
     },
   },
 };
