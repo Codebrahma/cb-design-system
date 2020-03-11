@@ -7,7 +7,7 @@ Check [Theme UI docs](https://theme-ui.com/theming/) for theming the atoms. To t
 
 ### Theming Complex Components
 
-#### Modal
+### Modal
 Modal overlay, content container, header, body, footer and close button can be styled through `theme` object. To customize the style of a modal, create a variant under the themeKey `modal`.
 
 | Component                    | themeKey                             | Description                                                                                           |
