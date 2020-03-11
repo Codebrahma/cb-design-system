@@ -7,6 +7,7 @@ import {
 } from 'mdx-docs'
 import * as designSystem from 'cb-design-system';
 import ModalDemo from './../src/components/modalDemo';
+import RichModalDemo from './../src/components/richModalDemo';
 import theme from './../theme';
 
 const routes = [
@@ -45,6 +46,7 @@ export default class MyApp extends App {
             components={{
               ...components,
               ModalDemo,
+              RichModalDemo,
               a: ({ href, ...props }) => (
                 <Link href={href}>
                   <a {...props} />
