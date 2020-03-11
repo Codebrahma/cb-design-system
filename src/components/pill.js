@@ -11,7 +11,7 @@ const variantStyles = (theme, variant = 'primary', themeKey = 'pill') =>
 const Container = styled(InlineFlex)`
   justify-content: space-between;
   cursor: pointer;
-  ${({ theme, variant, maxWidth, minWidth }) =>
+  ${({ theme, variant }) =>
     css({
       content: "'contain'",
       width: '100px',
@@ -29,6 +29,7 @@ const Container = styled(InlineFlex)`
       },
     })(theme)}
 `;
+
 const Content = styled(Box)(
   css({
     whiteSpace: 'nowrap',
@@ -36,6 +37,7 @@ const Content = styled(Box)(
     textOverflow: 'ellipsis',
   })
 );
+
 const Icon = styled(InlineFlex)`
   cursor: pointer;
 `;
@@ -81,7 +83,12 @@ const Pill = ({
               viewBox='0 0 24 24'
               style={{ width: '11px', height: '11px', fill: '#888' }}
             >
-              <path d='M14.3 11.7l6-6c.3-.3.3-.7 0-1l-.9-1c-.3-.2-.7-.2-1 0l-6 6.1c-.2.2-.5.2-.7 0l-6-6.1c-.3-.3-.7-.3-1 0l-1 1c-.2.2-.2.7 0 .9l6.1 6.1c.2.2.2.4 0 .6l-6.1 6.1c-.3.3-.3.7 0 1l1 1c.2.2.7.2.9 0l6.1-6.1c.2-.2.4-.2.6 0l6.1 6.1c.2.2.7.2.9 0l1-1c.3-.3.3-.7 0-1l-6-6c-.2-.2-.2-.5 0-.7z' />
+              <path d='M14.3 11.7l6-6c.3-.3.3-.7 0-1l-.9-1c-.3-.2-.7-.2-1 0l-6
+                6.1c-.2.2-.5.2-.7 0l-6-6.1c-.3-.3-.7-.3-1 0l-1 1c-.2.2-.2.7
+                0 .9l6.1 6.1c.2.2.2.4 0 .6l-6.1 6.1c-.3.3-.3.7 0 1l1 1c.2.2.7.2.9
+                0l6.1-6.1c.2-.2.4-.2.6 0l6.1 6.1c.2.2.7.2.9 0l1-1c.3-.3.3-.7
+                0-1l-6-6c-.2-.2-.2-.5 0-.7z'
+              />
             </svg>
           </span>
         )}
@@ -101,10 +108,12 @@ Pill.propTypes = {
     removetitle: PropTypes.string,
   }).isRequired,
 };
+
 Pill.defaultProps = {
   removeIcon: null,
   icon: null,
   onClick: null,
   onRemove: null,
 };
+
 export default Pill;
