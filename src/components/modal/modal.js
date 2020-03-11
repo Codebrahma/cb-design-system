@@ -67,10 +67,10 @@ const Modal = ({
     if (noCloseButton) {
       return null;
     } else if (CloseButton) {
-      return <CloseButton onClick={closeModal} />;
+      return <CloseButton variant={variant} onClick={closeModal} />;
     } else {
       return (
-        <DefaultCloseButton color='text' onClick={closeModal}>
+        <DefaultCloseButton variant={variant} onClick={closeModal}>
           &times;
         </DefaultCloseButton>
       );

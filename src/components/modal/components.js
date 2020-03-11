@@ -39,7 +39,6 @@ export const Overlay = styled(Fixed)(
 export const ContentContainer = styled(Relative)(
   ({ theme }) => css({
     bg: 'white',
-    p: 4,
     width: '60%',
     minHeight: '40%',
     borderRadius: 1,
@@ -52,7 +51,6 @@ export const CloseButton = styled(Absolute)(
     top: '5px',
     right: '10px',
     cursor: 'pointer',
-    bg: 'none',
     outline: 'none',
   })(theme),
   getStyleForVariant('closeButton'),
@@ -60,26 +58,25 @@ export const CloseButton = styled(Absolute)(
 
 export const Header = styled(Box)(
   ({ theme }) => css({
+    p: 4,
     borderBottom: '1px solid',
-    borderBottomColor: 'border',
+    borderBottomColor: 'borderGrey',
   })(theme),
   getStyleForVariant('header'),
 );
 
 export const Body = styled(Box)(
   ({ theme }) => css({
-    px: 0,
-    py: 3,
+    p: 4,
   })(theme),
   getStyleForVariant('body'),
 );
 
 export const Footer = styled(Box)(
   (theme) => css({
+    p: 4,
     borderBottom: '1px solid',
-    borderBottomColor: 'border',
-    px: 3,
-    py: 0,
+    borderBottomColor: 'borderGrey',
   })(theme),
   getStyleForVariant('footer'),
 );
