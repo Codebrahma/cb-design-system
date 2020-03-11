@@ -26,7 +26,8 @@ export default {
     success: '#4caf50',
     successDark: '#388e3c',
     background: 'white',
-    border: '#ddd',
+    borderGrey: '#ddd',
+    lightGrey: '#00000080',
   },
 
   buttons: {
@@ -71,6 +72,7 @@ export default {
   ],
   space: [0, 2, 4, 8, 16, 32, 64, 128],
   radii: [0, 1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
+  fontSizes: [4, 8, 12, 16, 20, 24, 28, 32],
   toast: {
     primary: {
       bg: 'primary',
