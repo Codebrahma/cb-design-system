@@ -26,8 +26,8 @@ export default {
     success: '#4caf50',
     successDark: '#388e3c',
     background: 'white',
-    borderGrey: '#ddd',
-    lightGrey: '#00000080',
+    borderGray: '#ddd',
+    lightGray: '#00000080',
   },
 
   buttons: {

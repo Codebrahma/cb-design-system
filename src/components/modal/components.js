@@ -60,7 +60,7 @@ export const Header = styled(Box)(
   ({ theme }) => css({
     p: 4,
     borderBottom: '1px solid',
-    borderBottomColor: 'borderGrey',
+    borderBottomColor: 'borderGray',
   })(theme),
   getStyleForVariant('header'),
 );
@@ -76,7 +76,7 @@ export const Footer = styled(Box)(
   (theme) => css({
     p: 4,
     borderBottom: '1px solid',
-    borderBottomColor: 'borderGrey',
+    borderBottomColor: 'borderGray',
   })(theme),
   getStyleForVariant('footer'),
 );
