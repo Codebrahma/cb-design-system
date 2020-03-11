@@ -1,6 +1,16 @@
 
 # Modal
 
+A Modal is composed with the building blocks given below.
+  - Overlay
+  - Content Container
+  - Header
+  - Body
+  - Footer
+  - Close Button
+
+![Modal structure](/images/modal-structure.png)
+
 Modal can be created in two ways.
 
   - Using `Modal` component
