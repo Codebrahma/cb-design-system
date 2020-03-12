@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { Box, css } from 'theme-ui';
 import { Absolute, Fixed, Relative } from './../position';
-import { applyVariation } from './../../utils/getVariations';
+import { applyVariation } from './../../utils/getStyles';
 
 const themeKey = 'modal';
 const getStyleForVariant = (subVariant) => (
