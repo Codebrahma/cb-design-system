@@ -13,7 +13,7 @@
   "scripts": {
     "test": "cross-env CI=1 react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom",
-    "build": "NODE_ENV=production BABEL_ENV=cjs node_modules/.bin/babel ./src --out-dir ./dist/cjs",
+    "build": "NODE_ENV=production BABEL_ENV=cjs babel ./src --out-dir ./dist/cjs",
     "start": "rollup -c -w",
     "prepare": "npm run build",
     "predeploy": "cd example && npm install && npm run build",
