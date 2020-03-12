@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 import {
   Overlay,
-  Content,
-  CloseButton,
+  ContentContainer,
+  CloseButton as DefaultCloseButton,
   Header,
   Body,
   Footer,
@@ -15,19 +15,22 @@ const ESCAPE_KEY_CODE = 27;
 
 const onKeyDown = event => {
   const lastInstance = instances[instances.length - 1] || {};
-  if (event.keyCode === ESCAPE_KEY_CODE && lastInstance.closeOnEscape) {
+  if (event.keyCode === ESCAPE_KEY_CODE && lastInstance.dismissOnEscape) {
     lastInstance.closeModal();
   }
 };
 
 const Modal = ({
   open,
-  closeOnEscape,
-  overlayClickable,
+  dismissOnEscape,
+  dismissOnBackdropClick,
+  noCloseButton,
   onClose,
   header,
   body,
   footer,
+  variant,
+  closeButton: CloseButton,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   let isOpenRef = useRef(isOpen);
@@ -46,12 +49,36 @@ const Modal = ({
   };
 
   const onOverlayClick = (event) =>
-    event.target.id === 'overlay' && overlayClickable
+    event.target.id === 'overlay' && dismissOnBackdropClick
       ? closeModal(event)
       : null;
 
+  const renderComponent = (Comp, Capsule) => {
+    if (!Comp) {
+      return null;
+    }
+
+    return typeof Comp === 'string'
+      ? React.cloneElement(<Capsule variant={variant} />, {}, Comp)
+      : <Comp />;
+  };
+
+  const renderCloseButton = () => {
+    if (noCloseButton) {
+      return null;
+    } else if (CloseButton) {
+      return <CloseButton variant={variant} onClick={closeModal} />;
+    } else {
+      return (
+        <DefaultCloseButton variant={variant} onClick={closeModal}>
+          &times;
+        </DefaultCloseButton>
+      );
+    }
+  };
+
   useEffect(() => {
-    instances.push({ closeOnEscape, closeModal });
+    instances.push({ dismissOnEscape, closeModal });
     setIsOpen(open);
     if (instances.length === 1) {
       document.addEventListener('keydown', onKeyDown, false);
@@ -74,16 +101,15 @@ const Modal = ({
     >
       <Overlay
         onClick={onOverlayClick}
+        variant={variant}
         id='overlay'
       >
-        <Content>
-          <CloseButton color='text' onClick={closeModal}>
-            &times;
-          </CloseButton>
-          {header ? <Header>{header}</Header> : null}
-          {body ? <Body>{body}</Body> : null}
-          {footer ? <Footer>{footer}</Footer> : null}
-        </Content>
+        <ContentContainer variant={variant}>
+          { renderCloseButton() }
+          { renderComponent(header, Header) }
+          { renderComponent(body, Body) }
+          { renderComponent(footer, Footer) }
+        </ContentContainer>
       </Overlay>
     </CSSTransition>
   );
@@ -93,31 +119,40 @@ Modal.instances = instances;
 
 Modal.propTypes = {
   open: PropTypes.bool.isRequired,
-  closeOnEscape: PropTypes.bool,
-  overlayClickable: PropTypes.bool,
+  dismissOnEscape: PropTypes.bool,
+  dismissOnBackdropClick: PropTypes.bool,
+  noCloseButton: PropTypes.bool,
   onClose: PropTypes.func,
   header: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.element,
+    PropTypes.func,
+    PropTypes.node,
   ]),
   body: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.element,
+    PropTypes.func,
+    PropTypes.node,
   ]),
   footer: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.element,
+    PropTypes.func,
+    PropTypes.node,
   ]),
+  closeButton: PropTypes.node,
+  variant: PropTypes.string,
 };
 
 Modal.defaultProps = {
   open: false,
-  closeOnEscape: true,
-  overlayClickable: true,
+  dismissOnEscape: true,
+  dismissOnBackdropClick: true,
+  noCloseButton: false,
   onClick: null,
   header: null,
   body: null,
   footer: null,
+  closeButton: null,
+  variant: null,
 };
 
 export default Modal;
