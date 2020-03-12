@@ -11,13 +11,8 @@
     "npm": ">=5"
   },
   "scripts": {
-    "test": "cross-env CI=1 react-scripts test --env=jsdom",
-    "test:watch": "react-scripts test --env=jsdom",
-    "build": "NODE_ENV=production BABEL_ENV=cjs node_modules/.bin/babel ./src --out-dir ./dist/cjs",
-    "start": "rollup -c -w",
-    "prepare": "npm run build",
-    "predeploy": "cd example && npm install && npm run build",
-    "deploy": "gh-pages -d example/build"
+    "build": "NODE_ENV=production BABEL_ENV=cjs babel ./src --out-dir ./dist/cjs",
+    "start": "watch 'npm run build' src"
   },
   "peerDependencies": {
     "@emotion/core": "^10.0.27",
@@ -40,9 +35,6 @@
     "@emotion/styled": "^10.0.27",
     "@rollup/plugin-commonjs": "^11.0.2",
     "@rollup/plugin-node-resolve": "^7.1.1",
-    "babel-core": "^6.26.3",
-    "babel-eslint": "^8.2.5",
-    "babel-plugin-external-helpers": "^6.22.0",
     "cross-env": "^5.1.4",
     "eslint": "^5.0.1",
     "eslint-config-standard": "^11.0.0",
@@ -57,15 +49,10 @@
     "react-dom": "^16.4.1",
     "react-scripts": "^1.1.4",
     "react-transition-group": "^4.3.0",
-    "rollup": "^1.32.0",
-    "rollup-plugin-babel": "^3.0.7",
-    "rollup-plugin-peer-deps-external": "^2.2.0",
-    "theme-ui": "^0.3.1"
+    "theme-ui": "^0.3.1",
+    "watch": "^1.0.2"
   },
   "files": [
     "dist"
-  ],
-  "dependencies": {
-    "rollup-plugin-filesize": "^6.2.1"
-  }
+  ]
 }
