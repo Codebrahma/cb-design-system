@@ -13,6 +13,7 @@ const openModal = ({
   closeOnEscape,
   overlayClickable,
   onClose,
+  ...otherArgs
 }) => {
   const container = document.createElement('div');
   const modalId = Math.random()
@@ -22,6 +23,7 @@ const openModal = ({
 
   const modalInstance = createPortal(
     <Modal
+      {...otherArgs}
       open={true}
       header={header}
       body={body}
