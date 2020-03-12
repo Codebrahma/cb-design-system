@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import {
   applyVariation,
-} from './getVariations';
+} from './getStyles';
 
 export default (comp) => {
   const variantStyles = ({

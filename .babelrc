@@ -1,9 +1,24 @@
 {
   "presets": [
-    ["env", {
+    ["@babel/env", {
       "modules": false
     }],
-    "stage-0",
-    "react"
-  ]
+    "@babel/react"
+  ],
+  "plugins" : [
+    "@babel/plugin-proposal-optional-chaining",
+    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-export-default-from"
+  ],
+  "env" : {
+    "test" : {
+      "presets" : [["@babel/env", { "targets" : { "node" : "current" } }]],
+      "plugins" : ["@babel/transform-runtime"]
+    },
+    "cjs" : {
+      "presets" : [["@babel/env", { "modules" : "cjs" }]],
+      "plugins" : ["@babel/transform-runtime"]
+    }
+  }
 }
