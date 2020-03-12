@@ -28,6 +28,7 @@ export default {
     background: 'white',
     borderGray: '#ddd',
     lightGray: '#00000080',
+    darkGray: '#888',
   },
 
   buttons: {
@@ -64,7 +65,7 @@ export default {
   },
   placeholderVariants: {
     primary: {
-      color: 'red',
+      color: 'darkGray',
     },
   },
   breakpoints: [
@@ -106,4 +107,11 @@ export default {
       color: 'white',
     },
   },
+  forms: {
+    input: {
+      p: 3,
+      borderColor: 'border',
+      borderRadius: 2,
+    }
+  }
 };
