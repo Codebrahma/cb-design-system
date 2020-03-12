@@ -1,3 +1,8 @@
+const defautBtnStyles = {
+  m: 2,
+  cursor: 'pointer',
+};
+
 export default {
   colors: {
     text: '#000',
@@ -21,25 +26,61 @@ export default {
     success: '#4caf50',
     successDark: '#388e3c',
     background: 'white',
-    border: '#ddd',
-    borderDark: '#888',
+    borderGray: '#ddd',
+    lightGray: '#00000080',
+    darkGray: '#888',
   },
 
   buttons: {
     primary: {
+      ...defautBtnStyles,
+      bg: 'primary',
       color: 'white',
-    }
+    },
+    secondary: {
+      ...defautBtnStyles,
+      bg: 'secondary',
+      color: 'white',
+    },
+    success: {
+      ...defautBtnStyles,
+      bg: 'success',
+      color: 'white',
+    },
+    error: {
+      ...defautBtnStyles,
+      bg: 'error',
+      color: 'white',
+    },
+    warning: {
+      ...defautBtnStyles,
+      bg: 'warning',
+      color: 'white',
+    },
+    info: {
+      ...defautBtnStyles,
+      bg: 'info',
+      color: 'white',
+    },
   },
   placeholderVariants: {
     primary: {
-      color: 'borderDark',
-    }
+      color: 'darkGray',
+    },
   },
   breakpoints: [
     '320px','425px', '768px', '1024px',
   ],
   space: [0, 2, 4, 8, 16, 32, 64, 128],
-  radii: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
+  radii: [0, 1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
+  fontSizes: {
+    h1: '28px',
+    h2: '24px',
+    h3: '22px',
+    h4: '20px',
+    h5: '18px',
+    text: '16px',
+  },
   toast: {
     primary: {
       bg: 'primary',

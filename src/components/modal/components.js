@@ -1,6 +1,12 @@
 import styled from '@emotion/styled';
 import { Box, css } from 'theme-ui';
 import { Absolute, Fixed, Relative } from './../position';
+import { applyVariation } from './../../utils/getVariations';
+
+const themeKey = 'modal';
+const getStyleForVariant = (subVariant) => (
+  ({ theme, variant }) => variant ? applyVariation(theme, `${variant}.${subVariant}`, themeKey) : null
+);
 
 export const Overlay = styled(Fixed)(
   {
@@ -38,17 +44,18 @@ export const Overlay = styled(Fixed)(
       },
     },
   },
+  getStyleForVariant('overlay'),
 );
 
-export const Content = styled(Relative)(
+export const ContentContainer = styled(Relative)(
   ({ theme }) => css({
     bg: 'white',
-    p: 4,
     width: '60%',
-    minHeight: '60%',
+    minHeight: '40%',
     borderRadius: 1,
     boxShadow: '0 1px 15px rgba(0,0,0,.75)',
   })(theme),
+  getStyleForVariant('contentContainer'),
 );
 
 export const CloseButton = styled(Absolute)(
@@ -56,28 +63,33 @@ export const CloseButton = styled(Absolute)(
     top: '5px',
     right: '10px',
     cursor: 'pointer',
-    bg: 'none',
     outline: 'none',
   })(theme),
+  getStyleForVariant('closeButton'),
 );
 
 export const Header = styled(Box)(
   ({ theme }) => css({
+    p: 4,
     borderBottom: '1px solid',
-    borderBottomColor: 'border',
+    borderBottomColor: 'borderGray',
+    fontSize: 'h2',
   })(theme),
+  getStyleForVariant('header'),
 );
 
-export const Body = styled(Box)({
-  px: 3,
-  py: 0,
-});
+export const Body = styled(Box)(
+  ({ theme }) => css({
+    p: 4,
+  })(theme),
+  getStyleForVariant('body'),
+);
 
 export const Footer = styled(Box)(
   (theme) => css({
+    p: 4,
     borderBottom: '1px solid',
-    borderBottomColor: 'border',
-    px: 3,
-    py: 0,
+    borderBottomColor: 'borderGray',
   })(theme),
+  getStyleForVariant('footer'),
 );
