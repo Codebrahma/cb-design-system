@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { Box, css, Image, Flex } from 'theme-ui';
-import { getThemeStyles } from '../utils/getStyles';
+import { Box, css, Image } from 'theme-ui';
+import { getThemeStyles, ENTER_KEY } from '../utils/getStyles';
 import { InlineFlex, InlineBlock } from './layout';
 
 const Container = styled(InlineFlex)`
@@ -10,7 +10,6 @@ const Container = styled(InlineFlex)`
   cursor: pointer;
   ${({ theme, variant }) =>
     css({
-      content: "'contain'",
       width: '100px',
       borderWidth: '1px',
       borderStyle: 'solid',
@@ -18,98 +17,88 @@ const Container = styled(InlineFlex)`
       fontSize: '13px',
       padding: 2,
       borderRadius: 1,
-      ...getThemeStyles(theme, 'pill', variant),
       '&:focus': {
         outline: 0,
         borderColor: 'primaryDark',
         boxShadow: '0 0 3px #0070d2',
       },
+      ...getThemeStyles(theme, 'pill', variant, 'container'),
     })(theme)}
 `;
 
-const Content = styled(Box)(
+const Content = styled(Box)(({ theme, variant }) =>
   css({
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
+    ...getThemeStyles(theme, 'pill', variant, 'content'),
   })
 );
 
 const Icon = styled(Box)`
-  ${({ theme, variant, iconColor }) => css({
-    minWidth: 'max-content',
-    color: iconColor,
-  })}
-  cursor: pointer;
+  ${({ theme, variant }) =>
+    css({
+      minWidth: 'max-content',
+      cursor: 'pointer',
+      color: 'darkGray',
+      '&:focus': {
+        outline: 'none',
+        color: 'error',
+      },
+      ...getThemeStyles(theme, 'pill', variant, 'icon'),
+    })}
 `;
 
 const Pill = ({
-  label,
-  removeIcon,
-  icon,
-  iconColor,
+  id,
   onClick,
   onRemove,
   variant,
+  icon,
+  content,
   ...otherProps
 }) => {
-  const { content, title, removetitle } = label;
-
   return (
     <Container
       __themeKey='pill'
       tabIndex='0'
-      onClick={event => onClick(event, label)}
+      id={id}
       variant={variant}
       {...otherProps}
+      onClick={event => onClick(event, id)}
+      onKeyDown={e => (e.keyCode === ENTER_KEY ? onClick(e, id) : null)}
     >
-      <Flex>
-        {icon && (
-          <span style={{ marginRight: '2px' }}>
-            <Image src={icon} variant='pillIcon' />
-          </span>
-        )}
-        <Content title={title}>{content}</Content>
-      </Flex>
+      <Content variant={variant}>{content}</Content>
       <Icon
         tabIndex='0'
-        title={removetitle}
         variant={variant}
-        iconColor={iconColor}
         onClick={event => {
           event.stopPropagation();
-          onRemove(event, label);
+          onRemove(event, id);
         }}
+        onKeyDown={e => (e.keyCode === ENTER_KEY ? onRemove(e, id) : null)}
       >
-        {removeIcon ? (
-          <Image src={removeIcon} variant='pillCloseIcon' />
-        ) : <InlineBlock>&#10005;</InlineBlock>}
+        {icon ? <Image src={icon} /> : <InlineBlock>&#10005;</InlineBlock>}
       </Icon>
     </Container>
   );
 };
 
 Pill.propTypes = {
-  removeIcon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  id: PropTypes.string,
+  variant: PropTypes.string,
   onClick: PropTypes.func,
   onRemove: PropTypes.func,
-  label: PropTypes.shape({
-    content: PropTypes.string,
-    title: PropTypes.string,
-    removetitle: PropTypes.string,
-  }).isRequired,
-  variant: PropTypes.string,
-  iconColor: PropTypes.string,
+  icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  content: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
 };
 
 Pill.defaultProps = {
-  removeIcon: null,
+  id: '',
+  variant: 'primary',
   icon: null,
   onClick: null,
   onRemove: null,
-  variant: 'primary',
-  iconColor: 'inherit',
 };
 
 export default Pill;

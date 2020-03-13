@@ -110,10 +110,15 @@ export default {
 
   pill: {
     primary: {
-      py: 1,
-      borderRadius: 4,
-      color: 'primary',
-      bg: 'white',
+      container: {
+        py: 1,
+        borderRadius: 3,
+        bg: 'white',
+      },
+      content: {
+        color: 'primary',
+      },
+      icon: {},
     },
   },
 
