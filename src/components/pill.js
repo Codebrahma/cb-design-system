@@ -1,12 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { Box, css, Image, get } from 'theme-ui';
-
-import { InlineFlex, Flex } from './index';
-
-const variantStyles = (theme, variant = 'primary', themeKey = 'pill') =>
-  get(theme, themeKey)[variant];
+import { Box, css, Image, Flex } from 'theme-ui';
+import { getThemeStyles } from '../utils/getStyles';
+import { InlineFlex, InlineBlock } from './layout';
 
 const Container = styled(InlineFlex)`
   justify-content: space-between;
@@ -21,10 +18,10 @@ const Container = styled(InlineFlex)`
       fontSize: '13px',
       padding: 2,
       borderRadius: 1,
-      ...variantStyles(theme, variant),
+      ...getThemeStyles(theme, 'pill', variant),
       '&:focus': {
         outline: 0,
-        borderColor: '#1589ee',
+        borderColor: 'primaryDark',
         boxShadow: '0 0 3px #0070d2',
       },
     })(theme)}
@@ -38,7 +35,11 @@ const Content = styled(Box)(
   })
 );
 
-const Icon = styled(InlineFlex)`
+const Icon = styled(Box)`
+  ${({ theme, variant, iconColor }) => css({
+    minWidth: 'max-content',
+    color: iconColor,
+  })}
   cursor: pointer;
 `;
 
@@ -46,8 +47,10 @@ const Pill = ({
   label,
   removeIcon,
   icon,
+  iconColor,
   onClick,
   onRemove,
+  variant,
   ...otherProps
 }) => {
   const { content, title, removetitle } = label;
@@ -57,6 +60,7 @@ const Pill = ({
       __themeKey='pill'
       tabIndex='0'
       onClick={event => onClick(event, label)}
+      variant={variant}
       {...otherProps}
     >
       <Flex>
@@ -70,6 +74,8 @@ const Pill = ({
       <Icon
         tabIndex='0'
         title={removetitle}
+        variant={variant}
+        iconColor={iconColor}
         onClick={event => {
           event.stopPropagation();
           onRemove(event, label);
@@ -77,21 +83,7 @@ const Pill = ({
       >
         {removeIcon ? (
           <Image src={removeIcon} variant='pillCloseIcon' />
-        ) : (
-          <span style={{ marginRight: '8px' }}>
-            <svg
-              viewBox='0 0 24 24'
-              style={{ width: '11px', height: '11px', fill: '#888' }}
-            >
-              <path d='M14.3 11.7l6-6c.3-.3.3-.7 0-1l-.9-1c-.3-.2-.7-.2-1 0l-6
-                6.1c-.2.2-.5.2-.7 0l-6-6.1c-.3-.3-.7-.3-1 0l-1 1c-.2.2-.2.7
-                0 .9l6.1 6.1c.2.2.2.4 0 .6l-6.1 6.1c-.3.3-.3.7 0 1l1 1c.2.2.7.2.9
-                0l6.1-6.1c.2-.2.4-.2.6 0l6.1 6.1c.2.2.7.2.9 0l1-1c.3-.3.3-.7
-                0-1l-6-6c-.2-.2-.2-.5 0-.7z'
-              />
-            </svg>
-          </span>
-        )}
+        ) : <InlineBlock>&#10005;</InlineBlock>}
       </Icon>
     </Container>
   );
@@ -107,6 +99,8 @@ Pill.propTypes = {
     title: PropTypes.string,
     removetitle: PropTypes.string,
   }).isRequired,
+  variant: PropTypes.string,
+  iconColor: PropTypes.string,
 };
 
 Pill.defaultProps = {
@@ -114,6 +108,8 @@ Pill.defaultProps = {
   icon: null,
   onClick: null,
   onRemove: null,
+  variant: 'primary',
+  iconColor: 'inherit',
 };
 
 export default Pill;

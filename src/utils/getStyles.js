@@ -11,7 +11,16 @@ const applyFocus = (theme) => css({
   },
 })(theme);
 
+const getThemeStyles = (...args) => {
+  let theme = null;
+  for (let i = 0; i < args.length; i++) {
+    theme = !theme ? args[i] : theme[args[i]];
+  }
+  return theme;
+};
+
 export {
   applyVariation,
+  getThemeStyles,
   applyFocus,
 };

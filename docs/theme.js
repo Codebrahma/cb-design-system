@@ -110,14 +110,17 @@ export default {
 
   pill: {
     primary: {
-      color: 'error',
-      bg: 'info',
+      py: 1,
+      borderRadius: 4,
+      color: 'primary',
+      bg: 'white',
     },
   },
 
   images: {
-    pillCloseIcon: {
-      p: 3,
+    close: {
+      height: '20px',
+      width: '20px',
     },
     pillIcon: {
       width: '15px',

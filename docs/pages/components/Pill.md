@@ -8,6 +8,7 @@ Primitive pill component
       content: 'test label test label test label ',
       title: 'test Title'
     }}
+    iconColor='error'
     onClick={() => console.log('Clicked')}
     onRemove={() => console.log('Removed')}
   />
