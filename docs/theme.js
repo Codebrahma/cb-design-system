@@ -69,7 +69,7 @@ export default {
     },
   },
   breakpoints: [
-    '320px','425px', '768px', '1024px',
+    '320px', '425px', '768px', '1024px',
   ],
   space: [0, 2, 4, 8, 16, 32, 64, 128],
   radii: [0, 1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
@@ -117,15 +117,18 @@ export default {
       color: 'white',
     },
     md: {
-      border: 'transparent',
+      border: 'primary',
       bg: 'success',
-      color: 'error',
+      color: 'primary',
+      '&:checked': {
+        bg: 'error',
+      },
     },
     lg: {
-      width: '100px',
-      height: '50px',
+      width: '60px',
+      height: '30px',
       border: 'borderGray',
-      bg: 'warning',
+      bg: 'success',
       color: 'white',
     },
   },

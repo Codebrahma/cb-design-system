@@ -1,28 +1,29 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { css, Input } from 'theme-ui';
+import { applyVariation } from './../utils/getStyles';
 
 const defaultVariants = {
   sm: {
     width: '30px',
     height: '15px',
-    border: '#ddd',
-    bg: '#ddd',
-    color: '#fff',
+    borderColor: 'borderGray',
+    bg: 'borderGray',
+    color: 'white',
   },
   md: {
     width: '38px',
     height: '19px',
-    border: '#ddd',
-    bg: '#ddd',
-    color: '#fff',
+    border: 'borderGray',
+    bg: 'borderGray',
+    color: 'white',
   },
   lg: {
     width: '44px',
     height: '22px',
-    border: '#ddd',
-    bg: '#ddd',
-    color: '#fff',
+    border: 'borderGray',
+    bg: 'borderGray',
+    color: 'white',
   },
 };
 
@@ -37,11 +38,13 @@ const Checkbox = styled(Input)`
       position: 'relative',
       width: getVariants(theme, variant, 'width'),
       height: getVariants(theme, variant, 'height'),
-      WebkitAppearance: 'none',
       bg: getVariants(theme, variant, 'bg'),
+      WebkitAppearance: 'none',
       outline: 'none',
       borderRadius: '50px',
       transition: '.5s',
+      borderWidth: '1px',
+      borderStyle: 'solid',
       borderColor: 'transparent',
       boxShadow: 'inset 0 0 5px rgba(0, 0, 0, .3)',
       '&:checked': {
@@ -50,13 +53,14 @@ const Checkbox = styled(Input)`
       '&::before': {
         content: '""',
         position: 'absolute',
+        borderRadius: '50px',
+        borderWidth: '1px',
+        borderStyle: 'solid',
+        top: '-1.8px',
+        left: '-1px',
         width: parseInt(getVariants(theme, variant, 'width')) / 2,
         height: getVariants(theme, variant, 'height'),
-        borderRadius: '50px',
-        border: '1px solid',
         borderColor: getVariants(theme, variant, 'border'),
-        top: '-1.5px',
-        left: '-1px',
         bg: getVariants(theme, variant, 'color'),
         transition: '.5s',
         transform: 'scale(1.1)',
@@ -64,12 +68,12 @@ const Checkbox = styled(Input)`
       },
       '&:checked::before': {
         left: parseInt(getVariants(theme, variant, 'width')) * 0.5,
-        border: '1px solid ',
+        borderWidth: '1px',
+        borderStyle: 'solid',
         borderColor: getVariants(theme, variant, 'border'),
       },
     })(theme)}
+  ${({ variant, theme }) => applyVariation(theme, variant, 'switch')}
 `;
 
-const Switch = props => <Checkbox type='checkbox' {...props} />;
-
-export default Switch;
+export default props => <Checkbox {...props} type='checkbox' />;
