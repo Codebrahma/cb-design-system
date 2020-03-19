@@ -1,9 +1,10 @@
-/* eslint-disable react/prop-types */
+
 import React, { useState, useRef, useEffect } from 'react';
 import styled from '@emotion/styled';
-// import PropTypes from 'prop-types';
+
 import { Box } from 'theme-ui';
 import { InlineBlock } from './layout';
+import { PropTypes } from 'prop-types';
 
 const DropDown = styled(InlineBlock)`
   position: relative;
@@ -66,6 +67,21 @@ const DropDownMenu = ({ children, options, id, onSelect, noOptionMessage }) => {
       {showDropdownMenu && <DropdownContainer>{menus}</DropdownContainer>}
     </InlineBlock>
   );
+};
+
+DropDownMenu.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.arrayOf(PropTypes.node),
+  ]).isRequired,
+  options: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  noOptionMessage: PropTypes.string,
+  id: PropTypes.string.isRequired,
+  onSelect: PropTypes.func,
+};
+DropDownMenu.defaultProps = {
+  onSelect: null,
+  noOptionMessage: 'no menu items',
 };
 
 const D = () => {
