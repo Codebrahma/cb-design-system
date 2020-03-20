@@ -117,8 +117,14 @@ export default {
   dropdownMenu: {
     primary: {
       dropdownTrigger: {},
-      dropdownContainer: {},
-      dropdownMenu: {},
+      dropdownContainer: {
+        width: '300px',
+      },
+      dropdownMenu: {
+        '&:hover': {
+          bg: 'primaryLight',
+        },
+      },
     },
   },
 

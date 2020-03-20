@@ -15,6 +15,6 @@ Primitive DropdownMenu component with variants
     ]} 
     onSelect={(e, value) => console.log(value)}
   >
-    Trigger
+    Trigger &#9662;
   </DropdownMenu>
 ```
