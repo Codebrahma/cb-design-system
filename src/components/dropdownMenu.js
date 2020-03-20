@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { Box, css } from 'theme-ui';
 import { InlineBlock } from './layout';
 import { PropTypes } from 'prop-types';
-import { getThemeStyles } from './../utils/getStyles';
+import { getThemeStyles, UP_ARROW, DOWN_ARROW, ENTER_KEY } from './../utils/getStyles';
 
 const DropDown = styled(InlineBlock)`
   position: relative;
@@ -16,7 +16,6 @@ const DropDown = styled(InlineBlock)`
 
 const DropdownContainer = styled(Box)`
   position: absolute;
-
   width: 200px;
   background: #fff;
   padding: 10px 0;
@@ -34,7 +33,6 @@ const Menu = styled(Box)`
   &:hover {
     background: #ddd;
   }
-
   ${({ theme, variant, hover }) =>
     css({
       bg: hover
@@ -85,14 +83,14 @@ const DropdownMenu = ({
     if (showDropdownMenu) {
       const len = options.length;
       switch (e.keyCode) {
-        case 38: // up arrow
+        case UP_ARROW:
           const i = keySelected < 1 ? len - 1 : (keySelected - 1) % len;
           setKeySelected(i);
           return;
-        case 40: // down arrow
+        case DOWN_ARROW:
           setKeySelected((keySelected + 1) % len);
           return;
-        case 13: // enter key
+        case ENTER_KEY:
           closeDropdown(!showDropdownMenu);
           onSelect && onSelect(e, options[keySelected]);
       }

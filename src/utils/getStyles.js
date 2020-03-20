@@ -19,8 +19,15 @@ const getThemeStyles = (...args) => {
   return theme;
 };
 
+const UP_ARROW = 38;
+const DOWN_ARROW = 40;
+const ENTER_KEY = 13;
+
 export {
   getThemeStyles,
   applyVariation,
   applyFocus,
+  UP_ARROW,
+  DOWN_ARROW,
+  ENTER_KEY,
 };
