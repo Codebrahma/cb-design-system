@@ -4,7 +4,12 @@ import styled from '@emotion/styled';
 import { Box, css } from 'theme-ui';
 import { InlineBlock } from './layout';
 import { PropTypes } from 'prop-types';
-import { getThemeStyles, UP_ARROW, DOWN_ARROW, ENTER_KEY } from './../utils/getStyles';
+import {
+  getThemeStyles,
+  UP_ARROW,
+  DOWN_ARROW,
+  ENTER_KEY,
+} from './../utils/getStyles';
 
 const DropDown = styled(InlineBlock)`
   position: relative;
@@ -58,28 +63,30 @@ const DropdownMenu = ({
   noOptionMessage,
 }) => {
   const [showDropdownMenu, setShowDropdownMenu] = useState(false);
-  const [keySelected, setKeySelected] = useState(0);
+  const [keySelected, setKeySelected] = useState(null);
   const componentRef = useRef();
 
   useEffect(() => {
-    options &&
+    if (options && showDropdownMenu) {
       document.body.addEventListener('click', handleOutsideClick, true);
-    options &&
       document.body.addEventListener('keydown', handleKeyboardEvent, true);
+    }
     return () => {
-      options &&
+      if (options && showDropdownMenu) {
         document.body.removeEventListener('click', handleOutsideClick, true);
-      options &&
         document.body.removeEventListener('keydown', handleKeyboardEvent, true);
+      }
     };
   });
 
-  const closeDropdown = close => {
-    setShowDropdownMenu(close);
+  const toggleDropdown = toggleState => {
+    setShowDropdownMenu(toggleState);
     setKeySelected(0);
   };
 
   const handleKeyboardEvent = e => {
+    e.preventDefault();
+    e.stopPropagation();
     if (showDropdownMenu) {
       const len = options.length;
       switch (e.keyCode) {
@@ -91,7 +98,7 @@ const DropdownMenu = ({
           setKeySelected((keySelected + 1) % len);
           return;
         case ENTER_KEY:
-          closeDropdown(!showDropdownMenu);
+          toggleDropdown(!showDropdownMenu);
           onSelect && onSelect(e, options[keySelected]);
       }
     }
@@ -101,14 +108,14 @@ const DropdownMenu = ({
     if (componentRef.current.contains(e.target)) {
       return;
     }
-    closeDropdown(false);
+    toggleDropdown(false);
   };
 
-  const dropdownMenus = options ? (
-    options.map((option, index) => (
+  const dropdownMenus = options
+    ? options.map((option, index) => (
       <Menu
         onClick={e => {
-          closeDropdown(!showDropdownMenu);
+          toggleDropdown(!showDropdownMenu);
           onSelect && onSelect(e, option);
         }}
         key={option.value}
@@ -119,15 +126,13 @@ const DropdownMenu = ({
         {option.label}
       </Menu>
     ))
-  ) : (
-    <Box>{noOptionMessage}</Box>
-  );
+    : noOptionMessage;
 
   return (
     <InlineBlock ref={componentRef}>
       <DropDown
         variant={variant}
-        onClick={() => closeDropdown(!showDropdownMenu)}
+        onClick={() => toggleDropdown(!showDropdownMenu)}
         id={id}
       >
         {children}
