@@ -26,42 +26,47 @@ const Menu = styled(Box)`
     background: #ddd;
   }
 
-  ${(theme, hover) => css({
-    bg: hover ? 'red' : '',
-  })(theme)}
+  ${({ theme, hover }) =>
+    css({
+      bg: hover ? '#ddd' : '',
+    })(theme)}
 `;
 
-const DropDownMenu = ({ children, options, id, onSelect, noOptionMessage }) => {
+const DropdownMenu = ({ children, options, id, onSelect, noOptionMessage }) => {
   const [showDropdownMenu, setShowDropdownMenu] = useState(false);
-  const [keySelected, setKeySelected] = useState(2);
+  const [keySelected, setKeySelected] = useState(0);
   const componentRef = useRef();
 
   useEffect(() => {
-    document.body.addEventListener('click', handleOutsideClick, true);
-    // document.body.addEventListener('keydown', handleKeyboardEvent, true);
+    options &&
+      document.body.addEventListener('click', handleOutsideClick, true);
+    options &&
+      document.body.addEventListener('keydown', handleKeyboardEvent, true);
     return () => {
-      document.body.removeEventListener('click', handleOutsideClick, true);
-      // document.body.removeEventListener('keydown', handleKeyboardEvent, true);
+      options &&
+        document.body.removeEventListener('click', handleOutsideClick, true);
+      options &&
+        document.body.removeEventListener('keydown', handleKeyboardEvent, true);
     };
   });
 
-  // TODO keyboard-event, theming
-
-  // const handleKeyboardEvent = e => {
-  //   if (showDropdownMenu) {
-  //     switch (e.keyCode) {
-  //       case 38:// up arrow
-  //         setKeySelected(keySelected - 1);
-  //         // console.log('up arrow');
-  //         return;
-  //       case 40:// down arrow
-  //         setKeySelected(keySelected + 1);
-  //         // console.log('down arrow');
-  //     }
-  //   }
-  // };
-
-  console.log(keySelected);
+  const handleKeyboardEvent = e => {
+    if (showDropdownMenu) {
+      const len = options.length;
+      switch (e.keyCode) {
+        case 38: // up arrow
+          const i = keySelected < 1 ? len - 1 : (keySelected - 1) % len;
+          setKeySelected(i);
+          return;
+        case 40: // down arrow
+          setKeySelected((keySelected + 1) % len);
+          return;
+        case 13: // enter key
+          setShowDropdownMenu(!showDropdownMenu);
+          onSelect && onSelect(e, options[keySelected]);
+      }
+    }
+  };
 
   const handleOutsideClick = e => {
     if (componentRef.current.contains(e.target)) {
@@ -70,57 +75,50 @@ const DropDownMenu = ({ children, options, id, onSelect, noOptionMessage }) => {
     setShowDropdownMenu(false);
   };
 
-  const dropdownMenus = options.map((option, index) => {
-    return (
+  const dropdownMenus = options ? (
+    options.map((option, index) => (
       <Menu
-        onClick={() => {
-          console.log(option.value);
-          onSelect && onSelect(option);
+        onClick={e => {
+          setShowDropdownMenu(!showDropdownMenu);
+          onSelect && onSelect(e, option);
         }}
         key={option.value}
-        hover={keySelected === index ? 's' : 'a'}
+        onMouseOver={() => setKeySelected(index)}
+        hover={keySelected === index}
       >
         {option.label}
       </Menu>
-    );
-  });
+    ))
+  ) : (
+    <Box>{noOptionMessage}</Box>
+  );
 
   return (
     <InlineBlock ref={componentRef}>
-      <DropDown onClick={() => setShowDropdownMenu(!showDropdownMenu)}>
+      <DropDown onClick={() => setShowDropdownMenu(!showDropdownMenu)} id={id}>
         {children}
       </DropDown>
-      {showDropdownMenu && <DropdownContainer>{dropdownMenus}</DropdownContainer>}
+      {showDropdownMenu && (
+        <DropdownContainer>{dropdownMenus}</DropdownContainer>
+      )}
     </InlineBlock>
   );
 };
 
-DropDownMenu.propTypes = {
+DropdownMenu.propTypes = {
+  id: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node),
   ]).isRequired,
   options: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   noOptionMessage: PropTypes.string,
-  id: PropTypes.string.isRequired,
   onSelect: PropTypes.func,
 };
-DropDownMenu.defaultProps = {
+DropdownMenu.defaultProps = {
+  id: '',
   onSelect: null,
-  noOptionMessage: 'no menu items',
+  noOptionMessage: 'No options found',
 };
 
-const D = () => {
-  const options = [
-    { label: 'Menu Item One', value: 'A0' },
-    { label: 'Menu Item Two', value: 'B0' },
-    { label: 'Menu Item Three', value: 'C0' },
-    { label: 'Menu Item Four', value: 'D0' },
-    { label: 'Menu Item Five', value: 'E0' },
-    { label: 'Menu Item Six', value: 'F0' },
-    { label: 'Menu Item Seven', value: 'G0' },
-  ];
-  return <DropDownMenu options={options}>Trigger</DropDownMenu>;
-};
-
-export default D;
+export default DropdownMenu;
