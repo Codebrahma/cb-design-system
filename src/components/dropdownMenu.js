@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 
 import { Box, css } from 'theme-ui';
 import { InlineBlock } from './layout';
+import { Relative } from './position';
 import { PropTypes } from 'prop-types';
 import {
   getThemeStyles,
@@ -26,9 +27,10 @@ const DropdownContainer = styled(Box)`
   padding: 10px 0;
   border: 1px solid #ddd;
   border-radius: 6px;
-  ${({ theme, variant }) =>
+  ${({ theme, variant, displayTop }) =>
     css({
       ...getThemeStyles(theme, 'dropdownMenu', variant, 'dropdownContainer'),
+      bottom: displayTop,
     })(theme)}
 `;
 
@@ -64,24 +66,35 @@ const DropdownMenu = ({
 }) => {
   const [showDropdownMenu, setShowDropdownMenu] = useState(false);
   const [keySelected, setKeySelected] = useState(null);
+  const [positionTop, setPositionTop] = useState(false);
   const componentRef = useRef();
+  const contentRef = useRef();
+
+  useEffect(() => {
+    showDropdownMenu && determinePosition();
+  }, [showDropdownMenu]);
 
   useEffect(() => {
     if (options && showDropdownMenu) {
       document.body.addEventListener('click', handleOutsideClick, true);
       document.body.addEventListener('keydown', handleKeyboardEvent, true);
+      document.body.addEventListener('scroll', determinePosition, true);
     }
     return () => {
       if (options && showDropdownMenu) {
         document.body.removeEventListener('click', handleOutsideClick, true);
         document.body.removeEventListener('keydown', handleKeyboardEvent, true);
+        document.body.removeEventListener('scroll', determinePosition, true);
       }
     };
   });
 
   const toggleDropdown = toggleState => {
     setShowDropdownMenu(toggleState);
-    setKeySelected(0);
+    if (!toggleState) {
+      setKeySelected(0);
+      setPositionTop(false);
+    }
   };
 
   const handleKeyboardEvent = e => {
@@ -101,6 +114,27 @@ const DropdownMenu = ({
           toggleDropdown(!showDropdownMenu);
           onSelect && onSelect(e, options[keySelected]);
       }
+    }
+  };
+
+  const determinePosition = () => {
+    const [target, content] = document.querySelectorAll('#dropdown-container > div');
+
+    // const [target, content] = componentRef.current.children;
+
+    const windowHeight = window.innerHeight;
+    const { top, height } = content.getBoundingClientRect();
+    const { height: contentHeight } = target.getBoundingClientRect();
+    const totalHeight = top + height;
+
+    console.log(content.getBoundingClientRect());
+
+    if (totalHeight > windowHeight) {
+      setPositionTop(`${contentHeight}px`);
+      console.log('top', top, height);
+    } else {
+      console.log('bottom', top, height);
+      setPositionTop(false);
     }
   };
 
@@ -129,7 +163,7 @@ const DropdownMenu = ({
     : noOptionMessage;
 
   return (
-    <InlineBlock ref={componentRef}>
+    <Relative id='dropdown-container' ref={componentRef}>
       <DropDown
         variant={variant}
         onClick={() => toggleDropdown(!showDropdownMenu)}
@@ -138,9 +172,15 @@ const DropdownMenu = ({
         {children}
       </DropDown>
       {showDropdownMenu && (
-        <DropdownContainer variant={variant}>{dropdownMenus}</DropdownContainer>
+        <DropdownContainer
+          variant={variant}
+          ref={contentRef}
+          displayTop={positionTop || 'unset'}
+        >
+          {dropdownMenus}
+        </DropdownContainer>
       )}
-    </InlineBlock>
+    </Relative>
   );
 };
 

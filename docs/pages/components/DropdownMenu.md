@@ -1,6 +1,15 @@
 # DropdownMenu
 
 Primitive DropdownMenu component with variants
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo ipsum laudantium natus? Dolores atque earum provident cupiditate quibusdam, id odit velit voluptate placeat unde, impedit voluptas? Veritatis perspiciatis et cum!
+
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo ipsum laudantium natus? Dolores atque earum provident cupiditate quibusdam, id odit velit voluptate placeat unde, impedit voluptas? Veritatis perspiciatis et cum!
+
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo ipsum laudantium natus? Dolores atque earum provident cupiditate quibusdam, id odit velit voluptate placeat unde, impedit voluptas? Veritatis perspiciatis et cum!
+
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo ipsum laudantium natus? Dolores atque earum provident cupiditate quibusdam, id odit velit voluptate placeat unde, impedit voluptas? Veritatis perspiciatis et cum!
+
+
 
 ```.jsx
   <DropdownMenu
