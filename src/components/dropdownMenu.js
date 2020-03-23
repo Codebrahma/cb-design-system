@@ -102,7 +102,7 @@ const DropdownMenu = ({
   };
 
   const handleKeyboardEvent = e => {
-    e.stopPropagation();
+    e.preventDefault();
     if (showDropdownMenu) {
       const len = options.length;
       switch (e.keyCode) {
@@ -126,8 +126,8 @@ const DropdownMenu = ({
     const { top, height } = content.getBoundingClientRect();
     const { height: contentHeight } = target.getBoundingClientRect();
     const totalHeight = top + height;
-
-    if (totalHeight > windowHeight) {
+    console.log(top, height);
+    if ((totalHeight > windowHeight) && (top > height)) {
       setPositionTop(`${contentHeight}px`);
     } else {
       setPositionTop(false);
