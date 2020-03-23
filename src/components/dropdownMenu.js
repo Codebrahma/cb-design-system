@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 
 import { Box, css } from 'theme-ui';
 import { InlineBlock } from './layout';
-import { Relative } from './position';
 import { PropTypes } from 'prop-types';
 import {
   getThemeStyles,
@@ -12,15 +11,18 @@ import {
   ENTER_KEY,
 } from './../utils/getStyles';
 
+const DropdownContainer = styled(InlineBlock)({
+  position: 'relative',
+});
+
 const DropDown = styled(InlineBlock)`
-  position: relative;
   ${({ theme, variant }) =>
     css({
       ...getThemeStyles(theme, 'dropdownMenu', variant, 'dropdownTrigger'),
     })(theme)}
 `;
 
-const DropdownContainer = styled(Box)`
+const MenusContainer = styled(Box)`
   position: absolute;
   width: 200px;
   background: #fff;
@@ -57,12 +59,13 @@ const Menu = styled(Box)`
 `;
 
 const DropdownMenu = ({
-  children,
-  variant,
-  options,
   id,
+  variant,
+  children,
+  options,
   onSelect,
   noOptionMessage,
+  scrollableContainer,
 }) => {
   const [showDropdownMenu, setShowDropdownMenu] = useState(false);
   const [keySelected, setKeySelected] = useState(null);
@@ -75,16 +78,17 @@ const DropdownMenu = ({
   }, [showDropdownMenu]);
 
   useEffect(() => {
+    const scrollContainer = scrollableContainer || document.body;
     if (options && showDropdownMenu) {
       document.body.addEventListener('click', handleOutsideClick, true);
       document.body.addEventListener('keydown', handleKeyboardEvent, true);
-      document.body.addEventListener('scroll', determinePosition, true);
+      scrollContainer.addEventListener('scroll', determinePosition, true);
     }
     return () => {
       if (options && showDropdownMenu) {
         document.body.removeEventListener('click', handleOutsideClick, true);
         document.body.removeEventListener('keydown', handleKeyboardEvent, true);
-        document.body.removeEventListener('scroll', determinePosition, true);
+        scrollContainer.removeEventListener('scroll', determinePosition, true);
       }
     };
   });
@@ -98,7 +102,6 @@ const DropdownMenu = ({
   };
 
   const handleKeyboardEvent = e => {
-    e.preventDefault();
     e.stopPropagation();
     if (showDropdownMenu) {
       const len = options.length;
@@ -118,22 +121,15 @@ const DropdownMenu = ({
   };
 
   const determinePosition = () => {
-    const [target, content] = document.querySelectorAll('#dropdown-container > div');
-
-    // const [target, content] = componentRef.current.children;
-
+    const [target, content] = componentRef.current.children;
     const windowHeight = window.innerHeight;
     const { top, height } = content.getBoundingClientRect();
     const { height: contentHeight } = target.getBoundingClientRect();
     const totalHeight = top + height;
 
-    console.log(content.getBoundingClientRect());
-
     if (totalHeight > windowHeight) {
       setPositionTop(`${contentHeight}px`);
-      console.log('top', top, height);
     } else {
-      console.log('bottom', top, height);
       setPositionTop(false);
     }
   };
@@ -163,7 +159,7 @@ const DropdownMenu = ({
     : noOptionMessage;
 
   return (
-    <Relative id='dropdown-container' ref={componentRef}>
+    <DropdownContainer ref={componentRef}>
       <DropDown
         variant={variant}
         onClick={() => toggleDropdown(!showDropdownMenu)}
@@ -172,15 +168,15 @@ const DropdownMenu = ({
         {children}
       </DropDown>
       {showDropdownMenu && (
-        <DropdownContainer
+        <MenusContainer
           variant={variant}
           ref={contentRef}
           displayTop={positionTop || 'unset'}
         >
           {dropdownMenus}
-        </DropdownContainer>
+        </MenusContainer>
       )}
-    </Relative>
+    </DropdownContainer>
   );
 };
 
@@ -188,18 +184,22 @@ DropdownMenu.propTypes = {
   id: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.node,
+    PropTypes.string,
     PropTypes.arrayOf(PropTypes.node),
   ]).isRequired,
   options: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   noOptionMessage: PropTypes.string,
   variant: PropTypes.string,
   onSelect: PropTypes.func,
+  scrollableContainer: PropTypes.node,
 };
+
 DropdownMenu.defaultProps = {
   id: '',
   onSelect: null,
   variant: 'primary',
   noOptionMessage: 'No options found',
+  scrollableContainer: null,
 };
 
-export default DropdownMenu;
+export default React.memo(DropdownMenu);
