@@ -96,7 +96,7 @@ const DropdownMenu = ({
   const toggleDropdown = toggleState => {
     setShowDropdownMenu(toggleState);
     if (!toggleState) {
-      setKeySelected(0);
+      setKeySelected(null);
       setPositionTop(false);
     }
   };
