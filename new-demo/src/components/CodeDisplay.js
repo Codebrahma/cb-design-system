@@ -4,7 +4,13 @@ import { css } from '@emotion/core';
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import theme from 'prism-react-renderer/themes/oceanicNext'; // included by react-live
-import * as components from 'cb-design-system';
+import * as dsComponents from 'cb-design-system';
+import * as demoComponents from './demo';
+
+const components = {
+  ...dsComponents,
+  ...demoComponents,
+};
 
 function clearSelection() {
   if (window.getSelection) {
