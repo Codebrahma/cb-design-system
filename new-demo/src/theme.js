@@ -123,6 +123,16 @@ export default {
     },
     img: {
       maxWidth: '600px',
-    }
+    },
+    table: {
+      borderCollapse: 'collapse',
+      'td, th' : {
+        p: 3,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: 'borderGray',
+        textAlign: 'left',
+      },
+    },
   },
 };
