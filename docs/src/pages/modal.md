@@ -67,15 +67,15 @@ const ModalDemo = () => {
 <Editor>
 
 ```jsx
-  <Button
-    onClick={() => openModal({
-      header: "Hello",
-      body: "This modal is opened via 'openModal' method",
-      closeOnEscape: true
-    })}
-  >
-    Open Modal
-  </Button>
+<Button
+  onClick={() => openModal({
+    header: "Hello",
+    body: "This modal is opened via 'openModal' method",
+    closeOnEscape: true
+  })}
+>
+  Open Modal
+</Button>
 ```
 
 </Editor>
