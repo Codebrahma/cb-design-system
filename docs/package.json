@@ -26,10 +26,7 @@
     "format": "prettier '**/*.{js,json,css,md}' --write  --ignore-path .gitignore",
     "prebuild": "yarn lint",
     "build": "gatsby build",
-    "dev": "gatsby develop -H 0.0.0.0",
-    "predeploy": "yarn build",
-    "deploy": "surge -p ./public -d gatsby-live-mdx.surge.sh",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "gatsby develop -H 0.0.0.0"
   },
   "husky": {
     "hooks": {
