@@ -110,26 +110,20 @@ export default {
 
   switch: {
     sm: {
-      width: '30px',
-      height: '15px',
-      border: 'borderGray',
-      bg: 'borderGray',
-      color: 'white',
-    },
-    md: {
-      border: 'primary',
-      bg: 'success',
-      color: 'primary',
-      '&:checked': {
-        bg: 'error',
+      switchBody: {
+        width: '30px',
+        height: '15px',
+        borderColor: 'borderGray',
+        bg: 'borderGray',
+        '&:checked': {
+          borderColor: 'success',
+          bg: 'success',
+        },
       },
-    },
-    lg: {
-      width: '60px',
-      height: '30px',
-      border: 'borderGray',
-      bg: 'success',
-      color: 'white',
+      switchHandle: {
+        borderColor: 'borderGray',
+        bg: 'primary',
+      },
     },
   },
 
