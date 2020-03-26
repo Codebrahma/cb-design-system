@@ -4,9 +4,9 @@ import { Absolute, Fixed, Relative } from './../position';
 import { applyVariation } from './../../utils/getStyles';
 
 const themeKey = 'modal';
-const getStyleForVariant = (subVariant) =>
+const getStyleForVariant = (subVariant) => (
   ({ theme, variant }) => variant ? applyVariation(theme, `${variant}.${subVariant}`, themeKey) : null
-;
+);
 
 export const Overlay = styled(Fixed)(
   {

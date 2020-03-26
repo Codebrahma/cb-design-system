@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { Box, css, Image } from 'theme-ui';
-import { getThemeStyles, ENTER_KEY } from '../utils/getStyles';
+import { ENTER_KEY } from '../utils/general';
+import { getThemeStyles } from '../utils/getStyles';
 import { InlineFlex, InlineBlock } from './layout';
 
 const Container = styled(InlineFlex)`
@@ -45,7 +46,7 @@ const Icon = styled(Box)`
         outline: 'none',
         color: 'error',
       },
-      ...getThemeStyles(theme, 'pill', variant, 'icon'),
+      ...getThemeStyles(theme, 'pill', variant, 'closeIcon'),
     })}
 `;
 
@@ -60,13 +61,13 @@ const Pill = ({
 }) => {
   return (
     <Container
+      {...otherProps}
       __themeKey='pill'
       tabIndex='0'
       id={id}
       variant={variant}
-      {...otherProps}
       onClick={event => onClick(event, id)}
-      onKeyDown={e => (e.keyCode === ENTER_KEY ? onClick(e, id) : null)}
+      onKeyDown={event => (event.keyCode === ENTER_KEY ? onClick(event, id) : null)}
     >
       <Content variant={variant}>{content}</Content>
       <Icon

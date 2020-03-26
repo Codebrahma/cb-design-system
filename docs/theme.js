@@ -118,18 +118,10 @@ export default {
       content: {
         color: 'primary',
       },
-      icon: {},
-    },
-  },
-
-  images: {
-    close: {
-      height: '20px',
-      width: '20px',
-    },
-    pillIcon: {
-      width: '15px',
-      height: '15px',
+      closeIcon: {
+        height: '20px',
+        width: '20px',
+      },
     },
   },
 
