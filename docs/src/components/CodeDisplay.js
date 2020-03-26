@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
@@ -75,7 +75,12 @@ const cssCopyAction = css`
   padding: 0.4em;
   color: #fff;
   outline: 0;
+  padding: 10px;
   cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 `;
 
 const cssPreviewPane = css`
@@ -94,6 +99,7 @@ const cssError = css`
 `;
 
 function CodeDisplay({ code, editable, className, noInline, ...otherProps }) {
+  const [isTextCopied, setIsTextCopied] = useState(false);
   const language = className.replace('language-', '');
   const textareaId = 'live-editor-textarea';
   const editorPaneRef = React.useRef();
@@ -102,6 +108,8 @@ function CodeDisplay({ code, editable, className, noInline, ...otherProps }) {
     if (editorPaneRef.current) {
       const textarea = editorPaneRef.current.querySelector(`#${textareaId}`);
       safeCopy(textarea);
+      setIsTextCopied(true);
+      setTimeout(() => setIsTextCopied(false), 2000);
     }
   };
 
@@ -129,8 +137,13 @@ function CodeDisplay({ code, editable, className, noInline, ...otherProps }) {
             theme={theme}
             textareaId={textareaId}
           />
-          <button css={cssCopyAction} type="button" onClick={handleCopy}>
-            Copy
+          <button
+            css={cssCopyAction}
+            onClick={handleCopy}
+            type="button"
+            disabled={isTextCopied}
+          >
+            {isTextCopied ? '✔ Copied' : 'Copy'}
           </button>
         </div>
       </div>
