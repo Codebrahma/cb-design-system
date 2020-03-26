@@ -17,7 +17,7 @@ Modal can be created in two ways.
 
 ## Using `Modal` Component
 
-```react
+```jsx
 const ModalDemo = () => {
   const [isOpen, setIsOpen] = useState(false);
   const header = () => (<h3>Title</h3>);
@@ -41,7 +41,7 @@ const ModalDemo = () => {
 
 <Editor>
 
-```.jsx
+```jsx
 <ModalDemo />
 ```
 
@@ -66,7 +66,7 @@ const ModalDemo = () => {
 
 <Editor>
 
-```.jsx
+```jsx
   <Button
     onClick={() => openModal({
       header: "Hello",

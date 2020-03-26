@@ -37,7 +37,6 @@ function safeCopy(textarea) {
 }
 
 const cssWrapper = css`
-  display: flex;
   border: 1px solid #e8e8e8;
   border-radius: 2px;
   margin-top: 1em;
@@ -58,11 +57,12 @@ const cssLiveEditor = css`
   flex: 1;
   font-size: 14px;
   line-height: 1.4;
+  background-color: #f6f6ff !important;
 
   & > textarea,
   pre {
     outline: 0;
-    padding: 1em;
+    padding: 15px !important;
   }
 `;
 
@@ -84,20 +84,14 @@ const cssPreviewPane = css`
   display: flex;
   flex-direction: column;
   position: relative;
+  padding: 15px;
 `;
 
 const cssError = css`
-  margin: 0;
-  color: #ff1717;
   font-size: 12px;
-  padding: 1em 2em;
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
+  padding-top: 15px;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.85);
+  color: #ff0000;
 `;
 
 function CodeDisplay({ code, editable, className, noInline, ...otherProps }) {
@@ -121,6 +115,14 @@ function CodeDisplay({ code, editable, className, noInline, ...otherProps }) {
       {...otherProps}
     >
       <div css={cssWrapper}>
+        {
+          editable ? (
+            <div css={cssPreviewPane}>
+              <LivePreview />
+              <LiveError css={cssError} />
+            </div>
+          ) : null
+        }
         <div css={cssEditorPane} ref={editorPaneRef}>
           <LiveEditor
             css={cssLiveEditor}
@@ -132,12 +134,6 @@ function CodeDisplay({ code, editable, className, noInline, ...otherProps }) {
             Copy
           </button>
         </div>
-        {editable ? (
-          <div css={cssPreviewPane}>
-            <LivePreview />
-            <LiveError css={cssError} />
-          </div>
-        ) : null}
       </div>
     </LiveProvider>
   );

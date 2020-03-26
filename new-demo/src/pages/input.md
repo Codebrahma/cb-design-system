@@ -4,7 +4,7 @@ Primitive Input component with variants
 
 <Editor>
 
-```.jsx
+```jsx
 <Input />
 ```
 
