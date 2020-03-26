@@ -3,10 +3,32 @@ import { Link } from 'gatsby';
 import { css } from '@emotion/core';
 import { sidebarWidth, textColor, themeColor } from '../styles';
 
+const sidebarLinks = [
+  {
+    name: 'Home',
+    ref: '/'
+  },
+  {
+    name: 'Button',
+    ref: '/button'
+  },
+  {
+    name: 'Input',
+    ref: '/input'
+  },
+  {
+    name: 'Modal',
+    ref: '/modal'
+  },
+  {
+    name: 'Theming',
+    ref: '/theming'
+  },
+];
+
 export const cssNavLink = css`
   font-size: 18px;
   text-decoration: none;
-  margin: 6px 0;
   padding: 6px 24px;
   color: ${textColor};
   position: relative;
@@ -46,15 +68,13 @@ function Sidebar() {
           margin-top: 12px;
         `}
       >
-        <Link to="/" css={cssNavLink} activeClassName="active">
-          Home
-        </Link>
-        <Link to="/live-editing" css={cssNavLink} activeClassName="active">
-          Live Editing
-        </Link>
-        <Link to="/references" css={cssNavLink} activeClassName="active">
-          References
-        </Link>
+        {
+          sidebarLinks.map(({ name, ref }) => (
+            <Link to={ref} css={cssNavLink} activeClassName="active">
+              {name}
+            </Link>
+          ))
+        }
       </nav>
     </aside>
   );
