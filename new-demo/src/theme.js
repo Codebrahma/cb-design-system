@@ -73,6 +73,7 @@ export default {
   ],
   space: [0, 2, 4, 8, 16, 32, 64, 128],
   radii: [0, 1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
+  lineHeight: [1, 1.15, 1.30, 1.45, 1.60, 1.75, 1.90, 2.05],
   fontSizes: {
     h1: '28px',
     h2: '24px',
@@ -112,6 +113,12 @@ export default {
       p: 3,
       borderColor: 'border',
       borderRadius: 2,
-    }
-  }
+    },
+  },
+
+  styles: {
+    root: {
+      lineHeight: 4,
+    },
+  },
 };
