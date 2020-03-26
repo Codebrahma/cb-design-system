@@ -146,7 +146,7 @@ CodeDisplay.propTypes = {
 
 CodeDisplay.defaultProps = {
   className: '',
-  editable: true,
+  editable: false,
   noInline: false,
   mountStylesheet: false,
   transformCode: src => `<React.Fragment>${src}</React.Fragment>`,
