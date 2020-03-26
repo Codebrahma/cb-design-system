@@ -41,7 +41,7 @@ function Header({ title }) {
         </Link>
       </h1>
       <a
-        href="https://github.com/xiaofan2406/gatsby-live-mdx"
+        href="https://github.com/codebrahma/bricks"
         target="_blank"
         rel="noopener noreferrer"
         css={cssExternalLink}
