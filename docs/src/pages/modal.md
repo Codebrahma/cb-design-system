@@ -1,3 +1,5 @@
+import ModalStructure from './../images/modal-structure.png';
+
 # Modal
 
 A Modal is composed with the building blocks given below.
@@ -8,7 +10,7 @@ A Modal is composed with the building blocks given below.
   - Footer
   - Close Button
 
-![Modal structure](../images/modal-structure.png)
+<img src={ModalStructure} alt="Modal structure" />
 
 Modal can be created in two ways.
 
