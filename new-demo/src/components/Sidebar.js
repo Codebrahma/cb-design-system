@@ -27,7 +27,7 @@ const sidebarLinks = [
 ];
 
 export const cssNavLink = css`
-  font-size: 18px;
+  font-size: 16px;
   text-decoration: none;
   padding: 6px 24px;
   color: ${textColor};
