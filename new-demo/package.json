@@ -1,0 +1,78 @@
+{
+  "name": "gatsby-live-mdx",
+  "description": "Gatsby with react-live and mdx starter",
+  "version": "1.0.0",
+  "author": "Xiaofan Wu <xiaofan2406@gmail.com> (https://github.com/xiaofan2406",
+  "keywords": [
+    "gatsby",
+    "react-live",
+    "mdx"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xiaofan2406/gatsby-live-mdx"
+  },
+  "bugs": {
+    "url": "https://github.com/xiaofan2406/gatsby-live-mdx/issues"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "license": "MIT",
+  "scripts": {
+    "lint:eslint": "eslint '**/*.js' --ignore-path .gitignore",
+    "lint:prettier": "prettier-check '**/*.{js,json,css,md}' --ignore-path .gitignore",
+    "lint": "yarn lint:eslint && yarn lint:prettier",
+    "format": "prettier '**/*.{js,json,css,md}' --write  --ignore-path .gitignore",
+    "prebuild": "yarn lint",
+    "build": "gatsby build",
+    "dev": "gatsby develop -H 0.0.0.0",
+    "predeploy": "yarn build",
+    "deploy": "surge -p ./public -d gatsby-live-mdx.surge.sh",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": [
+      "prettier --write"
+    ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "dependencies": {
+    "@emotion/core": "^10.0.27",
+    "@mdx-js/mdx": "^1.5.7",
+    "@mdx-js/react": "^1.5.7",
+    "@mdx-js/tag": "^0.20.3",
+    "gatsby": "^2.19.21",
+    "gatsby-plugin-emotion": "^4.1.22",
+    "gatsby-plugin-manifest": "^2.2.42",
+    "gatsby-plugin-mdx": "^1.0.73",
+    "gatsby-plugin-offline": "^3.0.35",
+    "gatsby-plugin-react-helmet": "^3.1.22",
+    "prismjs": "^1.19.0",
+    "prop-types": "^15.7.2",
+    "react": "file:../node_modules/react",
+    "react-dom": "file:../node_modules/react-dom",
+    "react-helmet": "^5.2.1",
+    "react-live": "^2.2.2",
+    "cb-design-system": "file:.."
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.8.0",
+    "eslint-config-free": "^0.1.0",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.7",
+    "prettier": "^1.19.1",
+    "prettier-check": "^2.0.0",
+    "surge": "^0.21.3"
+  }
+}
