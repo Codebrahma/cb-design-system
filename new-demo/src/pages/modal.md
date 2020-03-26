@@ -40,9 +40,13 @@ const ModalDemo = () => {
 };
 ```
 
+<Editor>
+
 ```.jsx
-  <ModalDemo />
+<ModalDemo />
 ```
+
+</Editor>
 
 ### Props
 
@@ -61,6 +65,8 @@ const ModalDemo = () => {
 
 ## Using `openModal` helper method
 
+<Editor>
+
 ```.jsx
   <Button
     onClick={() => openModal({
@@ -72,3 +78,5 @@ const ModalDemo = () => {
     Open Modal
   </Button>
 ```
+
+</Editor>
