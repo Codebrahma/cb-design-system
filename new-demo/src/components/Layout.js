@@ -14,7 +14,7 @@ import Editor from './Editor';
 import theme from '../theme';
 import { cssPageWidth, headerHeight, sidebarWidth } from '../styles';
 
-const { ThemeProvider, PortableModalContainer, ...otherPrimitiveComps } = designSystem;
+const { ThemeProvider, PortableModalContainer, components: otherPrimitiveComps } = designSystem;
 const components = {
   ...otherPrimitiveComps,
   pre: PreComponent,

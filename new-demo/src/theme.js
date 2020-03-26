@@ -120,5 +120,8 @@ export default {
     root: {
       lineHeight: 4,
     },
+    img: {
+      maxWidth: '600px',
+    }
   },
 };
