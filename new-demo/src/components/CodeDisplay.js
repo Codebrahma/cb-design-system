@@ -57,7 +57,6 @@ const cssLiveEditor = css`
   flex: 1;
   font-size: 14px;
   line-height: 1.4;
-  background-color: #f6f6ff !important;
 
   & > textarea,
   pre {
