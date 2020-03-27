@@ -11,20 +11,11 @@ const applyFocus = (theme) => css({
   },
 })(theme);
 
-const getThemeStyles = (...args) => {
-  let theme = null;
-  for (let i = 0; i < args.length; i++) {
-    theme = !theme ? args[i] : theme[args[i]];
-  }
-  return theme;
-};
-
 const UP_ARROW = 38;
 const DOWN_ARROW = 40;
 const ENTER_KEY = 13;
 
 export {
-  getThemeStyles,
   applyVariation,
   applyFocus,
   UP_ARROW,

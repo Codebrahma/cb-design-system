@@ -5,57 +5,46 @@ import { Box, css } from 'theme-ui';
 import { InlineBlock } from './layout';
 import { PropTypes } from 'prop-types';
 import {
-  getThemeStyles,
+  applyVariation,
   UP_ARROW,
   DOWN_ARROW,
   ENTER_KEY,
-} from './../utils/getStyles';
+} from './../utils/getStyles'; // TODO: move to separate file after pills merged
 
 const DropdownContainer = styled(InlineBlock)({
   position: 'relative',
 });
 
-const DropDown = styled(InlineBlock)`
-  ${({ theme, variant }) =>
-    css({
-      ...getThemeStyles(theme, 'dropdownMenu', variant, 'dropdownTrigger'),
-    })(theme)}
-`;
+const DropDown = styled(InlineBlock)(
+  ({ theme, variant }) => applyVariation(theme, `${variant}.dropdownTrigger`, 'dropdownMenu')
+);
 
 const MenusContainer = styled(Box)`
-  position: absolute;
-  width: 200px;
-  background: #fff;
-  padding: 10px 0;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  ${({ theme, variant, displayTop }) =>
-    css({
-      ...getThemeStyles(theme, 'dropdownMenu', variant, 'dropdownContainer'),
-      bottom: displayTop,
-    })(theme)}
+  ${({ theme, displayTop }) => css({
+    position: 'absolute',
+    width: '200px',
+    background: 'white',
+    padding: '10px 0',
+    borderStyle: 'solid',
+    borderWidth: '1px',
+    borderColor: 'borderGray',
+    borderRadius: '6px',
+    bottom: displayTop,
+  })(theme)}
+  ${({theme, variant}) => applyVariation(theme, `${variant}.dropdownContainer`, 'dropdownMenu')}
 `;
 
 const Menu = styled(Box)`
-  position: relative;
-  padding: 5px 10px;
-  &:hover {
-    background: #ddd;
-  }
-  ${({ theme, variant, hover }) =>
-    css({
-      bg: hover
-        ? getThemeStyles(
-          theme,
-          'dropdownMenu',
-          variant,
-          'dropdownMenu',
-          '&:hover',
-          'bg'
-        ) || '#ddd'
-        : '',
-      ...getThemeStyles(theme, 'dropdownMenu', variant, 'dropdownMenu'),
-    })(theme)}
+  ${({ theme }) => css({
+    position: 'relative',
+    padding: '5px 10px',
+    '&:hover': {
+      background: 'borderGray',
+    },
+  })(theme)}
+  ${({ theme, variant }) => applyVariation(theme, `${variant}.dropdownOption`, 'dropdownMenu')}
+  ${({ theme, variant, hover }) => hover ? applyVariation(theme, `${variant}.dropdownOption.&:hover`, 'dropdownMenu') : ''}
+  ${({ theme, variant, hover }) => hover ? applyVariation(theme, `${variant}.dropdownOption.&:focus`, 'dropdownMenu') : ''}
 `;
 
 const DropdownMenu = ({
@@ -79,13 +68,13 @@ const DropdownMenu = ({
 
   useEffect(() => {
     const scrollContainer = scrollableContainer || document.body;
-    if (options && showDropdownMenu) {
+    if (showDropdownMenu) {
       document.body.addEventListener('click', handleOutsideClick, true);
       document.body.addEventListener('keydown', handleKeyboardEvent, true);
       scrollContainer.addEventListener('scroll', determinePosition, true);
     }
     return () => {
-      if (options && showDropdownMenu) {
+      if (showDropdownMenu) {
         document.body.removeEventListener('click', handleOutsideClick, true);
         document.body.removeEventListener('keydown', handleKeyboardEvent, true);
         scrollContainer.removeEventListener('scroll', determinePosition, true);
@@ -126,7 +115,7 @@ const DropdownMenu = ({
     const { top, height } = content.getBoundingClientRect();
     const { height: contentHeight } = target.getBoundingClientRect();
     const totalHeight = top + height;
-    console.log(top, height);
+
     if ((totalHeight > windowHeight) && (top > height)) {
       setPositionTop(`${contentHeight}px`);
     } else {
@@ -187,7 +176,7 @@ DropdownMenu.propTypes = {
     PropTypes.string,
     PropTypes.arrayOf(PropTypes.node),
   ]).isRequired,
-  options: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  options: PropTypes.arrayOf(PropTypes.shape({})),
   noOptionMessage: PropTypes.string,
   variant: PropTypes.string,
   onSelect: PropTypes.func,
@@ -200,6 +189,7 @@ DropdownMenu.defaultProps = {
   variant: 'primary',
   noOptionMessage: 'No options found',
   scrollableContainer: null,
+  options: null,
 };
 
 export default React.memo(DropdownMenu);

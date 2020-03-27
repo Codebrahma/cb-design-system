@@ -116,16 +116,25 @@ export default {
   },
   dropdownMenu: {
     primary: {
-      dropdownTrigger: {},
+      dropdownTrigger: {
+        border: '1px solid #ddd',
+        borderRadius: 4,
+        px: 2,
+      },
       dropdownContainer: {
         width: '300px',
       },
-      dropdownMenu: {
+      dropdownOption: {
+        color: 'text',
         '&:hover': {
           bg: 'primaryLight',
+          color: 'white',
+        },
+        '&:focus': {
+          bg: 'primaryDark',
+          color: 'white',
         },
       },
     },
   },
-
 };
