@@ -14,6 +14,7 @@ const applyFocus = (theme) => css({
 const UP_ARROW = 38;
 const DOWN_ARROW = 40;
 const ENTER_KEY = 13;
+const TAB_KEY = 9;
 
 export {
   applyVariation,
@@ -21,4 +22,5 @@ export {
   UP_ARROW,
   DOWN_ARROW,
   ENTER_KEY,
+  TAB_KEY,
 };

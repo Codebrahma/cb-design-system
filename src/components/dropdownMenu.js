@@ -9,6 +9,7 @@ import {
   UP_ARROW,
   DOWN_ARROW,
   ENTER_KEY,
+  TAB_KEY,
 } from './../utils/getStyles'; // TODO: move to separate file after pills merged
 
 const DropdownContainer = styled(InlineBlock)({
@@ -61,6 +62,7 @@ const DropdownMenu = ({
   const [positionTop, setPositionTop] = useState(false);
   const componentRef = useRef();
   const contentRef = useRef();
+  const dropdownButton = useRef();
 
   useEffect(() => {
     showDropdownMenu && determinePosition();
@@ -92,20 +94,28 @@ const DropdownMenu = ({
 
   const handleKeyboardEvent = e => {
     e.preventDefault();
-    if (showDropdownMenu) {
-      const len = options.length;
-      switch (e.keyCode) {
-        case UP_ARROW:
-          const i = keySelected < 1 ? len - 1 : (keySelected - 1) % len;
-          setKeySelected(i);
-          return;
-        case DOWN_ARROW:
-          setKeySelected((keySelected + 1) % len);
-          return;
-        case ENTER_KEY:
-          toggleDropdown(!showDropdownMenu);
-          onSelect && onSelect(e, options[keySelected]);
-      }
+    const len = options.length;
+
+    switch (e.keyCode) {
+      case UP_ARROW:
+        const i = keySelected < 1 ? len - 1 : (keySelected - 1) % len;
+        setKeySelected(i);
+        return;
+      case DOWN_ARROW:
+        const index = keySelected !== null ? ((keySelected + 1) % len) : 0;
+        setKeySelected(index);
+        return;
+      case ENTER_KEY:
+        if (showDropdownMenu && onSelect) onSelect(options[keySelected], e);
+        if (!showDropdownMenu) {
+          dropdownButton.current.focus();
+        } else {
+          dropdownButton.current.blur();
+        }
+        toggleDropdown(!showDropdownMenu);
+        return;
+      case TAB_KEY:
+        toggleDropdown(!showDropdownMenu);
     }
   };
 
@@ -135,7 +145,7 @@ const DropdownMenu = ({
       <Menu
         onClick={e => {
           toggleDropdown(!showDropdownMenu);
-          onSelect && onSelect(e, option);
+          onSelect && onSelect(option, e);
         }}
         key={option.value}
         onMouseOver={() => setKeySelected(index)}
@@ -153,6 +163,9 @@ const DropdownMenu = ({
         variant={variant}
         onClick={() => toggleDropdown(!showDropdownMenu)}
         id={id}
+        tabIndex='0'
+        onKeyUp={(e) => e.keyCode === ENTER_KEY ? handleKeyboardEvent(e) : null}
+        ref={dropdownButton}
       >
         {children}
       </DropDown>

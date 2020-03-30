@@ -13,7 +13,7 @@ Primitive DropdownMenu component with variants
       { label: 'Menu Item Six', value: 'F0' },
       { label: 'Menu Item Seven', value: 'G0' },
     ]} 
-    onSelect={(e, value) => console.log(value)}
+    onSelect={(value, event) => console.log(value)}
   >
     Trigger &#9662;
   </DropdownMenu>
