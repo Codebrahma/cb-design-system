@@ -28,6 +28,10 @@ const sidebarLinks = [
     name: 'Theming',
     ref: '/theming',
   },
+  {
+    name: 'AutoComplete',
+    ref: '/autocomplete',
+  },
 ];
 
 export const cssNavLink = css`
