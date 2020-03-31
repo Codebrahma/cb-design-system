@@ -11,16 +11,19 @@ const applyFocus = (theme) => css({
   },
 })(theme);
 
-const UP_ARROW = 38;
-const DOWN_ARROW = 40;
-const ENTER_KEY = 13;
-const TAB_KEY = 9;
+const getThemeStyles = (...args) => {
+  let theme = null;
+  for (let i = 0; i < args.length; i++) {
+    if (!(i === 0) && !theme) {
+      break;
+    }
+    theme = !theme ? args[i] : theme[args[i]];
+  }
+  return theme;
+};
 
 export {
+  getThemeStyles,
   applyVariation,
   applyFocus,
-  UP_ARROW,
-  DOWN_ARROW,
-  ENTER_KEY,
-  TAB_KEY,
 };

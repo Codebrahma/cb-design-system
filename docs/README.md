@@ -1,43 +1,37 @@
+# gatsby-live-mdx
 
-# mdx-docs
+[![Dependencies Status][dependencies-badge]][dependencies] [![Styled with prettier][prettier-badge]][prettier]
 
-This project was built with [mdx-docs][] and [Next.js][]
+[dependencies-badge]: https://img.shields.io/david/xiaofan2406/gatsby-live-mdx.svg?style=flat-square
+[dependencies]: https://david-dm.org/xiaofan2406/gatsby-live-mdx
+[prettier-badge]: https://img.shields.io/badge/styled_with-prettier-ff69b4.svg?style=flat-square
+[prettier]: https://github.com/prettier/prettier
 
-## Getting Started
+The starter Gatsby template for live editing with mdx.
 
-```sh
-npm install
-```
+## Install
 
-### Run in development mode
-
-```sh
-npm start
-```
-
-### Export static site
+Make sure that you have the Gatsby CLI program installed:
 
 ```sh
-npm run build
+yarn global add gatsby-cli
 ```
 
-## Adding Routes & Navigation
+And run from your CLI:
 
-Each file in the `pages/` directory will create a route for your application.
-To edit the navigation in the sidebar, change the `routes` array in the [`pages/_app.js`](pages/_app.js) component.
+```sh
+gatsby new gatsby-live-mdx-example https://github.com/xiaofan2406/gatsby-live-mdx
+```
 
-For more information on how Next.js works, see the [Next.js Docs][Next.js].
+Then you can run it by:
 
-## Customizing
+```sh
+cd gatsby-live-mdx-example
+yarn dev
+```
 
-To customize the look at feel of your application see the docs for mdx-docs:
+## Deploy with surge
 
-- [Theming Docs][docs-theming]
-- [Components Docs][docs-components]
-
-Built with [mdx-docs][]
-
-[mdx-docs]: https://github.com/jxnblk/mdx-docs
-[Next.js]: https://github.com/zeit/next.js/
-[docs-components]: https://github.com/jxnblk/mdx-docs/blob/master/docs/components.md
-[docs-theming]: https://github.com/jxnblk/mdx-docs/blob/master/docs/theming.md
+```sh
+yarn deploy
+```

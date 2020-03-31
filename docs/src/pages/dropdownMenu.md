@@ -2,7 +2,8 @@
 
 Primitive DropdownMenu component with variants
 
-```.jsx
+```jsx
+const DropdownMenu = () => (
   <DropdownMenu
     options={[
       { label: 'Menu Item One', value: 'A0' },
@@ -12,9 +13,18 @@ Primitive DropdownMenu component with variants
       { label: 'Menu Item Five', value: 'E0' },
       { label: 'Menu Item Six', value: 'F0' },
       { label: 'Menu Item Seven', value: 'G0' },
-    ]} 
+    ]}
     onSelect={(value, event) => console.log(value)}
   >
     Trigger &#9662;
   </DropdownMenu>
+);
 ```
+
+<Editor>
+
+```jsx
+<DropdownMenu />
+```
+
+</Editor>

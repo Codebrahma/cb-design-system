@@ -2,6 +2,10 @@
 
 Primitive Input component with variants
 
-```.jsx
-  <Input />
+<Editor>
+
+```jsx
+<Input />
 ```
+
+</Editor>

@@ -6,11 +6,13 @@ import { InlineBlock } from './layout';
 import { PropTypes } from 'prop-types';
 import {
   applyVariation,
+} from './../utils/getStyles';
+import {
   UP_ARROW,
   DOWN_ARROW,
   ENTER_KEY,
   TAB_KEY,
-} from './../utils/getStyles'; // TODO: move to separate file after pills merged
+} from './../utils/general';
 
 const DropdownContainer = styled(InlineBlock)({
   position: 'relative',
