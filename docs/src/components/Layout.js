@@ -14,7 +14,11 @@ import Editor from './Editor';
 import theme from '../theme';
 import { cssPageWidth, headerHeight, sidebarWidth } from '../styles';
 
-const { ThemeProvider, PortableModalContainer, components: otherPrimitiveComps } = designSystem;
+const {
+  ThemeProvider,
+  PortableModalContainer,
+  components: otherPrimitiveComps,
+} = designSystem;
 const components = {
   ...otherPrimitiveComps,
   pre: PreComponent,
@@ -70,9 +74,7 @@ function Layout({ children }) {
                     margin: auto;
                   `}
                 >
-                  <MDXProvider components={components}>
-                    {children}
-                  </MDXProvider>
+                  <MDXProvider components={components}>{children}</MDXProvider>
                 </main>
               </section>
             </div>

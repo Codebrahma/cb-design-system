@@ -25,6 +25,10 @@ const sidebarLinks = [
     ref: '/switch',
   },
   {
+    name: 'Pill',
+    ref: '/pill',
+  },
+  {
     name: 'Theming',
     ref: '/theming',
   },
@@ -73,7 +77,7 @@ function Sidebar() {
         `}
       >
         {sidebarLinks.map(({ name, ref }) => (
-          <Link to={ref} css={cssNavLink} activeClassName="active">
+          <Link key={ref} to={ref} css={cssNavLink} activeClassName="active">
             {name}
           </Link>
         ))}

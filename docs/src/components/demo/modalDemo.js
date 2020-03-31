@@ -8,13 +8,11 @@ export default () => {
     <Box>
       <Modal
         open={isOpen}
-        header='Title'
-        body='This is body'
+        header="Title"
+        body="This is body"
         onClose={() => setIsOpen(false)}
       />
-      <Button onClick={() => setIsOpen(true)}>
-        Open Modal
-      </Button>
+      <Button onClick={() => setIsOpen(true)}>Open Modal</Button>
     </Box>
   );
 };

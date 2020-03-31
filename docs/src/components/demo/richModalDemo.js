@@ -34,10 +34,7 @@ const themeForModalVariantDemo = {
 
 const Footer = ({ closeModal }) => (
   <Flex p={4} css={{ justifyContent: 'flex-end' }}>
-    <Button
-      variant='primary'
-      onClick={closeModal}
-    >
+    <Button variant="primary" onClick={closeModal}>
       Close me!
     </Button>
   </Flex>
@@ -54,11 +51,9 @@ export default () => {
           body="Hey There! I'm a demo pop up!"
           footer={() => <Footer closeModal={() => setIsOpen(false)} />}
           onClose={() => setIsOpen(false)}
-          variant='rich'
+          variant="rich"
         />
-        <Button onClick={() => setIsOpen(true)}>
-          Open Modal
-        </Button>
+        <Button onClick={() => setIsOpen(true)}>Open Modal</Button>
       </Box>
     </ThemeProvider>
   );
