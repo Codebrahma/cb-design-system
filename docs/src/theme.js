@@ -157,7 +157,9 @@ export default {
   dropdownMenu: {
     primary: {
       dropdownTrigger: {
-        border: '1px solid #ddd',
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: 'borderGray',
         borderRadius: 4,
         px: 2,
       },

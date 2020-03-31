@@ -1,8 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import styled from '@emotion/styled';
 
-import { Box, css } from 'theme-ui';
+import { css } from 'theme-ui';
 import { InlineBlock } from './layout';
+import { Absolute, Relative } from './position';
 import { PropTypes } from 'prop-types';
 import {
   applyVariation,
@@ -22,25 +23,24 @@ const DropDown = styled(InlineBlock)(
   ({ theme, variant }) => applyVariation(theme, `${variant}.dropdownTrigger`, 'dropdownMenu')
 );
 
-const MenusContainer = styled(Box)`
-  ${({ theme, displayTop }) => css({
-    position: 'absolute',
+const OptionsContainer = styled(Absolute)`
+  ${({ theme, positionTop }) => css({
     width: '200px',
     background: 'white',
-    padding: '10px 0',
+    py: 3,
     borderStyle: 'solid',
     borderWidth: '1px',
     borderColor: 'borderGray',
-    borderRadius: '6px',
-    bottom: displayTop,
+    borderRadius: 4,
+    bottom: positionTop,
   })(theme)}
   ${({theme, variant}) => applyVariation(theme, `${variant}.dropdownContainer`, 'dropdownMenu')}
 `;
 
-const Menu = styled(Box)`
+const Menu = styled(Relative)`
   ${({ theme }) => css({
-    position: 'relative',
-    padding: '5px 10px',
+    py: 2,
+    px: 3,
     '&:hover': {
       background: 'borderGray',
     },
@@ -86,15 +86,15 @@ const DropdownMenu = ({
     };
   });
 
-  const toggleDropdown = toggleState => {
+  const toggleDropdown = useCallback((toggleState) => {
     setShowDropdownMenu(toggleState);
     if (!toggleState) {
       setKeySelected(null);
       setPositionTop(false);
     }
-  };
+  }, []);
 
-  const handleKeyboardEvent = e => {
+  const handleKeyboardEvent = useCallback((e) => {
     e.preventDefault();
     const len = options.length;
 
@@ -119,9 +119,9 @@ const DropdownMenu = ({
       case TAB_KEY:
         toggleDropdown(!showDropdownMenu);
     }
-  };
+  }, [showDropdownMenu, options, keySelected]);
 
-  const determinePosition = () => {
+  const determinePosition = useCallback(() => {
     const [target, content] = componentRef.current.children;
     const windowHeight = window.innerHeight;
     const { top, height } = content.getBoundingClientRect();
@@ -133,14 +133,14 @@ const DropdownMenu = ({
     } else {
       setPositionTop(false);
     }
-  };
+  }, [componentRef]);
 
-  const handleOutsideClick = e => {
+  const handleOutsideClick = useCallback((e) => {
     if (componentRef.current.contains(e.target)) {
       return;
     }
     toggleDropdown(false);
-  };
+  }, [componentRef]);
 
   const dropdownMenus = options
     ? options.map((option, index) => (
@@ -172,13 +172,13 @@ const DropdownMenu = ({
         {children}
       </DropDown>
       {showDropdownMenu && (
-        <MenusContainer
+        <OptionsContainer
           variant={variant}
           ref={contentRef}
-          displayTop={positionTop || 'unset'}
+          positionTop={positionTop || 'unset'}
         >
           {dropdownMenus}
-        </MenusContainer>
+        </OptionsContainer>
       )}
     </DropdownContainer>
   );
