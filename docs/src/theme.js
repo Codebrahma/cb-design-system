@@ -80,6 +80,7 @@ export default {
     h4: '20px',
     h5: '18px',
     text: '16px',
+    small: '14px',
   },
   toast: {
     primary: {
@@ -111,7 +112,8 @@ export default {
   pill: {
     primary: {
       container: {
-        py: 1,
+        px: 3,
+        py: 2,
         borderRadius: 3,
         bg: 'white',
       },

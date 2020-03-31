@@ -11,11 +11,11 @@ const Container = styled(InlineFlex)`
   cursor: pointer;
   ${({ theme, variant }) =>
     css({
-      width: '100px',
-      borderWidth: '1px',
+      minWidth: '80px',
+      borderWidth: 1,
       borderStyle: 'solid',
       borderColor: 'primary',
-      fontSize: '13px',
+      fontSize: 'small',
       padding: 2,
       borderRadius: 1,
       '&:focus': {
@@ -41,6 +41,7 @@ const Icon = styled(Box)`
     css({
       minWidth: 'max-content',
       cursor: 'pointer',
+      textAlign: 'right',
       color: 'darkGray',
       '&:focus': {
         outline: 'none',
