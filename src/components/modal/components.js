@@ -15,6 +15,7 @@ export const Overlay = styled(Fixed)(
     width: '100%',
     height: '100%',
     background: 'rgba(0, 0, 0, 0.7)',
+    zIndex: 2,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

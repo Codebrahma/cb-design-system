@@ -14,13 +14,16 @@ const applyFocus = (theme) => css({
 const getThemeStyles = (...args) => {
   let theme = null;
   for (let i = 0; i < args.length; i++) {
+    if (!(i === 0) && !theme) {
+      break;
+    }
     theme = !theme ? args[i] : theme[args[i]];
   }
   return theme;
 };
 
 export {
-  applyVariation,
   getThemeStyles,
+  applyVariation,
   applyFocus,
 };
