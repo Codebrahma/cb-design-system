@@ -6,23 +6,27 @@ import { sidebarWidth, textColor, themeColor } from '../styles';
 const sidebarLinks = [
   {
     name: 'Home',
-    ref: '/'
+    ref: '/',
   },
   {
     name: 'Button',
-    ref: '/button'
+    ref: '/button',
   },
   {
     name: 'Input',
-    ref: '/input'
+    ref: '/input',
   },
   {
     name: 'Modal',
-    ref: '/modal'
+    ref: '/modal',
+  },
+  {
+    name: 'Switch',
+    ref: '/switch',
   },
   {
     name: 'Theming',
-    ref: '/theming'
+    ref: '/theming',
   },
 ];
 
@@ -68,13 +72,11 @@ function Sidebar() {
           margin-top: 12px;
         `}
       >
-        {
-          sidebarLinks.map(({ name, ref }) => (
-            <Link to={ref} css={cssNavLink} activeClassName="active">
-              {name}
-            </Link>
-          ))
-        }
+        {sidebarLinks.map(({ name, ref }) => (
+          <Link to={ref} css={cssNavLink} activeClassName="active">
+            {name}
+          </Link>
+        ))}
       </nav>
     </aside>
   );
