@@ -69,7 +69,7 @@ export default {
     },
   },
   breakpoints: [
-    '320px','425px', '768px', '1024px',
+    '320px', '425px', '768px', '1024px',
   ],
   space: [0, 2, 4, 8, 16, 32, 64, 128],
   radii: [0, 1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
@@ -109,10 +109,30 @@ export default {
       color: 'white',
     },
   },
+
+  switch: {
+    sm: {
+      switchBody: {
+        width: '30px',
+        height: '15px',
+        borderColor: 'borderGray',
+        bg: 'borderGray',
+        '&:checked': {
+          borderColor: 'success',
+          bg: 'success',
+        },
+      },
+      switchHandle: {
+        borderColor: 'borderGray',
+        bg: 'primary',
+      },
+    },
+  },
+
   forms: {
     input: {
       p: 3,
-      borderColor: 'border',
+      borderColor: 'borderGray',
       borderRadius: 2,
     },
   },
