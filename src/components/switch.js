@@ -62,8 +62,8 @@ const defaultVariants = {
   },
 };
 
-const getWidth = (theme, variant, key = 'width') =>
-  getThemeStyles(theme, 'switch', variant, 'switchBody', key) || getDefaultTheme(variant, 'switchBody', key);
+const getWidth = (theme, variant) =>
+  getThemeStyles(theme, 'switch', variant, 'switchBody', 'width') || getDefaultTheme(variant, 'switchBody', 'width');
 
 const getDefaultTheme = (variant, themekey, key) => !key
   ? defaultVariants[variant][themekey]
