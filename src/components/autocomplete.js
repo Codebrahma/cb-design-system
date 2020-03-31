@@ -19,19 +19,23 @@ const DropDownContainer = styled(Relative)`
   padding: 5px;
   border-radius: 6px;
 
-  ${({theme}) => css({
-    '&:focus': {
-      outline: 'none',
-      borderColor: 'primary',
-    },
-  })(theme)}
+  ${({ theme }) =>
+    css({
+      '&:focus': {
+        outline: 'none',
+        borderColor: 'primary',
+      },
+    })(theme)}
 
-  ${({theme, focused}) => css({
-    borderColor: focused ? 'primary' : '',
-  })(theme)}
+  ${({ theme, focused }) =>
+    css({
+      borderColor: focused ? 'primary' : '',
+      borderWidth: focused ? '2px' : '',
+    })(theme)}
 `;
 
 const Options = styled(Absolute)`
+  z-index: 1;
   max-height: 300px;
   width: 100%;
   border: 1px solid #ddd;
@@ -88,7 +92,7 @@ const Autocomplete = ({
   useEffect(() => {
     visible && document.addEventListener('click', handleOutsideClick, true);
     return () => {
-      visible && document.removeEventListener('click', handleOutsideClick, true);
+      document.removeEventListener('click', handleOutsideClick, true);
     };
   });
 
@@ -96,9 +100,9 @@ const Autocomplete = ({
     if (value && isFocused) {
       setVisible(true);
     }
-  });
+  }, [value]);
 
-  const toggleVisibility = (e) => {
+  const toggleVisibility = e => {
     e.preventDefault();
     if (!visible) {
       setFocus();
@@ -126,7 +130,6 @@ const Autocomplete = ({
   };
 
   const onOptionSelect = option => {
-    console.log('option selected');
     onChange && onChange(option);
     setValue(option.label);
     setVisible(false);
@@ -135,9 +138,8 @@ const Autocomplete = ({
     clearFocus();
   };
 
-  const clearValue = (e) => {
+  const clearValue = e => {
     // e.preventDefault();
-    console.log('clear value');
     e.stopPropagation();
     if (value) {
       setFilteredOption(null);
@@ -147,13 +149,11 @@ const Autocomplete = ({
   };
 
   const setFocus = () => {
-    console.log('focused');
     setIsFocused(true);
     inputRef.current.focus();
   };
 
   const clearFocus = () => {
-    console.log('clearFocus');
     setIsFocused(false);
     inputRef.current.blur();
   };
@@ -162,7 +162,13 @@ const Autocomplete = ({
 
   return (
     <Relative ref={dropdownRef}>
-      <DropDownContainer focused={isFocused} onClick={toggleVisibility} tabIndex='0' onFocus={setFocus}>
+      <DropDownContainer
+        focused={isFocused}
+        onClick={toggleVisibility}
+        tabIndex='0'
+        onFocus={setFocus}
+        onBlur={clearFocus}
+      >
         <Input
           type='text'
           value={value !== selected.value && !visible ? selected.label : value}
@@ -174,7 +180,7 @@ const Autocomplete = ({
           defaultValue=''
           {...props}
         />
-        {isClearable && (<ClearIcon onClick={clearValue}>&times;</ClearIcon>)}
+        {isClearable && <ClearIcon onClick={clearValue}>&times;</ClearIcon>}
         <svg
           height='20'
           width='20'
@@ -188,11 +194,15 @@ const Autocomplete = ({
       </DropDownContainer>
       {Values && visible && (
         <Options>
-          {Values.length ? Values.map(option => (
-            <Option key={option.value} onClick={() => onOptionSelect(option)}>
-              {option.label}
-            </Option>
-          )) : <Option>no options found</Option>}
+          {Values.length ? (
+            Values.map(option => (
+              <Option key={option.value} onClick={() => onOptionSelect(option)}>
+                {option.label}
+              </Option>
+            ))
+          ) : (
+            <Option>no options found</Option>
+          )}
         </Options>
       )}
     </Relative>
@@ -203,18 +213,12 @@ Autocomplete.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      label: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number,
-      ]),
+      label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     })
   ),
   defaultValue: PropTypes.shape({
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    label: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]),
+    label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   }),
   name: PropTypes.string,
   placeholder: PropTypes.string,
@@ -235,14 +239,12 @@ Autocomplete.defaultProps = {
 
 const A = () => {
   const options = [
-    {value: 'rustic', label: 'Rustic'},
-    {value: 'antique', label: 'Antique'},
-    {value: 'vinyl', label: 'Vinyl'},
-    {value: 'vintage', label: 'Vintage'},
-    {value: 'refurbished', label: 'Refurbished'},
+    { value: 'rustic', label: 'Rustic' },
+    { value: 'antique', label: 'Antique' },
+    { value: 'vinyl', label: 'Vinyl' },
+    { value: 'vintage', label: 'Vintage' },
+    { value: 'refurbished', label: 'Refurbished' },
   ];
-  return (
-    <Autocomplete options={options} />
-  );
+  return <Autocomplete options={options} />;
 };
 export default A;
