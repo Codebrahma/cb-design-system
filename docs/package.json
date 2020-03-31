@@ -1,28 +1,74 @@
 {
-  "private": true,
+  "name": "cb-design-system-docs",
+  "description": "Codebrahma's design system docs",
   "version": "1.0.0",
+  "author": "Codebrahma",
+  "keywords": [
+    "gatsby",
+    "react-live",
+    "mdx"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codebrahma/bricks"
+  },
+  "bugs": {
+    "url": "https://github.com/codebrahma/bricks/issues"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "license": "MIT",
   "scripts": {
-    "start": "next",
-    "build": "next build && next export"
+    "lint:eslint": "eslint '**/*.js' --ignore-path .gitignore",
+    "lint:prettier": "prettier-check '**/*.{js,json,css,md}' --ignore-path .gitignore",
+    "lint": "yarn lint:eslint && yarn lint:prettier",
+    "format": "prettier '**/*.{js,json,css,md}' --write  --ignore-path .gitignore",
+    "build": "gatsby build",
+    "start": "gatsby develop -H 0.0.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": [
+      "prettier --write"
+    ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "es5"
   },
   "dependencies": {
-    "@mdx-js/mdx": "^0.15.0",
-    "cb-design-system": "file:..",
-    "mdx-docs": "^2.0.0-alpha.0",
-    "next": "^9.3.0",
-    "remark-autolink-headings": "^5.1.0",
-    "remark-emoji": "^2.0.2",
-    "remark-images": "^0.16.1",
-    "remark-slug": "^5.1.1",
-    "remark-unwrap-images": "^0.1.0"
-  },
-  "devDependencies": {
-    "@emotion/styled": "^10.0.27",
-    "@mdx-js/loader": "^0.16.6",
+    "@emotion/core": "^10.0.27",
+    "@mdx-js/mdx": "^1.5.7",
+    "@mdx-js/react": "^1.5.7",
+    "@mdx-js/tag": "^0.20.3",
+    "gatsby": "^2.19.21",
+    "gatsby-plugin-emotion": "^4.1.22",
+    "gatsby-plugin-manifest": "^2.2.42",
+    "gatsby-plugin-mdx": "^1.0.73",
+    "gatsby-plugin-offline": "^3.0.35",
+    "gatsby-plugin-react-helmet": "^3.1.22",
+    "prismjs": "^1.19.0",
     "prop-types": "^15.7.2",
     "react": "file:../node_modules/react",
     "react-dom": "file:../node_modules/react-dom",
-    "theme-ui": "^0.3.1"
+    "react-helmet": "^5.2.1",
+    "react-live": "^2.2.2",
+    "cb-design-system": "file:.."
   },
-  "name": "docs"
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.8.0",
+    "eslint-config-free": "^0.1.0",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.7",
+    "prettier": "^1.19.1",
+    "prettier-check": "^2.0.0",
+    "surge": "^0.21.3"
+  }
 }

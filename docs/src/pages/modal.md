@@ -1,3 +1,4 @@
+import ModalStructure from './../images/modal-structure.png';
 
 # Modal
 
@@ -9,7 +10,7 @@ A Modal is composed with the building blocks given below.
   - Footer
   - Close Button
 
-![Modal structure](/images/modal-structure.png)
+<img src={ModalStructure} alt="Modal structure" />
 
 Modal can be created in two ways.
 
@@ -18,7 +19,7 @@ Modal can be created in two ways.
 
 ## Using `Modal` Component
 
-```react
+```jsx
 const ModalDemo = () => {
   const [isOpen, setIsOpen] = useState(false);
   const header = () => (<h3>Title</h3>);
@@ -40,9 +41,13 @@ const ModalDemo = () => {
 };
 ```
 
-```.jsx
-  <ModalDemo />
+<Editor>
+
+```jsx
+<ModalDemo />
 ```
+
+</Editor>
 
 ### Props
 
@@ -61,14 +66,18 @@ const ModalDemo = () => {
 
 ## Using `openModal` helper method
 
-```.jsx
-  <Button
-    onClick={() => openModal({
-      header: "Hello",
-      body: "This modal is opened via 'openModal' method",
-      closeOnEscape: true
-    })}
-  >
-    Open Modal
-  </Button>
+<Editor>
+
+```jsx
+<Button
+  onClick={() => openModal({
+    header: "Hello",
+    body: "This modal is opened via 'openModal' method",
+    closeOnEscape: true
+  })}
+>
+  Open Modal
+</Button>
 ```
+
+</Editor>

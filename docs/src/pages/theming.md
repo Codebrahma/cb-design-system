@@ -20,35 +20,39 @@ Modal overlay, content container, header, body, footer and close button can be s
 | `closeButton`                | modal.variantName.closeButton        | Styles for the `modal` closeButton for your variant                                                   |
 
 For example, the below theme object creates a modal variant named 'rich' and applies styles for its `overlay`, `contentContainer`, `closeButton` and `body`.
-```
-  {
-    modal: {
-      rich: {
-        overlay: {
-          bg: 'lightGray',
-        },
-        contentContainer: {
-          boxShadow: '1px 1px 3px 1px #435563',
-          minHeight: 'auto',
-          width: '100%',
-          maxWidth: '450px',
-        },
-        closeButton: {
-          fontSize: 'h1',
-          right: '15px',
-        },
-        body: {
-          bg: 'borderGray',
-          height: '125px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        },
+```js
+{
+  modal: {
+    rich: {
+      overlay: {
+        bg: 'lightGray',
       },
-    }
+      contentContainer: {
+        boxShadow: '1px 1px 3px 1px #435563',
+        minHeight: 'auto',
+        width: '100%',
+        maxWidth: '450px',
+      },
+      closeButton: {
+        fontSize: 'h1',
+        right: '15px',
+      },
+      body: {
+        bg: 'borderGray',
+        height: '125px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+    },
   }
+}
 ```
 
-```.jsx
+<Editor>
+
+```jsx
 <RichModalDemo />
 ```
+
+</Editor>

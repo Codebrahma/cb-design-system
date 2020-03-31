@@ -73,6 +73,8 @@ export default {
   ],
   space: [0, 2, 4, 8, 16, 32, 64, 128],
   radii: [0, 1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
+  lineHeight: [1, 1.15, 1.30, 1.45, 1.60, 1.75, 1.90, 2.05],
+  zIndices: [-32, -16, -8, -4, -2, -1, 0, 1, 2, 4, 8, 16, 32],
   fontSizes: {
     h1: '28px',
     h2: '24px',
@@ -132,6 +134,25 @@ export default {
       p: 3,
       borderColor: 'borderGray',
       borderRadius: 2,
+    },
+  },
+
+  styles: {
+    root: {
+      lineHeight: 4,
+    },
+    img: {
+      maxWidth: '600px',
+    },
+    table: {
+      borderCollapse: 'collapse',
+      'td, th' : {
+        p: 3,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: 'borderGray',
+        textAlign: 'left',
+      },
     },
   },
 };
