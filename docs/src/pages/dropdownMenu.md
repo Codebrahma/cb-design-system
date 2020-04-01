@@ -14,7 +14,7 @@ const DropdownMenu = () => (
       { label: 'Menu Item Six', value: 'F0' },
       { label: 'Menu Item Seven', value: 'G0' },
     ]}
-    onSelect={(value, event) => console.log(value)}
+    onSelect={value => alert(value)}
   >
     Trigger &#9662;
   </DropdownMenu>
