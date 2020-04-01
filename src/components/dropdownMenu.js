@@ -25,6 +25,7 @@ const DropDown = styled(InlineBlock)(
 
 const OptionsContainer = styled(Absolute)`
   ${({ theme, positionTop }) => css({
+    zIndex: 7,
     width: '200px',
     background: 'white',
     py: 3,
@@ -56,10 +57,11 @@ const DropdownMenu = ({
   children,
   options,
   onSelect,
+  tabIndex,
   noOptionMessage,
   scrollableContainer,
 }) => {
-  const [showDropdownMenu, setShowDropdownMenu] = useState(false);
+  const [isOptionsVisible, setIsOptionsVisible] = useState(false);
   const [keySelected, setKeySelected] = useState(null);
   const [positionTop, setPositionTop] = useState(false);
   const componentRef = useRef();
@@ -67,18 +69,18 @@ const DropdownMenu = ({
   const dropdownButton = useRef();
 
   useEffect(() => {
-    showDropdownMenu && determinePosition();
-  }, [showDropdownMenu]);
+    isOptionsVisible && determinePosition();
+  }, [isOptionsVisible]);
 
   useEffect(() => {
     const scrollContainer = scrollableContainer || document.body;
-    if (showDropdownMenu) {
+    if (isOptionsVisible) {
       document.body.addEventListener('click', handleOutsideClick, true);
       document.body.addEventListener('keydown', handleKeyboardEvent, true);
       scrollContainer.addEventListener('scroll', determinePosition, true);
     }
     return () => {
-      if (showDropdownMenu) {
+      if (isOptionsVisible) {
         document.body.removeEventListener('click', handleOutsideClick, true);
         document.body.removeEventListener('keydown', handleKeyboardEvent, true);
         scrollContainer.removeEventListener('scroll', determinePosition, true);
@@ -87,7 +89,7 @@ const DropdownMenu = ({
   });
 
   const toggleDropdown = useCallback((toggleState) => {
-    setShowDropdownMenu(toggleState);
+    setIsOptionsVisible(toggleState);
     if (!toggleState) {
       setKeySelected(null);
       setPositionTop(false);
@@ -108,18 +110,18 @@ const DropdownMenu = ({
         setKeySelected(index);
         return;
       case ENTER_KEY:
-        if (showDropdownMenu && onSelect) onSelect(options[keySelected], e);
-        if (!showDropdownMenu) {
+        if (isOptionsVisible && onSelect) onSelect(options[keySelected], e);
+        if (!isOptionsVisible) {
           dropdownButton.current.focus();
         } else {
           dropdownButton.current.blur();
         }
-        toggleDropdown(!showDropdownMenu);
+        toggleDropdown(!isOptionsVisible);
         return;
       case TAB_KEY:
-        toggleDropdown(!showDropdownMenu);
+        toggleDropdown(!isOptionsVisible);
     }
-  }, [showDropdownMenu, options, keySelected]);
+  }, [isOptionsVisible, options, keySelected]);
 
   const determinePosition = useCallback(() => {
     const [target, content] = componentRef.current.children;
@@ -142,11 +144,11 @@ const DropdownMenu = ({
     toggleDropdown(false);
   }, [componentRef]);
 
-  const dropdownMenus = options
+  const dropdownOptions = options
     ? options.map((option, index) => (
       <Menu
         onClick={e => {
-          toggleDropdown(!showDropdownMenu);
+          toggleDropdown(!isOptionsVisible);
           onSelect && onSelect(option, e);
         }}
         key={option.value}
@@ -163,21 +165,21 @@ const DropdownMenu = ({
     <DropdownContainer ref={componentRef}>
       <DropDown
         variant={variant}
-        onClick={() => toggleDropdown(!showDropdownMenu)}
+        onClick={() => toggleDropdown(!isOptionsVisible)}
         id={id}
-        tabIndex='0'
+        tabIndex={tabIndex}
         onKeyUp={(e) => e.keyCode === ENTER_KEY ? handleKeyboardEvent(e) : null}
         ref={dropdownButton}
       >
         {children}
       </DropDown>
-      {showDropdownMenu && (
+      {isOptionsVisible && (
         <OptionsContainer
           variant={variant}
           ref={contentRef}
           positionTop={positionTop || 'unset'}
         >
-          {dropdownMenus}
+          {dropdownOptions}
         </OptionsContainer>
       )}
     </DropdownContainer>
@@ -194,6 +196,7 @@ DropdownMenu.propTypes = {
   options: PropTypes.arrayOf(PropTypes.shape({})),
   noOptionMessage: PropTypes.string,
   variant: PropTypes.string,
+  tabIndex: PropTypes.string,
   onSelect: PropTypes.func,
   scrollableContainer: PropTypes.node,
 };
@@ -205,6 +208,7 @@ DropdownMenu.defaultProps = {
   noOptionMessage: 'No options found',
   scrollableContainer: null,
   options: null,
+  tabIndex: '0',
 };
 
 export default React.memo(DropdownMenu);
