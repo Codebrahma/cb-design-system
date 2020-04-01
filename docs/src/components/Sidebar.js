@@ -77,7 +77,7 @@ function Sidebar() {
         `}
       >
         {sidebarLinks.map(({ name, ref }) => (
-          <Link to={ref} css={cssNavLink} activeClassName="active">
+          <Link to={ref} key={name} css={cssNavLink} activeClassName="active">
             {name}
           </Link>
         ))}
