@@ -141,7 +141,7 @@ const Autocomplete = ({
       case ENTER_KEY:
         // if (showDropdownMenu && onSelect) onSelect(options[keySelected], e);
         console.log(optionsToShow[keySelected]);
-        setValue(optionsToShow[keySelected].label);
+        setValue('');
         setKeySelected(null);
         setSelected(optionsToShow[keySelected]);
         setVisible(!visible);
