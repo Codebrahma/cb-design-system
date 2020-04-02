@@ -12,14 +12,10 @@ import {
   TAB_KEY,
 } from './../utils/general';
 
-// TODO: clear the input field
 // TODO: Icon as a prop,both clearIcon and arrowIcon
 // TODO: loadOptions
-// TODO: defaultOptions
 // TODO: isloading
 // TODO: multi
-
-// const Icons = styled(InlineBlock)``
 
 const DropDownContainer = styled(Relative)`
   display: flex;
@@ -28,7 +24,6 @@ const DropDownContainer = styled(Relative)`
   border: 1px solid #ddd;
   padding: 5px;
   border-radius: 6px;
-
   ${({ theme }) =>
     css({
       '&:focus': {
@@ -87,7 +82,7 @@ const ClearIcon = styled(InlineBlock)`
 const Autocomplete = ({
   options,
   name,
-  isLoading,
+  // isLoading,
   defaultValue,
   // loadOptions,
   onChange,
@@ -96,16 +91,14 @@ const Autocomplete = ({
   ...props
 }) => {
   const [value, setValue] = useState('');
-  const [selected, setSelected] = useState('');
+  const [selected, setSelected] = useState(defaultValue);
   const [visible, setVisible] = useState(false);
   const [filteredOption, setFilteredOption] = useState(null);
   const [keySelected, setKeySelected] = useState(null);
-
   const [isFocused, setIsFocused] = useState(false);
 
   const dropdownRef = useRef(null);
   const inputRef = useRef(null);
-  const optionsRef = useRef(options);
 
   const optionsToShow = filteredOption || options;
 
@@ -125,8 +118,6 @@ const Autocomplete = ({
   }, [value]);
 
   const handleKeyboardEvent = (e) => {
-    console.log('handle keydown event');
-    // e.preventDefault();
     const len = optionsToShow.length;
 
     switch (e.keyCode) {
@@ -139,8 +130,7 @@ const Autocomplete = ({
         setKeySelected(index);
         return;
       case ENTER_KEY:
-        // if (showDropdownMenu && onSelect) onSelect(options[keySelected], e);
-        console.log(optionsToShow[keySelected]);
+        if (setVisible && onChange) onChange(options[keySelected], e);
         setValue('');
         setKeySelected(null);
         setSelected(optionsToShow[keySelected]);
@@ -187,8 +177,8 @@ const Autocomplete = ({
     setFilteredOption(newOptions);
   };
 
-  const onOptionSelect = option => {
-    onChange && onChange(option);
+  const onOptionSelect = (option, e) => {
+    onChange && onChange(option, e);
     setValue('');
     setVisible(false);
     setSelected(option);
@@ -257,7 +247,7 @@ const Autocomplete = ({
         <Options>
           {optionsToShow.length ? (
             optionsToShow.map((option, index) => (
-              <Option key={option.value} hover={keySelected === index} onClick={() => onOptionSelect(option)}>
+              <Option key={option.value} hover={keySelected === index} onClick={(e) => onOptionSelect(option, e)}>
                 {option.label}
               </Option>
             ))
@@ -283,7 +273,7 @@ Autocomplete.propTypes = {
   }),
   name: PropTypes.string,
   placeholder: PropTypes.string,
-  isLoading: PropTypes.bool,
+  // isLoading: PropTypes.bool,
   isClearable: PropTypes.bool,
   onChange: PropTypes.func,
 };
@@ -291,7 +281,7 @@ Autocomplete.propTypes = {
 Autocomplete.defaultProps = {
   options: null,
   name: '',
-  isLoading: false,
+  // isLoading: false,
   isClearable: true,
   onChange: null,
   defaultValue: null,
@@ -328,6 +318,13 @@ const A = () => {
     };
   });
 
-  return <Autocomplete options={options} />;
+  return (
+    <Autocomplete
+      options={options}
+      placeholder='select here'
+      onChange={(v) => console.log(v)}
+      // defaultValue={{ value: 'default', label: 'Default Value' }}
+      // isClearable
+    />);
 };
 export default A;
