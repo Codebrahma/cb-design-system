@@ -5,6 +5,13 @@ import { Box, Input as input, css, Flex } from 'theme-ui';
 import { Relative, Absolute } from './position';
 import { InlineBlock } from './layout';
 
+import {
+  UP_ARROW,
+  DOWN_ARROW,
+  ENTER_KEY,
+  TAB_KEY,
+} from './../utils/general';
+
 // TODO: clear the input field
 // TODO: Icon as a prop,both clearIcon and arrowIcon
 // TODO: loadOptions
@@ -56,6 +63,9 @@ const Option = styled(Box)`
   &:hover {
     background: #ddd;
   }
+  ${({theme, hover}) => css({
+    background: hover ? '#ddd' : '',
+  })(theme)}
 `;
 
 const Input = styled(input)`
@@ -89,6 +99,7 @@ const Autocomplete = ({
   const [selected, setSelected] = useState('');
   const [visible, setVisible] = useState(false);
   const [filteredOption, setFilteredOption] = useState(null);
+  const [keySelected, setKeySelected] = useState(null);
 
   const [isFocused, setIsFocused] = useState(false);
 
@@ -96,10 +107,14 @@ const Autocomplete = ({
   const inputRef = useRef(null);
   const optionsRef = useRef(options);
 
+  const optionsToShow = filteredOption || options;
+
   useEffect(() => {
     visible && document.addEventListener('click', handleOutsideClick, true);
+    visible && document.addEventListener('keydown', handleKeyboardEvent, true);
     return () => {
-      document.removeEventListener('click', handleOutsideClick, true);
+      visible && document.removeEventListener('click', handleOutsideClick, true);
+      visible && document.removeEventListener('keydown', handleKeyboardEvent, true);
     };
   });
 
@@ -109,6 +124,33 @@ const Autocomplete = ({
     }
   }, [value]);
 
+  const handleKeyboardEvent = (e) => {
+    console.log('handle keydown event');
+    // e.preventDefault();
+    const len = optionsToShow.length;
+
+    switch (e.keyCode) {
+      case UP_ARROW:
+        const i = keySelected < 1 ? len - 1 : (keySelected - 1) % len;
+        setKeySelected(i);
+        return;
+      case DOWN_ARROW:
+        const index = keySelected !== null ? ((keySelected + 1) % len) : 0;
+        setKeySelected(index);
+        return;
+      case ENTER_KEY:
+        // if (showDropdownMenu && onSelect) onSelect(options[keySelected], e);
+        console.log(optionsToShow[keySelected]);
+        setValue(optionsToShow[keySelected].label);
+        setKeySelected(null);
+        setSelected(optionsToShow[keySelected]);
+        setVisible(!visible);
+        return;
+      case TAB_KEY:
+        setVisible(!visible);
+    }
+  };
+
   const toggleVisibility = e => {
     e.preventDefault();
     if (!visible) {
@@ -116,6 +158,7 @@ const Autocomplete = ({
     } else {
       clearFocus();
     }
+    setFilteredOption(null);
     setVisible(!visible);
   };
 
@@ -125,11 +168,12 @@ const Autocomplete = ({
     }
     setValue('');
     toggleVisibility(e);
+    // setFilteredOption(null);
     clearFocus();
   };
 
   const handleChange = ({ target: { value } }) => {
-    console.log(optionsRef.current[0].label);
+    console.log(value);
     const newOptions = options.filter(option => {
       return typeof option.label === 'string' ? option.label.toLowerCase().includes(value.toLowerCase()) : option.label.contains(value);
       // if (typeof option.label === 'string') {
@@ -172,8 +216,6 @@ const Autocomplete = ({
     inputRef.current.blur();
   };
 
-  const Values = filteredOption || options;
-
   return (
     <Relative ref={dropdownRef}>
       <DropDownContainer
@@ -211,11 +253,11 @@ const Autocomplete = ({
           </svg>
         </Flex>
       </DropDownContainer>
-      {Values && visible && (
+      {optionsToShow && visible && (
         <Options>
-          {Values.length ? (
-            Values.map(option => (
-              <Option key={option.value} onClick={() => onOptionSelect(option)}>
+          {optionsToShow.length ? (
+            optionsToShow.map((option, index) => (
+              <Option key={option.value} hover={keySelected === index} onClick={() => onOptionSelect(option)}>
                 {option.label}
               </Option>
             ))
