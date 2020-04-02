@@ -68,12 +68,10 @@ export default {
       color: 'darkGray',
     },
   },
-  breakpoints: [
-    '320px', '425px', '768px', '1024px',
-  ],
+  breakpoints: ['320px', '425px', '768px', '1024px'],
   space: [0, 2, 4, 8, 16, 32, 64, 128],
   radii: [0, 1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
-  lineHeight: [1, 1.15, 1.30, 1.45, 1.60, 1.75, 1.90, 2.05],
+  lineHeight: [1, 1.15, 1.3, 1.45, 1.6, 1.75, 1.9, 2.05],
   zIndices: [-32, -16, -8, -4, -2, -1, 0, 1, 2, 4, 8, 16, 32],
   fontSizes: {
     h1: '28px',
@@ -82,6 +80,7 @@ export default {
     h4: '20px',
     h5: '18px',
     text: '16px',
+    small: '14px',
   },
   toast: {
     primary: {
@@ -107,6 +106,24 @@ export default {
     success: {
       bg: 'success',
       color: 'white',
+    },
+  },
+
+  pill: {
+    primary: {
+      container: {
+        px: 3,
+        py: 2,
+        borderRadius: 3,
+        bg: 'white',
+      },
+      content: {
+        color: 'primary',
+      },
+      closeIcon: {
+        height: '20px',
+        width: '20px',
+      },
     },
   },
 
@@ -146,7 +163,7 @@ export default {
     },
     table: {
       borderCollapse: 'collapse',
-      'td, th' : {
+      'td, th': {
         p: 3,
         borderWidth: 1,
         borderStyle: 'solid',

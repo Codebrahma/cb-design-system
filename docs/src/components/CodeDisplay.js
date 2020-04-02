@@ -122,14 +122,12 @@ function CodeDisplay({ code, editable, className, noInline, ...otherProps }) {
       {...otherProps}
     >
       <div css={cssWrapper}>
-        {
-          editable ? (
-            <div css={cssPreviewPane}>
-              <LivePreview />
-              <LiveError css={cssError} />
-            </div>
-          ) : null
-        }
+        {editable ? (
+          <div css={cssPreviewPane}>
+            <LivePreview />
+            <LiveError css={cssError} />
+          </div>
+        ) : null}
         <div css={cssEditorPane} ref={editorPaneRef}>
           <LiveEditor
             css={cssLiveEditor}
