@@ -5,12 +5,7 @@ import { Box, Input as input, css, Flex } from 'theme-ui';
 import { Relative, Absolute } from './position';
 import { InlineBlock } from './layout';
 
-import {
-  UP_ARROW,
-  DOWN_ARROW,
-  ENTER_KEY,
-  TAB_KEY,
-} from './../utils/general';
+import { UP_ARROW, DOWN_ARROW, ENTER_KEY, TAB_KEY } from './../utils/general';
 
 // TODO: multi
 // TODO: Icon as a prop,both clearIcon and arrowIcon
@@ -58,9 +53,16 @@ const Option = styled(Box)`
   &:hover {
     background: #ddd;
   }
-  ${({theme, hover}) => css({
-    background: hover ? '#ddd' : '',
-  })(theme)}
+  ${({ theme, hover }) =>
+    css({
+      background: hover ? '#ddd' : '',
+    })(theme)}
+`;
+
+const MultiSelectOption = styled(InlineBlock)`
+  background: #ddd;
+  margin-right: 5px;
+  min-width: max-content;
 `;
 
 const Input = styled(input)`
@@ -82,9 +84,7 @@ const ClearIcon = styled(InlineBlock)`
 const Autocomplete = ({
   options,
   name,
-  // isLoading,
   defaultValue,
-  // loadOptions,
   onChange,
   placeholder,
   isClearable,
@@ -92,20 +92,18 @@ const Autocomplete = ({
   ...props
 }) => {
   const [value, setValue] = useState('');
-  const [selected, setSelected] = useState();
+  const [selected, setSelected] = useState(isMulti ? [] : null);
   const [visible, setVisible] = useState(false);
-  const [filteredOption, setFilteredOption] = useState(null);
+  const [filteredOption, setFilteredOption] = useState(options);
   const [keySelected, setKeySelected] = useState(null);
   const [isFocused, setIsFocused] = useState(false);
 
   const dropdownRef = useRef(null);
   const inputRef = useRef(null);
 
-  const optionsToShow = filteredOption || options;
-
   useEffect(() => {
     if (isMulti) {
-      defaultValue ? setSelected([defaultValue]) : setSelected([]);
+      defaultValue ? setSelected([...defaultValue]) : setSelected([]);
     } else {
       setSelected(defaultValue);
     }
@@ -115,8 +113,10 @@ const Autocomplete = ({
     visible && document.addEventListener('click', handleOutsideClick, true);
     visible && document.addEventListener('keydown', handleKeyboardEvent, true);
     return () => {
-      visible && document.removeEventListener('click', handleOutsideClick, true);
-      visible && document.removeEventListener('keydown', handleKeyboardEvent, true);
+      visible &&
+        document.removeEventListener('click', handleOutsideClick, true);
+      visible &&
+        document.removeEventListener('keydown', handleKeyboardEvent, true);
     };
   });
 
@@ -126,18 +126,18 @@ const Autocomplete = ({
     }
   }, [value]);
 
-  const SetSelectedValue = (selectedValue) => {
+  const SetSelectedValue = (selectedValue, e) => {
     if (isMulti) {
       setSelected([...selected, selectedValue]);
+      onChange && onChange([...selected, selectedValue], e);
     } else {
-      console.log('not isMulti');
       setSelected(selectedValue);
+      onChange && onChange(selectedValue, e);
     }
-    onChange && onChange(selected);
   };
 
   const handleKeyboardEvent = (e) => {
-    const len = optionsToShow.length;
+    const len = filteredOption.length;
 
     switch (e.keyCode) {
       case UP_ARROW:
@@ -145,74 +145,64 @@ const Autocomplete = ({
         setKeySelected(i);
         return;
       case DOWN_ARROW:
-        const index = keySelected !== null ? ((keySelected + 1) % len) : 0;
+        const index = keySelected !== null ? (keySelected + 1) % len : 0;
         setKeySelected(index);
         return;
       case ENTER_KEY:
-        setValue('');
-        setKeySelected(null);
-        SetSelectedValue(optionsToShow[keySelected]);
-        if (setVisible && onChange) onChange(selected, e);
-        setVisible(!visible);
+        if (keySelected !== null) {
+          setValue('');
+          SetSelectedValue(filteredOption[keySelected], e);
+          setKeySelected(null);
+          setVisible(!visible);
+        }
         return;
       case TAB_KEY:
         setVisible(!visible);
     }
   };
 
-  const toggleVisibility = e => {
+  const toggleVisibility = (e) => {
     e.preventDefault();
     if (!visible) {
       setFocus();
     } else {
       clearFocus();
     }
-    setFilteredOption(null);
+    filterOptions();
     setVisible(!visible);
+    setKeySelected(null);
   };
 
-  const handleOutsideClick = e => {
+  const handleOutsideClick = (e) => {
     if (dropdownRef.current.contains(e.target)) {
       return;
     }
     setValue('');
     toggleVisibility(e);
-    // setFilteredOption(null);
     clearFocus();
   };
 
   const handleChange = ({ target: { value } }) => {
     console.log(value);
-    const newOptions = options.filter(option => {
-      return typeof option.label === 'string' ? option.label.toLowerCase().includes(value.toLowerCase()) : option.label.contains(value);
-      // if (typeof option.label === 'string') {
-      //   return option.label.toLowerCase().includes(value.toLowerCase());
-      // } else {
-      //   const valurRef = useRef(option.label);
-      //   console.log(valurRef.contains(value));
-      // }
-    });
     setValue(value);
-    setFilteredOption(newOptions);
+    filterOptions(value);
   };
 
   const onOptionSelect = (option, e) => {
     setValue('');
-    SetSelectedValue(option);
+    SetSelectedValue(option, e);
     setVisible(false);
-    setFilteredOption(null);
-    // onChange && onChange(selected, e);
     clearFocus();
   };
 
-  const clearValue = e => {
+  const clearValue = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    // if (value) {
-    setFilteredOption(null);
+
     setSelected([]);
     setValue('');
-    // }
+    if (isMulti) onChange && onChange([]);
+    else onChange && onChange(null);
   };
 
   const setFocus = () => {
@@ -225,30 +215,39 @@ const Autocomplete = ({
     inputRef.current.blur();
   };
 
-  // const selectedValues = () => {
-  //   return selected
-  // }
+  const filterOptions = (inputValue = '') => {
+    let filteredArr = options;
+
+    if (isMulti) {
+      filteredArr = options.filter(function (option) {
+        return !selected.find(function (selctedItem) {
+          return option.value === selctedItem.value;
+        });
+      });
+    }
+
+    const newOption = filteredArr.filter((val) =>
+      val.label.toLowerCase().includes(inputValue.toLowerCase())
+    );
+    setFilteredOption(newOption);
+  };
 
   const displayValue = () => {
-    // if (!value && selected) {
-    //   if ((typeof selected === 'object') && selected.length) {
-    //     console.log('if');
-    //     return selected.map(v => v.label);
-    //   } else {
-    //     return selected.label;
-    //   }
-    // } else {
-    //   return (<Placeholder>{placeholder}</Placeholder>);
-    // }
     if (isMulti) {
-      console.log('ismulti');
+      if (selected.length) {
+        return selected.map((data) => (
+          <MultiSelectOption key={data.value}>{data.label}</MultiSelectOption>
+        ));
+      }
     } else {
       if (value) {
         return null;
+      } else if (!value && !selected && defaultValue) {
+        return <Selected>{defaultValue.label}</Selected>;
       } else if (!value && selected) {
-        return (<Selected>{selected.label}</Selected>);
+        return <Selected>{selected.label}</Selected>;
       } else {
-        return (<Placeholder>{placeholder}</Placeholder>);
+        return <Placeholder>{placeholder}</Placeholder>;
       }
     }
   };
@@ -266,14 +265,12 @@ const Autocomplete = ({
           {displayValue()}
           <Input
             type='text'
-            // value={value !== selected.value && !visible ? selected.label : value}
             value={value}
             ref={inputRef}
             onChange={handleChange}
-            onClick={e => console.log('onclick')}
+            onClick={(e) => console.log('onclick')}
             name={name}
             {...props}
-            // style={{ position: !isMulti && selected ? 'absolute' : 'relative' }}
           />
         </Flex>
         <Flex>
@@ -290,11 +287,15 @@ const Autocomplete = ({
           </svg>
         </Flex>
       </DropDownContainer>
-      {optionsToShow && visible && (
+      {filteredOption && visible && (
         <Options>
-          {optionsToShow.length ? (
-            optionsToShow.map((option, index) => (
-              <Option key={option.value} hover={keySelected === index} onClick={(e) => onOptionSelect(option, e)}>
+          {filteredOption.length ? (
+            filteredOption.map((option, index) => (
+              <Option
+                key={option.value}
+                hover={keySelected === index}
+                onClick={(e) => onOptionSelect(option, e)}
+              >
                 {option.label}
               </Option>
             ))
@@ -376,6 +377,7 @@ const A = () => {
       // isMulti
       // defaultValue={{ value: 'default', label: 'Default Value' }}
       // isClearable
-    />);
+    />
+  );
 };
 export default A;
