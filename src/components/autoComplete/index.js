@@ -1,85 +1,24 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
-import { Box, Input as input, css, Flex } from 'theme-ui';
-import { Relative, Absolute } from './position';
-import { InlineBlock } from './layout';
+import { Flex } from 'theme-ui';
+import { Relative } from '../position';
 
-import { UP_ARROW, DOWN_ARROW, ENTER_KEY, TAB_KEY } from './../utils/general';
+import { UP_ARROW, DOWN_ARROW, ENTER_KEY, TAB_KEY } from '../../utils/general';
 
-// TODO: multi
+import {
+  DropDownContainer,
+  Options,
+  Option,
+  MultiSelectOption,
+  Input,
+  Selected,
+  Placeholder,
+  ClearIcon,
+} from './component';
+
 // TODO: Icon as a prop,both clearIcon and arrowIcon
-// TODO: loadOptions
-// TODO: isloading
-
-const DropDownContainer = styled(Relative)`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border: 1px solid #ddd;
-  padding: 5px;
-  border-radius: 6px;
-  ${({ theme }) =>
-    css({
-      '&:focus': {
-        outline: 'none',
-        borderColor: 'primary',
-      },
-    })(theme)}
-
-  ${({ theme, focused }) =>
-    css({
-      borderColor: focused ? 'primary' : '',
-      borderWidth: focused ? '1px' : '',
-    })(theme)}
-`;
-
-const Options = styled(Absolute)`
-  z-index: 1;
-  max-height: 300px;
-  width: 100%;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  overflow: scroll;
-  background: #fff;
-`;
-
-const Option = styled(Box)`
-  cursor: pointer;
-  height: max-content;
-  max-height: 300px;
-  border-bottom: 1px solid #ddd;
-  padding: 5px;
-  &:hover {
-    background: #ddd;
-  }
-  ${({ theme, hover }) =>
-    css({
-      background: hover ? '#ddd' : '',
-    })(theme)}
-`;
-
-const MultiSelectOption = styled(InlineBlock)`
-  background: #ddd;
-  margin-right: 5px;
-  min-width: max-content;
-`;
-
-const Input = styled(input)`
-  border: none;
-  outline: none;
-  padding: 0;
-  width: 2px;
-  min-width: max-content;
-`;
-
-const Selected = Absolute;
-const Placeholder = Absolute;
-
-const ClearIcon = styled(InlineBlock)`
-  padding: 0 7px;
-  cursor: pointer;
-`;
+// TODO: theming
+// TODO: default value handling for isMulti
 
 const Autocomplete = ({
   options,
@@ -195,12 +134,19 @@ const Autocomplete = ({
     clearFocus();
   };
 
+  const removeSelectedOption = (e, option) => {
+    e.stopPropagation();
+    const updatedValue = selected.filter(selectedOption => selectedOption.value !== option.value);
+    setSelected(updatedValue);
+    onChange && onChange(updatedValue);
+  };
+
   const clearValue = (e) => {
-    e.preventDefault();
     e.stopPropagation();
 
     setSelected([]);
     setValue('');
+    filterOptions();
     if (isMulti) onChange && onChange([]);
     else onChange && onChange(null);
   };
@@ -235,9 +181,16 @@ const Autocomplete = ({
   const displayValue = () => {
     if (isMulti) {
       if (selected.length) {
-        return selected.map((data) => (
-          <MultiSelectOption key={data.value}>{data.label}</MultiSelectOption>
+        return selected.map((selectedOption) => (
+          <MultiSelectOption
+            key={selectedOption.value}
+            onClick={(e) => removeSelectedOption(e, selectedOption)}
+          >
+            {selectedOption.label}
+          </MultiSelectOption>
         ));
+      } else if (!value) {
+        return <Placeholder>{placeholder}</Placeholder>;
       }
     } else {
       if (value) {
@@ -321,7 +274,6 @@ Autocomplete.propTypes = {
   }),
   name: PropTypes.string,
   placeholder: PropTypes.string,
-  // isLoading: PropTypes.bool,
   isClearable: PropTypes.bool,
   isMulti: PropTypes.bool,
   onChange: PropTypes.func,
@@ -330,20 +282,19 @@ Autocomplete.propTypes = {
 Autocomplete.defaultProps = {
   options: null,
   name: '',
-  // isLoading: false,
   isClearable: true,
   onChange: null,
-  // defaultValue: null,
+  defaultValue: null,
   isMulti: false,
   placeholder: 'select here..',
 };
 
-const Photo = styled(Box)`
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: #ddd;
-`;
+// const Photo = styled(Box)`
+//   width: 30px;
+//   height: 30px;
+//   border-radius: 50%;
+//   background: #ddd;
+// `;
 
 const A = () => {
   const options = [
@@ -374,7 +325,7 @@ const A = () => {
       options={options}
       placeholder='select here'
       onChange={(v) => console.log('selected', v)}
-      // isMulti
+      isMulti
       // defaultValue={{ value: 'default', label: 'Default Value' }}
       // isClearable
     />
