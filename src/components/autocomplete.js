@@ -12,10 +12,10 @@ import {
   TAB_KEY,
 } from './../utils/general';
 
+// TODO: multi
 // TODO: Icon as a prop,both clearIcon and arrowIcon
 // TODO: loadOptions
 // TODO: isloading
-// TODO: multi
 
 const DropDownContainer = styled(Relative)`
   display: flex;
@@ -88,10 +88,11 @@ const Autocomplete = ({
   onChange,
   placeholder,
   isClearable,
+  isMulti,
   ...props
 }) => {
   const [value, setValue] = useState('');
-  const [selected, setSelected] = useState(defaultValue);
+  const [selected, setSelected] = useState();
   const [visible, setVisible] = useState(false);
   const [filteredOption, setFilteredOption] = useState(null);
   const [keySelected, setKeySelected] = useState(null);
@@ -101,6 +102,14 @@ const Autocomplete = ({
   const inputRef = useRef(null);
 
   const optionsToShow = filteredOption || options;
+
+  useEffect(() => {
+    if (isMulti) {
+      defaultValue ? setSelected([defaultValue]) : setSelected([]);
+    } else {
+      setSelected(defaultValue);
+    }
+  }, []);
 
   useEffect(() => {
     visible && document.addEventListener('click', handleOutsideClick, true);
@@ -117,6 +126,16 @@ const Autocomplete = ({
     }
   }, [value]);
 
+  const SetSelectedValue = (selectedValue) => {
+    if (isMulti) {
+      setSelected([...selected, selectedValue]);
+    } else {
+      console.log('not isMulti');
+      setSelected(selectedValue);
+    }
+    onChange && onChange(selected);
+  };
+
   const handleKeyboardEvent = (e) => {
     const len = optionsToShow.length;
 
@@ -130,10 +149,10 @@ const Autocomplete = ({
         setKeySelected(index);
         return;
       case ENTER_KEY:
-        if (setVisible && onChange) onChange(options[keySelected], e);
         setValue('');
         setKeySelected(null);
-        setSelected(optionsToShow[keySelected]);
+        SetSelectedValue(optionsToShow[keySelected]);
+        if (setVisible && onChange) onChange(selected, e);
         setVisible(!visible);
         return;
       case TAB_KEY:
@@ -178,11 +197,11 @@ const Autocomplete = ({
   };
 
   const onOptionSelect = (option, e) => {
-    onChange && onChange(option, e);
     setValue('');
+    SetSelectedValue(option);
     setVisible(false);
-    setSelected(option);
     setFilteredOption(null);
+    // onChange && onChange(selected, e);
     clearFocus();
   };
 
@@ -191,7 +210,7 @@ const Autocomplete = ({
     e.stopPropagation();
     // if (value) {
     setFilteredOption(null);
-    setSelected('');
+    setSelected([]);
     setValue('');
     // }
   };
@@ -206,6 +225,34 @@ const Autocomplete = ({
     inputRef.current.blur();
   };
 
+  // const selectedValues = () => {
+  //   return selected
+  // }
+
+  const displayValue = () => {
+    // if (!value && selected) {
+    //   if ((typeof selected === 'object') && selected.length) {
+    //     console.log('if');
+    //     return selected.map(v => v.label);
+    //   } else {
+    //     return selected.label;
+    //   }
+    // } else {
+    //   return (<Placeholder>{placeholder}</Placeholder>);
+    // }
+    if (isMulti) {
+      console.log('ismulti');
+    } else {
+      if (value) {
+        return null;
+      } else if (!value && selected) {
+        return (<Selected>{selected.label}</Selected>);
+      } else {
+        return (<Placeholder>{placeholder}</Placeholder>);
+      }
+    }
+  };
+
   return (
     <Relative ref={dropdownRef}>
       <DropDownContainer
@@ -215,20 +262,20 @@ const Autocomplete = ({
         onFocus={setFocus}
         onBlur={clearFocus}
       >
-        {!value && <Selected>{selected && selected.label}</Selected>}
-        {!value && !selected && (
-          <Placeholder>{placeholder}</Placeholder>
-        )}
-        <Input
-          type='text'
-          // value={value !== selected.value && !visible ? selected.label : value}
-          value={value}
-          ref={inputRef}
-          onChange={handleChange}
-          onClick={e => console.log('onclick')}
-          name={name}
-          {...props}
-        />
+        <Flex>
+          {displayValue()}
+          <Input
+            type='text'
+            // value={value !== selected.value && !visible ? selected.label : value}
+            value={value}
+            ref={inputRef}
+            onChange={handleChange}
+            onClick={e => console.log('onclick')}
+            name={name}
+            {...props}
+            // style={{ position: !isMulti && selected ? 'absolute' : 'relative' }}
+          />
+        </Flex>
         <Flex>
           {isClearable && <ClearIcon onClick={clearValue}>&times;</ClearIcon>}
           <svg
@@ -275,6 +322,7 @@ Autocomplete.propTypes = {
   placeholder: PropTypes.string,
   // isLoading: PropTypes.bool,
   isClearable: PropTypes.bool,
+  isMulti: PropTypes.bool,
   onChange: PropTypes.func,
 };
 
@@ -284,7 +332,8 @@ Autocomplete.defaultProps = {
   // isLoading: false,
   isClearable: true,
   onChange: null,
-  defaultValue: null,
+  // defaultValue: null,
+  isMulti: false,
   placeholder: 'select here..',
 };
 
@@ -302,27 +351,29 @@ const A = () => {
     { value: 'vinyl', label: 'Vinyl' },
     { value: 'vintage', label: 'Vintage' },
     { value: 'refurbished', label: 'Refurbished' },
+    { value: 'a b', label: 'Aa Baa' },
   ];
 
-  const newOptions = options.map(v => {
-    const label = (
-      <Flex>
-        <Photo />
-        <span>{v.label}</span>
-      </Flex>
-    );
+  // const newOptions = options.map(v => {
+  //   const label = (
+  //     <Flex>
+  //       <Photo />
+  //       <span>{v.label}</span>
+  //     </Flex>
+  //   );
 
-    return {
-      label,
-      value: v.value,
-    };
-  });
+  //   return {
+  //     label,
+  //     value: v.value,
+  //   };
+  // });
 
   return (
     <Autocomplete
       options={options}
       placeholder='select here'
-      onChange={(v) => console.log(v)}
+      onChange={(v) => console.log('selected', v)}
+      // isMulti
       // defaultValue={{ value: 'default', label: 'Default Value' }}
       // isClearable
     />);
