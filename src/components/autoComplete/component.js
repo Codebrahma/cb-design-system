@@ -93,10 +93,16 @@ const MultiSelectOption = ({ children, onClick }) => (
 );
 MultiSelectOption.propTypes = {
   onClick: PropTypes.func.isRequired,
-  children: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.string,
-  ]),
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
 };
 
-export { DropDownContainer, Options, Option, MultiSelectOption, Input, Selected, Placeholder, ClearIcon };
+export {
+  DropDownContainer,
+  Options,
+  Option,
+  MultiSelectOption,
+  Input,
+  Selected,
+  Placeholder,
+  ClearIcon,
+};
