@@ -2,9 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Flex } from 'theme-ui';
 import { Relative } from '../position';
-
 import { UP_ARROW, DOWN_ARROW, ENTER_KEY, TAB_KEY } from '../../utils/general';
-
 import {
   DropDownContainer,
   Options,
@@ -13,13 +11,8 @@ import {
   Input,
   Selected,
   Placeholder,
-
   Icon,
-
 } from './component';
-
-// TODO: Icon as a prop,both clearIcon and arrowIcon
-// TODO: theming
 
 const Autocomplete = ({
   options,
@@ -29,6 +22,8 @@ const Autocomplete = ({
   placeholder,
   isClearable,
   isMulti,
+  onBlur,
+  onFocus,
   variant,
   ...props
 }) => {
@@ -104,11 +99,6 @@ const Autocomplete = ({
 
   const toggleVisibility = (e) => {
     e.preventDefault();
-    if (!visible) {
-      setFocus();
-    } else {
-      clearFocus();
-    }
     filterOptions();
     setVisible(!visible);
     setKeySelected(null);
@@ -124,7 +114,6 @@ const Autocomplete = ({
   };
 
   const handleChange = ({ target: { value } }) => {
-    console.log(value);
     setValue(value);
     filterOptions(value);
   };
@@ -138,7 +127,9 @@ const Autocomplete = ({
 
   const removeSelectedOption = (e, option) => {
     e.stopPropagation();
-    const updatedValue = selected.filter(selectedOption => selectedOption.value !== option.value);
+    const updatedValue = selected.filter(
+      (selectedOption) => selectedOption.value !== option.value
+    );
     setSelected(updatedValue);
     onChange && onChange(updatedValue);
   };
@@ -154,13 +145,19 @@ const Autocomplete = ({
   };
 
   const setFocus = () => {
-    setIsFocused(true);
-    inputRef.current.focus();
+    if (!isFocused) {
+      onFocus && onFocus();
+      setIsFocused(true);
+      inputRef.current.focus();
+    }
   };
 
   const clearFocus = () => {
-    setIsFocused(false);
-    inputRef.current.blur();
+    if (isFocused) {
+      onBlur && onBlur();
+      setIsFocused(false);
+      inputRef.current.blur();
+    }
   };
 
   const filterOptions = (inputValue = '') => {
@@ -232,6 +229,8 @@ const Autocomplete = ({
         <Flex>
           {isClearable && (
             <Icon onClick={clearValue}>
+              {' '}
+              {/* close Icon */}
               <svg
                 height='20'
                 width='20'
@@ -244,7 +243,9 @@ const Autocomplete = ({
               </svg>
             </Icon>
           )}
-          <Icon> {/* down arrow */}
+          <Icon>
+            {' '}
+            {/* down arrow */}
             <svg
               height='20'
               width='20'
@@ -296,7 +297,7 @@ Autocomplete.propTypes = {
       PropTypes.shape({
         value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      }),
+      })
     ),
   ]),
   name: PropTypes.string,
@@ -305,6 +306,8 @@ Autocomplete.propTypes = {
   isClearable: PropTypes.bool,
   isMulti: PropTypes.bool,
   onChange: PropTypes.func,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
 };
 
 Autocomplete.defaultProps = {
@@ -312,18 +315,13 @@ Autocomplete.defaultProps = {
   name: '',
   isClearable: true,
   onChange: null,
+  onFocus: null,
+  onBlur: null,
   defaultValue: null,
   isMulti: false,
   placeholder: 'select here..',
   variant: 'primary',
 };
-
-// const Photo = styled(Box)`
-//   width: 30px;
-//   height: 30px;
-//   border-radius: 50%;
-//   background: #ddd;
-// `;
 
 const A = () => {
   const options = [
@@ -335,27 +333,15 @@ const A = () => {
     { value: 'a b', label: 'Aa Baa' },
   ];
 
-  // const newOptions = options.map(v => {
-  //   const label = (
-  //     <Flex>
-  //       <Photo />
-  //       <span>{v.label}</span>
-  //     </Flex>
-  //   );
-
-  //   return {
-  //     label,
-  //     value: v.value,
-  //   };
-  // });
-
   return (
     <Autocomplete
+      isMulti
       options={options}
       placeholder='select here'
       onChange={(v) => console.log('selected', v)}
-      isMulti
       defaultValue={[{ value: 'default', label: 'Default Value' }]}
+      // onFocus={() => console.log('focused')}
+      // onBlur={() => console.log('blur')}
       // isClearable
     />
   );
