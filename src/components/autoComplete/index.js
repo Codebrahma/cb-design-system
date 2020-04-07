@@ -13,12 +13,13 @@ import {
   Input,
   Selected,
   Placeholder,
-  ClearIcon,
+
+  Icon,
+
 } from './component';
 
 // TODO: Icon as a prop,both clearIcon and arrowIcon
 // TODO: theming
-// TODO: default value handling for isMulti
 
 const Autocomplete = ({
   options,
@@ -28,6 +29,7 @@ const Autocomplete = ({
   placeholder,
   isClearable,
   isMulti,
+  variant,
   ...props
 }) => {
   const [value, setValue] = useState('');
@@ -185,6 +187,7 @@ const Autocomplete = ({
           <MultiSelectOption
             key={selectedOption.value}
             onClick={(e) => removeSelectedOption(e, selectedOption)}
+            variant={variant}
           >
             {selectedOption.label}
           </MultiSelectOption>
@@ -213,41 +216,57 @@ const Autocomplete = ({
         tabIndex='0'
         onFocus={setFocus}
         onBlur={clearFocus}
+        variant={variant}
       >
-        <Flex>
+        <Flex css={{ flexGrow: '1' }}>
           {displayValue()}
           <Input
             type='text'
             value={value}
             ref={inputRef}
             onChange={handleChange}
-            onClick={(e) => console.log('onclick')}
             name={name}
             {...props}
           />
         </Flex>
         <Flex>
-          {isClearable && <ClearIcon onClick={clearValue}>&times;</ClearIcon>}
-          <svg
-            height='20'
-            width='20'
-            viewBox='0 0 20 20'
-            aria-hidden='true'
-            focusable='false'
-            className='css-tj5bde-Svg'
-          >
-            <path d='M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z' />
-          </svg>
+          {isClearable && (
+            <Icon onClick={clearValue}>
+              <svg
+                height='20'
+                width='20'
+                viewBox='0 0 20 20'
+                aria-hidden='true'
+                focusable='false'
+                fill='#929292'
+              >
+                <path d='M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z' />
+              </svg>
+            </Icon>
+          )}
+          <Icon> {/* down arrow */}
+            <svg
+              height='20'
+              width='20'
+              viewBox='0 0 20 20'
+              aria-hidden='true'
+              focusable='false'
+              fill='#929292'
+            >
+              <path d='M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z' />
+            </svg>
+          </Icon>
         </Flex>
       </DropDownContainer>
       {filteredOption && visible && (
-        <Options>
+        <Options variant={variant}>
           {filteredOption.length ? (
             filteredOption.map((option, index) => (
               <Option
                 key={option.value}
                 hover={keySelected === index}
                 onClick={(e) => onOptionSelect(option, e)}
+                variant={variant}
               >
                 {option.label}
               </Option>
@@ -268,12 +287,21 @@ Autocomplete.propTypes = {
       label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     })
   ),
-  defaultValue: PropTypes.shape({
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  }),
+  defaultValue: PropTypes.oneOfType([
+    PropTypes.shape({
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    }),
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      }),
+    ),
+  ]),
   name: PropTypes.string,
   placeholder: PropTypes.string,
+  variant: PropTypes.string,
   isClearable: PropTypes.bool,
   isMulti: PropTypes.bool,
   onChange: PropTypes.func,
@@ -287,6 +315,7 @@ Autocomplete.defaultProps = {
   defaultValue: null,
   isMulti: false,
   placeholder: 'select here..',
+  variant: 'primary',
 };
 
 // const Photo = styled(Box)`
@@ -326,7 +355,7 @@ const A = () => {
       placeholder='select here'
       onChange={(v) => console.log('selected', v)}
       isMulti
-      // defaultValue={{ value: 'default', label: 'Default Value' }}
+      defaultValue={[{ value: 'default', label: 'Default Value' }]}
       // isClearable
     />
   );

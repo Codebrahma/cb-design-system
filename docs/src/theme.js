@@ -172,4 +172,26 @@ export default {
       },
     },
   },
+
+  autoComplete: {
+    primary: {
+      container: {
+        '&:focus': {
+          outline: 'none',
+          borderColor: 'primary',
+        },
+      },
+      optionsContainer: {
+        bg: 'white',
+      },
+      option: {
+        '&:hover': {
+          bg: 'borderGray',
+        },
+      },
+      multiselectContainer: {
+        bg: 'borderGray',
+      },
+    },
+  },
 };
