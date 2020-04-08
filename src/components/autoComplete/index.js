@@ -26,6 +26,7 @@ const Autocomplete = ({
   onFocus,
   variant,
   closeIcon,
+  tabIndex,
   visibilityIcon,
   ...props
 }) => {
@@ -211,7 +212,7 @@ const Autocomplete = ({
       <DropDownContainer
         focused={isFocused}
         onClick={toggleVisibility}
-        tabIndex='0'
+        tabIndex={tabIndex}
         onFocus={setFocus}
         onBlur={clearFocus}
         variant={variant}
@@ -307,6 +308,7 @@ Autocomplete.propTypes = {
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
+  tabIndex: PropTypes.string,
   closeIcon: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.func,
@@ -330,6 +332,7 @@ Autocomplete.defaultProps = {
   variant: 'primary',
   closeIcon: null,
   visibilityIcon: null,
+  tabIndex: '0',
 };
 
 export default memo(Autocomplete);
