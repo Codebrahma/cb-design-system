@@ -172,4 +172,24 @@ export default {
       },
     },
   },
+
+  buttonGroup: {
+    primary: {
+      borderRadius: 4,
+      m: 2,
+    },
+    secondary: {
+      button: {
+        mr: 1,
+        '&:first-of-type': {
+          borderTopLeftRadius: 11,
+          borderBottomLeftRadius: 11,
+        },
+        '&:last-child': {
+          borderTopRightRadius: 11,
+          borderBottomRightRadius: 11,
+        },
+      },
+    },
+  },
 };
