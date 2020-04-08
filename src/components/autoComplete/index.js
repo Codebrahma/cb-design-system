@@ -192,7 +192,7 @@ const Autocomplete = ({
           </MultiSelectOption>
         ));
       } else if (!value) {
-        return <Placeholder>{placeholder}</Placeholder>;
+        return <Placeholder variant={variant}>{placeholder}</Placeholder>;
       }
     } else {
       if (value) {
@@ -202,7 +202,7 @@ const Autocomplete = ({
       } else if (!value && selected) {
         return <Selected>{selected.label}</Selected>;
       } else {
-        return <Placeholder>{placeholder}</Placeholder>;
+        return <Placeholder variant={variant}>{placeholder}</Placeholder>;
       }
     }
   };

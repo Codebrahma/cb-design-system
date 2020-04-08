@@ -195,6 +195,9 @@ export default {
       multiselectContainer: {
         bg: 'borderGray',
       },
+      placeHolder: {
+        color: 'darkGray',
+      },
     },
   },
 };
