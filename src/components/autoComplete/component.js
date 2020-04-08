@@ -15,8 +15,6 @@ const DropDownContainer = styled(Relative)`
       borderWidth: '1px',
       borderStyle: 'solid',
       borderColor: 'borderGray',
-      padding: 2,
-      borderRadius: 4,
     })(theme)}
   ${({ theme, variant }) => applyVariation(theme, `${variant}.container`, 'autoComplete')}
   ${({ theme, variant, focused }) => focused ? applyVariation(theme, `${variant}.container.&:focus`, 'autoComplete') : ''}

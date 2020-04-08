@@ -176,12 +176,15 @@ export default {
   autoComplete: {
     primary: {
       container: {
+        padding: 3,
+        borderRadius: 2,
         '&:focus': {
           outline: 'none',
           borderColor: 'primary',
         },
       },
       optionsContainer: {
+        borderRadius: 2,
         bg: 'white',
       },
       option: {
