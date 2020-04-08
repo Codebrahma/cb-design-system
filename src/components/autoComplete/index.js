@@ -333,27 +333,4 @@ Autocomplete.defaultProps = {
   visibilityIcon: null,
 };
 
-const A = () => {
-  const options = [
-    { value: 'rustic', label: 'Rustic' },
-    { value: 'antique', label: 'Antique' },
-    { value: 'vinyl', label: 'Vinyl' },
-    { value: 'vintage', label: 'Vintage' },
-    { value: 'refurbished', label: 'Refurbished' },
-    { value: 'a b', label: 'Aa Baa' },
-  ];
-
-  return (
-    <Autocomplete
-      isMulti
-      options={options}
-      placeholder='select here'
-      onChange={(v) => console.log('selected', v)}
-      // defaultValue={[{ value: 'default', label: 'Default Value' }]}
-      // onFocus={() => console.log('focused')}
-      // onBlur={() => console.log('blur')}
-      // isClearable
-    />
-  );
-};
-export default A;
+export default Autocomplete;

@@ -1,11 +1,27 @@
-# Switch
+# AutoComplete
 
-Primitive checkbox component styled as Switch.
+Primitive AutoComplete component styled as autoComplete.
 
 <Editor>
 
 ```jsx
-<AutoComplete />
+<AutoComplete
+  isMulti
+  options={[
+    { value: 'rustic', label: 'Rustic' },
+    { value: 'antique', label: 'Antique' },
+    { value: 'vinyl', label: 'Vinyl' },
+    { value: 'vintage', label: 'Vintage' },
+    { value: 'refurbished', label: 'Refurbished' },
+    { value: 'a b', label: 'Aa Baa' },
+  ]}
+  placeholder="select here"
+  onChange={v => console.log('selected', v)}
+  // defaultValue={[{ value: 'default', label: 'Default Value' }]}
+  // onFocus={() => console.log('focused')}
+  // onBlur={() => console.log('blur')}
+  // isClearable
+/>
 ```
 
 </Editor>
