@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback, memo } from 'react';
 import PropTypes from 'prop-types';
 import { Flex } from 'theme-ui';
 import { Relative } from '../position';
@@ -64,7 +64,7 @@ const Autocomplete = ({
     }
   }, [value]);
 
-  const SetSelectedValue = (selectedValue, e) => {
+  const SetSelectedValue = useCallback((selectedValue, e) => {
     if (isMulti) {
       setSelected([...selected, selectedValue]);
       onChange && onChange([...selected, selectedValue], e);
@@ -72,9 +72,9 @@ const Autocomplete = ({
       setSelected(selectedValue);
       onChange && onChange(selectedValue, e);
     }
-  };
+  });
 
-  const handleKeyboardEvent = (e) => {
+  const handleKeyboardEvent = useCallback((e) => {
     const len = filteredOption.length;
 
     switch (e.keyCode) {
@@ -97,7 +97,7 @@ const Autocomplete = ({
       case TAB_KEY:
         setVisible(!visible);
     }
-  };
+  }, [keySelected, visible]);
 
   const toggleVisibility = (e) => {
     e.preventDefault();
@@ -106,39 +106,38 @@ const Autocomplete = ({
     setKeySelected(null);
   };
 
-  const handleOutsideClick = (e) => {
+  const handleOutsideClick = useCallback((e) => {
     if (dropdownRef.current.contains(e.target)) {
       return;
     }
     setValue('');
     toggleVisibility(e);
     clearFocus();
-  };
+  });
 
   const handleChange = ({ target: { value } }) => {
     setValue(value);
     filterOptions(value);
   };
 
-  const onOptionSelect = (option, e) => {
+  const onOptionSelect = useCallback((option, e) => {
     setValue('');
     SetSelectedValue(option, e);
     setVisible(false);
     clearFocus();
-  };
+  });
 
-  const removeSelectedOption = (e, option) => {
+  const removeSelectedOption = useCallback((e, option) => {
     e.stopPropagation();
     const updatedValue = selected.filter(
       (selectedOption) => selectedOption.value !== option.value
     );
     setSelected(updatedValue);
     onChange && onChange(updatedValue);
-  };
+  }, [selected]);
 
   const clearValue = (e) => {
     e.stopPropagation();
-
     setSelected([]);
     setValue('');
     filterOptions();
@@ -146,21 +145,21 @@ const Autocomplete = ({
     else onChange && onChange(null);
   };
 
-  const setFocus = () => {
+  const setFocus = useCallback(() => {
     if (!isFocused) {
       onFocus && onFocus();
       setIsFocused(true);
       inputRef.current.focus();
     }
-  };
+  }, [isFocused]);
 
-  const clearFocus = () => {
+  const clearFocus = useCallback(() => {
     if (isFocused) {
       onBlur && onBlur();
       setIsFocused(false);
       inputRef.current.blur();
     }
-  };
+  }, [isFocused]);
 
   const filterOptions = (inputValue = '') => {
     let filteredArr = options;
@@ -333,4 +332,4 @@ Autocomplete.defaultProps = {
   visibilityIcon: null,
 };
 
-export default Autocomplete;
+export default memo(Autocomplete);
