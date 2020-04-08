@@ -59,10 +59,9 @@ const Input = styled(input)`
 `;
 
 const Selected = Absolute;
-const Placeholder = styled(Absolute)`
-${({variant}) => { console.log(variant); }}
-  ${({theme, variant}) => applyVariation(theme, `${variant}.placeHolder`, 'autoComplete')}
-`;
+const Placeholder = styled(Absolute)(
+  ({theme, variant}) => applyVariation(theme, `${variant}.placeHolder`, 'autoComplete')
+);
 
 const Icon = styled(Flex)(
   ({theme}) => css({
