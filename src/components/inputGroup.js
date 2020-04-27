@@ -78,13 +78,10 @@ const InputGroupContainer = styled(Flex)`
       margin: 0,
       ...styles(position),
     })(theme)}
-  ${({ theme, variant }) =>
-    applyVariation(theme, variant, 'inputGroup')}
+  ${({ theme, variant }) => applyVariation(theme, variant, 'inputGroup')}
 `;
 
 const Label = styled(Box)`
-  align-items: center;
-  justify-content: center;
   ${({ theme, variant }) =>
     applyVariation(theme, `${variant}.label`, 'inputGroup')}
 `;
