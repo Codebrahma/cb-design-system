@@ -172,4 +172,25 @@ export default {
       },
     },
   },
+
+  collapse: {
+    primary: {
+      head: {
+        p: 3,
+        bg: 'borderGray',
+        borderRadius: 3,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: 'darkGray',
+        cursor: 'pointer',
+      },
+      body: {
+        p: 4,
+        borderRadius: 3,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: 'darkGray',
+      },
+    },
+  },
 };

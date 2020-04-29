@@ -5,8 +5,10 @@ Primitive Collapse component with variants
 <Editor>
 
 ```jsx
-<Collapse renderComponent={() => <h1>collapse</h1>}>
-  <h1>collapse content</h1>
+<Collapse head={() => <p>Collapse Head</p>}>
+  <Box>
+    <h1>Collapse body</h1>
+  </Box>
 </Collapse>
 ```
 
