@@ -13,3 +13,14 @@ Primitive Collapse component with variants
 ```
 
 </Editor>
+
+## props
+
+| prop               | type        | defaultProp | desc                                                               |
+| ------------------ | ----------- | ----------- | ------------------------------------------------------------------ |
+| head               | func/node   |             |
+| isOpen             | bool        | true        | set's the default state of collapse open/close                     |
+| transitionDuration | number      | 200         | set's transition duration                                          |
+| transitionFunction | string/func | 'linear'    | set's transition timming function                                  |
+| isCollapsed        | func        | null        | A callback function that trigger's when the collapse state changes |
+| variant            | string      | primary     |
