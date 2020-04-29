@@ -32,6 +32,10 @@ const sidebarLinks = [
     name: 'Theming',
     ref: '/theming',
   },
+  {
+    name: 'DropDownMenu',
+    ref: '/dropdownMenu',
+  },
 ];
 
 export const cssNavLink = css`
