@@ -58,9 +58,8 @@ const Input = styled(input)`
   })}
 `;
 
-const Selected = Absolute;
 const Placeholder = styled(Absolute)(
-  ({theme, variant}) => applyVariation(theme, `${variant}.placeHolder`, 'autoComplete')
+  ({theme, variant}) => applyVariation(theme, `${variant}.placeholder`, 'autoComplete')
 );
 
 const Icon = styled(Flex)(
@@ -77,7 +76,6 @@ const SelectOption = styled(Flex)`
   ${({ theme }) => css({
     marginRight: 2,
     minWidth: 'max-content',
-    display: 'flex',
     borderRadius: 2,
     paddingLeft: 2,
   })(theme)}
@@ -128,7 +126,7 @@ export {
   Option,
   MultiSelectOption,
   Input,
-  Selected,
+  Absolute as Selected,
   Placeholder,
   Icon,
   CustomIcon,

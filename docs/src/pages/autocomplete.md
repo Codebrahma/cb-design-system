@@ -1,6 +1,6 @@
-# AutoComplete
+# Autocomplete
 
-Primitive AutoComplete component styled as autoComplete.
+Primitive Autocomplete component styled as autoComplete.
 
 <Editor>
 

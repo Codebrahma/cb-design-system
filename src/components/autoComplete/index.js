@@ -43,33 +43,36 @@ const Autocomplete = ({
 
   useEffect(() => {
     if (isMulti) {
-      defaultValue ? setSelected([...defaultValue]) : setSelected([]);
+      defaultValue && setSelected([...defaultValue]);
     } else {
       setSelected(defaultValue);
     }
   }, []);
 
   useEffect(() => {
-    visible && document.addEventListener('click', handleOutsideClick, true);
-    visible && document.addEventListener('keydown', handleKeyboardEvent, true);
-    return () => {
-      visible &&
+    if (visible) {
+      document.addEventListener('click', handleOutsideClick, true);
+      document.addEventListener('keydown', handleKeyboardEvent, true);
+    }
+    return visible ? () => {
+      if (visible) {
         document.removeEventListener('click', handleOutsideClick, true);
-      visible &&
         document.removeEventListener('keydown', handleKeyboardEvent, true);
-    };
+      }
+    } : undefined;
   });
 
   useEffect(() => {
     if (value && isFocused) {
       setVisible(true);
     }
-  }, [value]);
+  }, [value, isFocused]);
 
-  const SetSelectedValue = useCallback((selectedValue, e) => {
+  const setSelectedValue = useCallback((selectedValue, e) => {
     if (isMulti) {
-      setSelected([...selected, selectedValue]);
-      onChange && onChange([...selected, selectedValue], e);
+      const selectedValues = [...selected, selectedValue];
+      setSelected(selectedValues);
+      onChange && onChange(selectedValues, e);
     } else {
       setSelected(selectedValue);
       onChange && onChange(selectedValue, e);
@@ -91,7 +94,7 @@ const Autocomplete = ({
       case ENTER_KEY:
         if (keySelected !== null) {
           setValue('');
-          SetSelectedValue(filteredOption[keySelected], e);
+          setSelectedValue(filteredOption[keySelected], e);
           setKeySelected(null);
           setVisible(!visible);
         }
@@ -124,7 +127,7 @@ const Autocomplete = ({
 
   const onOptionSelect = useCallback((option, e) => {
     setValue('');
-    SetSelectedValue(option, e);
+    setSelectedValue(option, e);
     setVisible(false);
     clearFocus();
   });
