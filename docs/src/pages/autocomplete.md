@@ -17,10 +17,6 @@ Primitive AutoComplete component styled as autoComplete.
   ]}
   placeholder="select here"
   onChange={v => console.log('selected', v)}
-  // defaultValue={[{ value: 'default', label: 'Default Value' }]}
-  // onFocus={() => console.log('focused')}
-  // onBlur={() => console.log('blur')}
-  // isClearable
 />
 ```
 

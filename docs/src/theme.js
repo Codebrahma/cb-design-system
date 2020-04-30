@@ -188,6 +188,7 @@ export default {
         bg: 'white',
       },
       option: {
+        p: 3,
         '&:hover': {
           bg: 'borderGray',
         },

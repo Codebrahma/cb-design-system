@@ -12,6 +12,7 @@ import {
   Selected,
   Placeholder,
   Icon,
+  CustomIcon,
 } from './component';
 
 const Autocomplete = ({
@@ -230,7 +231,7 @@ const Autocomplete = ({
         </Flex>
         <Flex>
           {isClearable && (
-            closeIcon || (
+            closeIcon ? (<CustomIcon src={closeIcon} variant={variant} alt='icon' />) : (
               <Icon onClick={clearValue}>
                 <svg
                   height='20'
@@ -245,7 +246,7 @@ const Autocomplete = ({
               </Icon>
             )
           )}
-          {visibilityIcon || (<Icon>
+          {visibilityIcon ? (<CustomIcon src={closeIcon} variant={variant} alt='icon' />) : (<Icon>
             <svg
               height='20'
               width='20'
@@ -311,11 +312,11 @@ Autocomplete.propTypes = {
   tabIndex: PropTypes.string,
   closeIcon: PropTypes.oneOfType([
     PropTypes.node,
-    PropTypes.func,
+    PropTypes.string,
   ]),
   visibilityIcon: PropTypes.oneOfType([
     PropTypes.node,
-    PropTypes.func,
+    PropTypes.string,
   ]),
 };
 

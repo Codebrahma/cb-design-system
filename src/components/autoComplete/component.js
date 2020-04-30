@@ -81,7 +81,7 @@ const SelectOption = styled(Flex)`
     borderRadius: 2,
     paddingLeft: 2,
   })(theme)}
-   ${({ theme, variant }) => applyVariation(theme, `${variant}.multiselectContainer`, 'autoComplete')}
+  ${({ theme, variant }) => applyVariation(theme, `${variant}.multiselectContainer`, 'autoComplete')}
 `;
 
 const CloseIcon = styled(Flex)`
@@ -93,6 +93,10 @@ const CloseIcon = styled(Flex)`
       cursor: 'pointer',
     },
   })}
+`;
+
+const CustomIcon = styled('img')`
+  ${({ theme, variant }) => applyVariation(theme, `${variant}.customIcon`, 'autoComplete')}
 `;
 
 const MultiSelectOption = ({ children, onClick, variant }) => (
@@ -127,4 +131,5 @@ export {
   Selected,
   Placeholder,
   Icon,
+  CustomIcon,
 };
