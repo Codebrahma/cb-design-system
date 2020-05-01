@@ -210,7 +210,7 @@ const Autocomplete = ({
       }
     }
   };
-
+  console.log(inputRef);
   return (
     <Relative ref={dropdownRef}>
       <DropDownContainer
@@ -221,7 +221,7 @@ const Autocomplete = ({
         onBlur={clearFocus}
         variant={variant}
       >
-        <Flex css={{ flexGrow: '1' }}>
+        <Flex css={{ flexGrow: '1', flexWrap: 'wrap', alignItems: 'center' }}>
           {displayValue()}
           <Input
             type='text'
@@ -232,7 +232,7 @@ const Autocomplete = ({
             {...props}
           />
         </Flex>
-        <Flex>
+        <Flex css={{ minWidth: 'max-content' }}>
           {isClearable && (
             closeIcon ? (<CustomIcon src={closeIcon} variant={variant} alt='icon' />) : (
               <Icon onClick={clearValue}>
@@ -272,6 +272,7 @@ const Autocomplete = ({
                 hover={keySelected === index}
                 onClick={(e) => onOptionSelect(option, e)}
                 variant={variant}
+                onMouseEnter={() => setKeySelected(index)}
               >
                 {option.label}
               </Option>

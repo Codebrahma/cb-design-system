@@ -176,7 +176,8 @@ export default {
   autoComplete: {
     primary: {
       container: {
-        padding: 3,
+        px: 3,
+        py: 2,
         borderRadius: 2,
         '&:focus': {
           outline: 'none',
@@ -184,8 +185,9 @@ export default {
         },
       },
       optionsContainer: {
-        borderRadius: 2,
+        borderRadius: 3,
         bg: 'white',
+        marginTop: 3,
       },
       option: {
         p: 3,

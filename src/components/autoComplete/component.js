@@ -33,7 +33,6 @@ const Options = styled(Absolute)`
     background: 'white',
   })(theme)}
   ${({ theme, variant }) => applyVariation(theme, `${variant}.optionsContainer`, 'autoComplete')}
-
 `;
 
 const Option = styled(Box)`
@@ -52,9 +51,11 @@ const Option = styled(Box)`
 
 const Input = styled(input)`
   ${css({
+    width: 'max-content',
     border: 'none',
     outline: 'none',
     padding: 0,
+    my: 2,
   })}
 `;
 
@@ -74,10 +75,11 @@ const Icon = styled(Flex)(
 
 const SelectOption = styled(Flex)`
   ${({ theme }) => css({
-    marginRight: 2,
+    margin: '1px',
     minWidth: 'max-content',
     borderRadius: 2,
     paddingLeft: 2,
+    fontSize: 'small',
   })(theme)}
   ${({ theme, variant }) => applyVariation(theme, `${variant}.multiselectContainer`, 'autoComplete')}
 `;
