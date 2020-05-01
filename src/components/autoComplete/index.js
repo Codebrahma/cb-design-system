@@ -34,7 +34,7 @@ const Autocomplete = ({
   const [value, setValue] = useState('');
   const [selected, setSelected] = useState(isMulti ? [] : null);
   const [visible, setVisible] = useState(false);
-  const [filteredOption, setFilteredOption] = useState(options);
+  const [suggestions, setSuggestions] = useState(options);
   const [keySelected, setKeySelected] = useState(null);
   const [isFocused, setIsFocused] = useState(false);
 
@@ -80,7 +80,7 @@ const Autocomplete = ({
   });
 
   const handleKeyboardEvent = useCallback((e) => {
-    const len = filteredOption.length;
+    const len = suggestions.length;
 
     switch (e.keyCode) {
       case UP_ARROW:
@@ -94,7 +94,7 @@ const Autocomplete = ({
       case ENTER_KEY:
         if (keySelected !== null) {
           setValue('');
-          setSelectedValue(filteredOption[keySelected], e);
+          setSelectedValue(suggestions[keySelected], e);
           setKeySelected(null);
           setVisible(!visible);
         }
@@ -180,7 +180,7 @@ const Autocomplete = ({
     const newOption = filteredArr.filter((val) =>
       val.label.toLowerCase().includes(inputValue.toLowerCase())
     );
-    setFilteredOption(newOption);
+    setSuggestions(newOption);
   };
 
   const displayValue = () => {
@@ -263,10 +263,10 @@ const Autocomplete = ({
           </Icon>)}
         </Flex>
       </DropDownContainer>
-      {filteredOption && visible && (
+      {suggestions && visible && (
         <Options variant={variant}>
-          {filteredOption.length ? (
-            filteredOption.map((option, index) => (
+          {suggestions.length ? (
+            suggestions.map((option, index) => (
               <Option
                 key={option.value}
                 hover={keySelected === index}
