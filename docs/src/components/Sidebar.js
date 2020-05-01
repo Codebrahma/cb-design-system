@@ -29,12 +29,16 @@ const sidebarLinks = [
     ref: '/pill',
   },
   {
-    name: 'Theming',
-    ref: '/theming',
-  },
-  {
     name: 'AutoComplete',
     ref: '/autocomplete',
+  },
+  {
+    name: 'DropDownMenu',
+    ref: '/dropdownMenu',
+  },
+  {
+    name: 'Theming',
+    ref: '/theming',
   },
 ];
 

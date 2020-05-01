@@ -154,6 +154,32 @@ export default {
     },
   },
 
+  dropdownMenu: {
+    primary: {
+      dropdownTrigger: {
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: 'borderGray',
+        borderRadius: 4,
+        px: 2,
+      },
+      dropdownContainer: {
+        width: '300px',
+      },
+      dropdownOption: {
+        color: 'text',
+        '&:hover': {
+          bg: 'primaryLight',
+          color: 'white',
+        },
+        '&:focus': {
+          bg: 'primaryDark',
+          color: 'white',
+        },
+      },
+    },
+  },
+
   styles: {
     root: {
       lineHeight: 4,
