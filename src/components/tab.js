@@ -4,8 +4,7 @@ import styled from "@emotion/styled";
 import { Box, css } from "theme-ui";
 import { InlineBlock } from "./index";
 import { applyVariation } from "../utils/getStyles";
-
-const ENTER_KEY = 13;
+import { ENTER_KEY } from '../utils/general';
 
 const Tab = styled(InlineBlock)`
   ${({ theme }) =>
@@ -16,7 +15,7 @@ const Tab = styled(InlineBlock)`
         outline: "none",
       },
       "&:focus": {
-        color: "primaryLight",
+        color: "primaryDark",
         outline: "none",
       },
     })(theme)}
