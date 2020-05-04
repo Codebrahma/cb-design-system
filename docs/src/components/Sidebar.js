@@ -36,6 +36,10 @@ const sidebarLinks = [
     name: 'DropDownMenu',
     ref: '/dropdownMenu',
   },
+  {
+    name: 'Tabs',
+    ref: '/tab',
+  },
 ];
 
 export const cssNavLink = css`

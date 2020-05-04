@@ -3,51 +3,40 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { Box, css } from 'theme-ui';
 import { InlineBlock } from './index';
-import { getThemeStyles } from './../utils/getStyles';
+import { applyVariation } from '../utils/getStyles';
 
 const ENTER_KEY = 13;
 
-const defaultStyle = themeColor => ({
-  color: themeColor,
-  borderBottom: '2px solid',
-  borderColor: themeColor,
-});
-
-const getTheme = (theme, variant, key) =>
-  getThemeStyles(theme, 'tabs', variant)[key];
-
 const Tab = styled(InlineBlock)`
-  cursor: pointer;
-  ${({ theme, selected, variant }) =>
-    css({
-      px: 2,
-      py: 3,
-      ...getTheme(theme, variant, 'tab'),
-      ...(selected
-        ? {
-          ...defaultStyle('primaryDark'),
-          ...getTheme(theme, variant, 'tabSelected'),
-        }
-        : {}),
-      '&:hover, &:focus': {
-        outline: 'none',
-        ...defaultStyle('primary'),
-      },
-    })(theme)}
+  ${({ theme }) => css({
+    px: 4,
+    py: 3,
+    cursor: 'pointer',
+    '&:hover': {
+      color:'success',
+      outline: 'none',
+    },
+    '&:focus': {
+      borderBottomWidth: '3px',
+      borderBottomStyle: 'solid',
+      borderBottomColor: 'primaryLight',
+      outline: 'none',
+    }
+  })(theme)}
+
+  ${({ theme, variant }) => applyVariation(theme, `${variant}.tab`, 'tabs')}
+  ${({ theme, variant, selected }) => selected && applyVariation(theme, `${variant}.tabSelected`, 'tabs')}
 `;
 
 const TabContainer = styled(Box)`
-  ${({theme, variant}) => css({
+  ${({ theme }) => css({
     borderBottom: '1px solid #888',
-    ...getTheme(theme, variant, 'tabContainer'),
   })(theme)}
+  ${({ theme, variant }) => applyVariation(theme, `${variant}.tabContainer`, 'tabs')}
 `;
 
 const Content = styled(Box)`
-  ${({ theme, variant }) =>
-    css({
-      ...getTheme(theme, variant, 'content'),
-    })(theme)}
+  ${({theme, variant}) => applyVariation(theme, `${variant}.content`, 'tabs')}
 `;
 
 const Tabs = ({ children, selected, variant, ...otherProps }) => {
@@ -81,7 +70,7 @@ const Tabs = ({ children, selected, variant, ...otherProps }) => {
   );
 };
 
-Tabs.tab = Tab;
+Tabs.tab = Box;
 
 Tabs.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
