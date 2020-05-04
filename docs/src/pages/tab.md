@@ -5,16 +5,24 @@ Primitive Tab component styled as tabs.
 <Editor>
 
 ```jsx
-<Tabs selected="1">
-  <Tabs.tab label="Tab 1">This is tab test1</Tabs.tab>
-  <Tabs.tab label="Tab 2">You can render anything you want here</Tabs.tab>
-  <Tabs.tab label="Tab 3">This is tab test3</Tabs.tab>
+<Tabs selected="2">
+  <Tabs.tab label="Tab 1">
+    <h2>This is tab 1 content</h2>
+  </Tabs.tab>
+  <Tabs.tab label="Tab 2">
+    <h2>you can render anything you want here</h2>
+  </Tabs.tab>
+  <Tabs.tab label="Tab 3">
+    <h2>This is tab 3 content</h2>
+  </Tabs.tab>
 </Tabs>
 ```
 
 </Editor>
 
 # Props
+
+---
 
 | Prop     | Type            | Default Prop | Desc                                                        |
 | -------- | --------------- | ------------ | ----------------------------------------------------------- |
@@ -27,7 +35,9 @@ Primitive Tab component styled as tabs.
 | ----- | -------------------- | ------------ | ------------------------- |
 | label | string / func / node | null         | To set label for each tab |
 
-# Default theme
+## Default theme
+
+---
 
 ```
 tabs: {
