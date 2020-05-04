@@ -1,37 +1,43 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
-import { Box, css } from 'theme-ui';
-import { InlineBlock } from './index';
-import { applyVariation } from '../utils/getStyles';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import styled from "@emotion/styled";
+import { Box, css } from "theme-ui";
+import { InlineBlock } from "./index";
+import { applyVariation } from "../utils/getStyles";
 
 const ENTER_KEY = 13;
 
 const Tab = styled(InlineBlock)`
-  ${({ theme }) => css({
-    cursor: 'pointer',
-    '&:hover': {
-      color:'primaryDark',
-      outline: 'none',
-    },
-    '&:focus': {
-      color: 'primaryLight',
-      outline: 'none',
-    }
-  })(theme)}
-  ${({ theme, variant }) => applyVariation(theme, `${variant}.tab`, 'tabs')}
-  ${({ theme, variant, selected }) => selected && applyVariation(theme, `${variant}.tabSelected`, 'tabs')}
+  ${({ theme }) =>
+    css({
+      cursor: "pointer",
+      "&:hover": {
+        color: "primaryDark",
+        outline: "none",
+      },
+      "&:focus": {
+        color: "primaryLight",
+        outline: "none",
+      },
+    })(theme)}
+  ${({ theme, variant }) => applyVariation(theme, `${variant}.tab`, "tabs")}
+  ${({ theme, variant, selected }) =>
+    selected && applyVariation(theme, `${variant}.tabSelected`, "tabs")}
 `;
 
 const TabContainer = styled(Box)`
-  ${({ theme }) => css({
-    borderBottom: '1px solid #888',
-  })(theme)}
-  ${({ theme, variant }) => applyVariation(theme, `${variant}.tabContainer`, 'tabs')}
+  ${({ theme }) =>
+    css({
+      borderBottomWidth: '1px',
+      borderBottomStyle: 'solid',
+      borderBottomColor: 'darkGray',
+    })(theme)}
+  ${({ theme, variant }) =>
+    applyVariation(theme, `${variant}.tabContainer`, "tabs")}
 `;
 
 const Content = styled(Box)`
-  ${({theme, variant}) => applyVariation(theme, `${variant}.content`, 'tabs')}
+  ${({ theme, variant }) => applyVariation(theme, `${variant}.content`, "tabs")}
 `;
 
 const Tabs = ({ children, selected, variant, ...otherProps }) => {
@@ -48,12 +54,12 @@ const Tabs = ({ children, selected, variant, ...otherProps }) => {
               selected={i + 1 === tabSelected}
               onClick={() => setTabSelected(i + 1)}
               key={label}
-              tabIndex='0'
-              onKeyDown={e =>
+              tabIndex="0"
+              onKeyDown={(e) =>
                 e.keyCode === ENTER_KEY ? setTabSelected(i + 1) : null
               }
             >
-              {typeof label === 'function' ? label() : label}
+              {typeof label === "function" ? label() : label}
             </Tab>
           </InlineBlock>
         ))}
@@ -76,7 +82,7 @@ Tabs.propTypes = {
 };
 Tabs.defaultProps = {
   selected: 1,
-  variant: 'primary',
+  variant: "primary",
 };
 
 export default Tabs;
