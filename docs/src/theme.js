@@ -191,10 +191,6 @@ export default {
         py: 3,
       },
       tabSelected: {
-        // color: 'success',
-        // borderBottomWidth: '3px',
-        // borderBottomStyle: 'solid',
-        // borderBottomColor: 'success',
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: 'darkGray',
