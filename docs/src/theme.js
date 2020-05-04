@@ -182,17 +182,27 @@ export default {
 
   tabs: {
     primary: {
+      tabContainer: {
+        bg: 'borderGray',
+      },
       tab: {
         color: 'primaryLight',
       },
-      tabSelected: {
-        color: 'success',
-        borderBottomWidth: '3px',
-        borderBottomStyle: 'solid',
-        borderBottomColor: 'success',
+      tabContent: {
+        px: 4,
+        py: 3,
       },
-      tabContainer: {
-        bg: 'borderGray',
+      tabSelected: {
+        // color: 'success',
+        // borderBottomWidth: '3px',
+        // borderBottomStyle: 'solid',
+        // borderBottomColor: 'success',
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: 'darkGray',
+        borderBottomColor: '#fff',
+        marginBottom: '-1px',
+        bg: '#fff',
       },
       content: {
         p: 3,

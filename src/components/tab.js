@@ -9,23 +9,23 @@ const ENTER_KEY = 13;
 
 const Tab = styled(InlineBlock)`
   ${({ theme }) => css({
-    px: 4,
-    py: 3,
     cursor: 'pointer',
     '&:hover': {
       color:'success',
       outline: 'none',
     },
     '&:focus': {
-      borderBottomWidth: '3px',
-      borderBottomStyle: 'solid',
-      borderBottomColor: 'primaryLight',
+      color: 'primaryLight',
       outline: 'none',
     }
   })(theme)}
 
   ${({ theme, variant }) => applyVariation(theme, `${variant}.tab`, 'tabs')}
   ${({ theme, variant, selected }) => selected && applyVariation(theme, `${variant}.tabSelected`, 'tabs')}
+`;
+
+const TabContent = styled(InlineBlock)`
+  ${({ theme, variant }) => applyVariation(theme, `${variant}.tabContent`, 'tabs')}
 `;
 
 const TabContainer = styled(Box)`
@@ -57,7 +57,8 @@ const Tabs = ({ children, selected, variant, ...otherProps }) => {
               e.keyCode === ENTER_KEY ? setTabSelected(i + 1) : null
             }
           >
-            {label}
+            {console.log(typeof label)}
+            <TabContent variant={variant}>{typeof label === 'function' ? label() : label}</TabContent>
           </Tab>
         ))}
       </TabContainer>
@@ -85,9 +86,9 @@ Tabs.defaultProps = {
 const T = () => {
   return (
     <Tabs selected='1'>
-      <Tabs.tab label='tab1'>This is tab test1</Tabs.tab>
-      <Tabs.tab label='tab2'>You can render anything you want here</Tabs.tab>
-      <Tabs.tab label='tab3'>This is tab test3</Tabs.tab>
+      <Tabs.tab label='Tab 1'>This is tab test1</Tabs.tab>
+      <Tabs.tab label='Tab 2'>You can render anything you want here</Tabs.tab>
+      <Tabs.tab label='Tab 3'>This is tab test3</Tabs.tab>
     </Tabs>
   );
 };
