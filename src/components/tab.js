@@ -11,7 +11,7 @@ const Tab = styled(InlineBlock)`
   ${({ theme }) => css({
     cursor: 'pointer',
     '&:hover': {
-      color:'success',
+      color:'primaryDark',
       outline: 'none',
     },
     '&:focus': {
@@ -19,13 +19,8 @@ const Tab = styled(InlineBlock)`
       outline: 'none',
     }
   })(theme)}
-
   ${({ theme, variant }) => applyVariation(theme, `${variant}.tab`, 'tabs')}
   ${({ theme, variant, selected }) => selected && applyVariation(theme, `${variant}.tabSelected`, 'tabs')}
-`;
-
-const TabContent = styled(InlineBlock)`
-  ${({ theme, variant }) => applyVariation(theme, `${variant}.tabContent`, 'tabs')}
 `;
 
 const TabContainer = styled(Box)`
@@ -47,19 +42,20 @@ const Tabs = ({ children, selected, variant, ...otherProps }) => {
     <Box {...otherProps}>
       <TabContainer variant={variant}>
         {labels.map((label, i) => (
-          <Tab
-            variant={variant}
-            selected={i + 1 === tabSelected}
-            onClick={() => setTabSelected(i + 1)}
-            key={label}
-            tabIndex='0'
-            onKeyDown={e =>
-              e.keyCode === ENTER_KEY ? setTabSelected(i + 1) : null
-            }
-          >
-            {console.log(typeof label)}
-            <TabContent variant={variant}>{typeof label === 'function' ? label() : label}</TabContent>
-          </Tab>
+          <InlineBlock>
+            <Tab
+              variant={variant}
+              selected={i + 1 === tabSelected}
+              onClick={() => setTabSelected(i + 1)}
+              key={label}
+              tabIndex='0'
+              onKeyDown={e =>
+                e.keyCode === ENTER_KEY ? setTabSelected(i + 1) : null
+              }
+            >
+              {typeof label === 'function' ? label() : label}
+            </Tab>
+          </InlineBlock>
         ))}
       </TabContainer>
       <Content variant={variant}>
@@ -83,14 +79,4 @@ Tabs.defaultProps = {
   variant: 'primary',
 };
 
-const T = () => {
-  return (
-    <Tabs selected='1'>
-      <Tabs.tab label='Tab 1'>This is tab test1</Tabs.tab>
-      <Tabs.tab label='Tab 2'>You can render anything you want here</Tabs.tab>
-      <Tabs.tab label='Tab 3'>This is tab test3</Tabs.tab>
-    </Tabs>
-  );
-};
-
-export default T;
+export default Tabs;

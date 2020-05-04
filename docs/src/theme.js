@@ -187,8 +187,6 @@ export default {
       },
       tab: {
         color: 'primaryLight',
-      },
-      tabContent: {
         px: 4,
         py: 3,
       },
