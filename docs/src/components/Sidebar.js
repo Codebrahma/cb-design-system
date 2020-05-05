@@ -33,8 +33,28 @@ const sidebarLinks = [
     ref: '/buttonGroup',
   },
   {
+    name: 'InputGroup',
+    ref: '/inputGroup',
+  },
+  {
+    name: 'Collapse',
+    ref: '/collapse',
+  },
+  {
+    name: 'BreadCrumbs',
+    ref: '/breadcrumbs',
+  },
+  {
     name: 'Theming',
     ref: '/theming',
+  },
+  {
+    name: 'DropDownMenu',
+    ref: '/dropdownMenu',
+  },
+  {
+    name: 'Tabs',
+    ref: '/tab',
   },
 ];
 
