@@ -226,6 +226,20 @@ export default {
     },
   },
 
+  inputGroup: {
+    primary: {
+      marginTop: '10px',
+      label: {
+        p: 3,
+      },
+      input: {
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: 'borderGray',
+      },
+    },
+  },
+
   collapse: {
     primary: {
       head: {

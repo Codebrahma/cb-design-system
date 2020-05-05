@@ -17,6 +17,7 @@ export { Toast, openToast, PortableToastContainer } from './toast';
 export DropdownMenu from './dropdownMenu';
 export Pill from './pill';
 export Switch from './switch';
+export InputGroup from './inputGroup';
 export Tabs from './tab';
 export Collapse from './collapse';
 export Breadcrumbs from './breadcrumbs';
