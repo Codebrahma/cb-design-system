@@ -198,4 +198,24 @@ export default {
       },
     },
   },
+
+  breadcrumbs: {
+    primary: {
+      breadcrumbContainer: {
+        p: 3,
+      },
+      breadcrumbItem: {
+        '&:hover': {
+          color: 'primary',
+        },
+        '&:focus': {
+          outline: 'none',
+          color: 'primary',
+        },
+      },
+      separater: {
+        mx: 3,
+      },
+    },
+  },
 };
