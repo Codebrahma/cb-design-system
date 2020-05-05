@@ -33,8 +33,16 @@ const sidebarLinks = [
     ref: '/collapse',
   },
   {
+    name: 'BreadCrumbs',
+    ref: '/breadcrumbs',
+  },
+  {
     name: 'Theming',
     ref: '/theming',
+  },
+  {
+    name: 'DropDownMenu',
+    ref: '/dropdownMenu',
   },
 ];
 
