@@ -1,7 +1,7 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { Flex, css } from 'theme-ui';
+import { Flex, css, Box } from 'theme-ui';
 import { InlineBlock } from './layout';
 import { ENTER_KEY } from '../utils/general';
 import { applyVariation } from '../utils/getStyles';
@@ -40,7 +40,7 @@ const Breadcrumbs = ({
   return (
     <BreadcrumbContainer variant={variant}>
       {options.map((option, i) => (
-        <Fragment>
+        <Box key={option.value}>
           <BreadcrumbItem
             key={option.value}
             onClick={(e) => onSelect && onSelect(option, e)}
@@ -59,19 +59,19 @@ const Breadcrumbs = ({
               {separater || <span>&#62;</span>}
             </Separater>
           ) : null}
-        </Fragment>
+        </Box>
       ))}
     </BreadcrumbContainer>
   );
 };
 
 Breadcrumbs.propTypes = {
-  options: PropTypes.arrayOf([
+  options: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
       value: PropTypes.string.isRequired,
     }),
-  ]).isRequired,
+  ).isRequired,
   onSelect: PropTypes.func,
   separater: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   tabIndex: PropTypes.string,
