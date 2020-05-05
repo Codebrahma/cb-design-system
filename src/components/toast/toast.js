@@ -4,10 +4,61 @@ import { CSSTransition } from 'react-transition-group';
 import { Flex } from 'theme-ui';
 import { Content, CloseButton } from './components';
 
+const getPositionStyles = (position) => {
+  switch (position) {
+    case 'top-center':
+      return {
+        top: '10px',
+        width: '80%',
+        left: '50%',
+        transform: 'translateX(-50%)',
+      };
+    case 'top-left':
+      return {
+        top: '10px',
+        width: '40%',
+        left: '10px',
+      };
+    case 'top-right':
+      return {
+        top: '10px',
+        width: '40%',
+        right: '10px',
+      };
+    case 'bottom-center':
+      return {
+        bottom: '10px',
+        width: '80%',
+        left: '50%',
+        transform: 'translateX(-50%)',
+      };
+    case 'bottom-left':
+      return {
+        bottom: '10px',
+        width: '40%',
+        left: '10px',
+      };
+    case 'bottom-right':
+      return {
+        bottom: '10px',
+        width: '40%',
+        right: '10px',
+      };
+    default:
+      return {
+        top: '10px',
+        width: '80%',
+        left: '50%',
+        transform: 'translateX(-50%)',
+      };
+  }
+};
+
 const Toast = ({
   open,
   timeout,
   onClose,
+  position,
   body,
   ...otherProps
 }) => {
@@ -45,10 +96,8 @@ const Toast = ({
         __css={{
           p: 4,
           position: 'fixed',
-          top: '10px',
-          width: '80%',
-          left: '50%',
-          transform: 'translateX(-50%)',
+          ...getPositionStyles(position),
+          zIndex: '9999',
           bg: 'primary',
           '&.toast-enter': {
             opacity: 0,
@@ -87,14 +136,16 @@ Toast.propTypes = {
     PropTypes.element,
   ]),
   variant: PropTypes.string,
+  position: PropTypes.string,
 };
 
 Toast.defaultProps = {
   open: false,
-  timeout: null,
+  timeout: 4000,
   onClose: null,
   body: null,
   variant: 'primary',
+  position: 'top-center',
 };
 
 export default Toast;
