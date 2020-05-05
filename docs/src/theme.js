@@ -180,6 +180,33 @@ export default {
     },
   },
 
+  tabs: {
+    primary: {
+      tabContainer: {
+        bg: 'borderGray',
+      },
+      tab: {
+        color: 'primaryLight',
+        px: 4,
+        py: 3,
+      },
+      tabSelected: {
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: 'darkGray',
+        borderBottomColor: '#fff',
+        marginBottom: '-1px',
+        bg: '#fff',
+      },
+      content: {
+        p: 3,
+        mt: 2,
+        bg: 'border',
+        color: 'text',
+      },
+    },
+  },
+
   styles: {
     root: {
       lineHeight: 4,
