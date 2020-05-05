@@ -154,6 +154,59 @@ export default {
     },
   },
 
+  dropdownMenu: {
+    primary: {
+      dropdownTrigger: {
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: 'borderGray',
+        borderRadius: 4,
+        px: 2,
+      },
+      dropdownContainer: {
+        width: '300px',
+      },
+      dropdownOption: {
+        color: 'text',
+        '&:hover': {
+          bg: 'primaryLight',
+          color: 'white',
+        },
+        '&:focus': {
+          bg: 'primaryDark',
+          color: 'white',
+        },
+      },
+    },
+  },
+
+  tabs: {
+    primary: {
+      tabContainer: {
+        bg: 'borderGray',
+      },
+      tab: {
+        color: 'primaryLight',
+        px: 4,
+        py: 3,
+      },
+      tabSelected: {
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: 'darkGray',
+        borderBottomColor: '#fff',
+        marginBottom: '-1px',
+        bg: '#fff',
+      },
+      content: {
+        p: 3,
+        mt: 2,
+        bg: 'border',
+        color: 'text',
+      },
+    },
+  },
+
   styles: {
     root: {
       lineHeight: 4,
@@ -183,6 +236,47 @@ export default {
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: 'borderGray',
+      },
+    },
+  },
+
+  collapse: {
+    primary: {
+      head: {
+        p: 3,
+        bg: 'borderGray',
+        borderRadius: 3,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: 'darkGray',
+        cursor: 'pointer',
+      },
+      body: {
+        p: 4,
+        borderRadius: 3,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: 'darkGray',
+      },
+    },
+  },
+
+  breadcrumbs: {
+    primary: {
+      breadcrumbContainer: {
+        p: 3,
+      },
+      breadcrumbItem: {
+        '&:hover': {
+          color: 'primary',
+        },
+        '&:focus': {
+          outline: 'none',
+          color: 'primary',
+        },
+      },
+      separater: {
+        mx: 3,
       },
     },
   },
