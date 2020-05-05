@@ -29,6 +29,10 @@ const sidebarLinks = [
     ref: '/pill',
   },
   {
+    name: 'ButtonGroup',
+    ref: '/buttonGroup',
+  },
+  {
     name: 'InputGroup',
     ref: '/inputGroup',
   },
