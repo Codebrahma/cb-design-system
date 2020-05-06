@@ -11,10 +11,9 @@ import {
   DaysText,
   Line,
 } from "./component";
-import Months from "./months";
 
 const Days = ({
-  onDateChange,
+  dayChangeHandler,
   updateScreen,
   date: calDate,
   onMonthChange,
@@ -71,7 +70,7 @@ const Days = ({
 
   const dayClickHandler = (date) => {
     if (date.month === "current") {
-      onDateChange(date.day);
+      dayChangeHandler(date.day);
     } else if (date.month === "prev") {
       const newMonth = calDate.month - 1;
       onMonthChange(
@@ -144,7 +143,7 @@ const Days = ({
 };
 
 Days.propTypes = {
-  onDateChange: PropTypes.func.isRequired,
+  dayChangeHandler: PropTypes.func.isRequired,
   updateScreen: PropTypes.func.isRequired,
   date: PropTypes.shape({
     day: PropTypes.number,

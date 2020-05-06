@@ -7,7 +7,7 @@ import { Wrapper } from "./component";
 
 const Calendar = React.forwardRef(
   (
-    { onDateChange, variant, onClickDay, onClickMonth, onClickYear, ...rest },
+    { onChange, variant, onClickDay, onClickMonth, onClickYear, ...rest },
     ref
   ) => {
     const [date, setDate] = React.useState({
@@ -28,8 +28,8 @@ const Calendar = React.forwardRef(
 
     const updateDate = (newDate) => {
       setDate(newDate);
-      if (onDateChange) {
-        onDateChange({ ...newDate, month: newDate.month + 1 });
+      if (onChange) {
+        onChange({ ...newDate, month: newDate.month + 1 });
       }
     };
     const updateCalendarScreen = (screenToShow) => {
@@ -62,7 +62,7 @@ const Calendar = React.forwardRef(
     const calendarScreens = {
       day: (
         <Days
-          onDateChange={handleDateChange}
+          dayChangeHandler={handleDateChange}
           onMonthChange={handleMonthChange}
           date={date}
           updateScreen={(newScreen) => updateCalendarScreen(newScreen)}
@@ -91,7 +91,7 @@ const Calendar = React.forwardRef(
 );
 
 Calendar.defaultProps = {
-  onDateChange: null,
+  onChange: null,
   variant: "primary",
   toggleOnDayClick: () => {},
   onClickDay: () => null,
@@ -100,7 +100,7 @@ Calendar.defaultProps = {
 };
 
 Calendar.propTypes = {
-  onDateChange: PropTypes.func,
+  onChange: PropTypes.func,
   variant: PropTypes.string,
   toggleOnDayClick: PropTypes.func,
   onClickDay: PropTypes.func,
