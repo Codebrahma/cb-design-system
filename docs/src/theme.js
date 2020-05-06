@@ -126,6 +126,26 @@ export default {
       },
     },
   },
+  table: {
+    primary: {
+      container: {
+        width: 750,
+        bg: 'white',
+      },
+      td: {
+        fontSize: 14,
+        p: 10,
+      },
+      th: {
+        fontSize: 16,
+        p: 10,
+        fontWeight: 'bold',
+      },
+      headerText: {
+        mr: 10,
+      },
+    },
+  },
 
   switch: {
     sm: {
@@ -245,7 +265,7 @@ export default {
       },
     },
   },
-  
+
   inputGroup: {
     primary: {
       marginTop: '10px',
@@ -298,7 +318,6 @@ export default {
       separater: {
         mx: 3,
       },
-
     },
   },
 };
