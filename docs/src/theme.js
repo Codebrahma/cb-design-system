@@ -245,7 +245,7 @@ export default {
       },
     },
   },
-  
+
   inputGroup: {
     primary: {
       marginTop: '10px',
@@ -256,6 +256,18 @@ export default {
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: 'borderGray',
+      },
+    },
+  },
+  calendar: {
+    primary: {
+      wrapper: {
+        color: '#777777',
+        height: '351px',
+        width: '344px',
+        borderRadius: '5px',
+        bg: 'background',
+        boxShadow: '0 0 7px 0 rgba(0, 0, 0, 0.15)',
       },
     },
   },
@@ -298,7 +310,6 @@ export default {
       separater: {
         mx: 3,
       },
-
     },
   },
 };
