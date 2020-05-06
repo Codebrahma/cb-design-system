@@ -180,6 +180,33 @@ export default {
     },
   },
 
+  tabs: {
+    primary: {
+      tabContainer: {
+        bg: 'borderGray',
+      },
+      tab: {
+        color: 'primaryLight',
+        px: 4,
+        py: 3,
+      },
+      tabSelected: {
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: 'darkGray',
+        borderBottomColor: '#fff',
+        marginBottom: '-1px',
+        bg: '#fff',
+      },
+      content: {
+        p: 3,
+        mt: 2,
+        bg: 'border',
+        color: 'text',
+      },
+    },
+  },
+
   styles: {
     root: {
       lineHeight: 4,
@@ -195,6 +222,81 @@ export default {
         borderStyle: 'solid',
         borderColor: 'borderGray',
         textAlign: 'left',
+      },
+    },
+  },
+
+  buttonGroup: {
+    primary: {
+      borderRadius: 4,
+      m: 2,
+    },
+    secondary: {
+      button: {
+        mr: 1,
+        '&:first-of-type': {
+          borderTopLeftRadius: 11,
+          borderBottomLeftRadius: 11,
+        },
+        '&:last-child': {
+          borderTopRightRadius: 11,
+          borderBottomRightRadius: 11,
+        },
+      },
+    },
+  },
+
+  inputGroup: {
+    primary: {
+      marginTop: '10px',
+      label: {
+        p: 3,
+      },
+      input: {
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: 'borderGray',
+      },
+    },
+  },
+
+  collapse: {
+    primary: {
+      head: {
+        p: 3,
+        bg: 'borderGray',
+        borderRadius: 3,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: 'darkGray',
+        cursor: 'pointer',
+      },
+      body: {
+        p: 4,
+        borderRadius: 3,
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: 'darkGray',
+      },
+    },
+  },
+
+  breadcrumbs: {
+    primary: {
+      breadcrumbContainer: {
+        p: 3,
+      },
+      breadcrumbItem: {
+        '&:hover': {
+          color: 'primary',
+        },
+        '&:focus': {
+          outline: 'none',
+          color: 'primary',
+        },
+      },
+      separater: {
+        mx: 3,
       },
     },
   },

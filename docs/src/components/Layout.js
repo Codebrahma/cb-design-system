@@ -17,6 +17,7 @@ import { cssPageWidth, headerHeight, sidebarWidth } from '../styles';
 const {
   ThemeProvider,
   PortableModalContainer,
+  PortableToastContainer,
   components: otherPrimitiveComps,
 } = designSystem;
 const components = {
@@ -43,6 +44,7 @@ function Layout({ children }) {
           <GlobalStyles />
           <SiteMeta {...siteMetadata} />
           <PortableModalContainer />
+          <PortableToastContainer />
           <div
             css={css`
               min-height: calc(100vh - 18px);

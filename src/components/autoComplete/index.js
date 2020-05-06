@@ -171,8 +171,8 @@ const Autocomplete = ({
 
     if (isMulti) {
       filteredArr = options.filter(function (option) {
-        return !selected.find(function (selctedItem) {
-          return option.value === selctedItem.value;
+        return !selected.find(function (selectedItem) {
+          return option.value === selectedItem.value;
         });
       });
     }
@@ -210,7 +210,7 @@ const Autocomplete = ({
       }
     }
   };
-  console.log(inputRef);
+
   return (
     <Relative ref={dropdownRef}>
       <DropDownContainer
