@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Months from './months';
-import Years from './years';
-import Days from './days';
-import { Wrapper } from './component';
+import React from "react";
+import PropTypes from "prop-types";
+import Months from "./months";
+import Years from "./years";
+import Days from "./days";
+import { Wrapper } from "./component";
 
 const Calendar = React.forwardRef(
   (
@@ -15,7 +15,7 @@ const Calendar = React.forwardRef(
       month: null,
       year: null,
     });
-    const [screen, setScreen] = React.useState('day');
+    const [screen, setScreen] = React.useState("day");
 
     React.useEffect(() => {
       const currentDate = new Date();
@@ -36,26 +36,27 @@ const Calendar = React.forwardRef(
       setScreen(screenToShow);
     };
 
-    const handle = (key, value, day = null) => {
+    const handle = (key, value, day = null, year = null) => {
       const newDate = { ...date };
       newDate[key] = value;
-      if (key === 'month' && day !== null) newDate.day = day;
+      if (key === "month" && day !== null) newDate.day = day;
+      if (key === "month" && year !== null) newDate.year = year;
       updateDate(newDate);
-      if (key === 'month' || key === 'year') updateCalendarScreen('day');
+      if (key === "month" || key === "year") updateCalendarScreen("day");
     };
 
     const handleYearChange = (year) => {
-      handle('year', year);
+      handle("year", year);
       onClickYear();
     };
 
-    const handleMonthChange = (month, day = null) => {
-      handle('month', month, day);
+    const handleMonthChange = (month, day = null, year = null) => {
+      handle("month", month, day, year);
       onClickMonth(month);
     };
 
     const handleDateChange = (day) => {
-      handle('day', day);
+      handle("day", day);
       onClickDay(day);
     };
     const calendarScreens = {
@@ -91,7 +92,7 @@ const Calendar = React.forwardRef(
 
 Calendar.defaultProps = {
   onDateChange: null,
-  variant: 'primary',
+  variant: "primary",
   toggleOnDayClick: () => {},
   onClickDay: () => null,
   onClickMonth: () => null,

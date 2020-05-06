@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { months, days } from './dates';
-import { createChunks } from './utils';
+import React from "react";
+import PropTypes from "prop-types";
+import { months, days } from "./dates";
+import { createChunks } from "./utils";
 import {
   OuterWrapper,
   DatesButton,
@@ -10,7 +10,8 @@ import {
   HeaderContainer,
   DaysText,
   Line,
-} from './component';
+} from "./component";
+import Months from "./months";
 
 const Days = ({
   onDateChange,
@@ -35,7 +36,7 @@ const Days = ({
     for (let i = 0; i < firstDay; i += 1) {
       daysArray.push({
         day: reverseDay - firstDay + 1,
-        month: 'prev',
+        month: "prev",
       });
       reverseDay += 1;
     }
@@ -45,14 +46,14 @@ const Days = ({
     for (let i = length; i < lastDate + length; i += 1) {
       daysArray.push({
         day: j,
-        month: 'current',
+        month: "current",
       });
       j += 1;
     }
     const { length: newLen } = daysArray;
     j = 1;
     for (let i = newLen; i < 42; i += 1) {
-      daysArray.push({ day: j, month: 'next' });
+      daysArray.push({ day: j, month: "next" });
       j += 1;
     }
     return daysArray;
@@ -69,12 +70,22 @@ const Days = ({
   }, [calDate]);
 
   const dayClickHandler = (date) => {
-    if (date.month === 'current') {
+    if (date.month === "current") {
       onDateChange(date.day);
-    } else if (date.month === 'prev') {
-      onMonthChange(calDate.month - 1, date.day);
+    } else if (date.month === "prev") {
+      const newMonth = calDate.month - 1;
+      onMonthChange(
+        newMonth < 0 ? months.length - 1 : newMonth,
+        date.day,
+        newMonth < 0 ? calDate.year - 1 : null
+      );
     } else {
-      onMonthChange(calDate.month + 1, date.day);
+      const newMonth = calDate.month + 1;
+      onMonthChange(
+        newMonth === months.length ? 0 : newMonth,
+        date.day,
+        newMonth === months.length ? calDate.year + 1 : null
+      );
     }
   };
   return (
@@ -83,7 +94,7 @@ const Days = ({
         <HeaderText
           variant={variant}
           onClick={() => {
-            updateScreen('month');
+            updateScreen("month");
           }}
         >
           {months[calDate.month]}
@@ -92,7 +103,7 @@ const Days = ({
         <HeaderText
           variant={variant}
           onClick={() => {
-            updateScreen('year');
+            updateScreen("year");
           }}
         >
           {calDate.year}
@@ -113,11 +124,11 @@ const Days = ({
                 <td key={date.day}>
                   <DatesButton
                     variant={variant}
-                    type='button'
+                    type="button"
                     active={
-                      calDate.day === date.day && date.month === 'current'
+                      calDate.day === date.day && date.month === "current"
                     }
-                    currentMonth={date.month === 'current'}
+                    currentMonth={date.month === "current"}
                     onClick={() => dayClickHandler(date)}
                   >
                     {date.day}

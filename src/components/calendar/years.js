@@ -24,7 +24,7 @@ const Years = ({ onYearChange, date, variant }) => {
           {years.map((yearChunk, index) => (
             <tr key={index}>
               {yearChunk.map((year) => (
-                <td>
+                <td key={year}>
                   <DatesButton
                     type='button'
                     variant={variant}
