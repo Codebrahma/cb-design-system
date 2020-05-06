@@ -56,6 +56,10 @@ const sidebarLinks = [
     name: 'Tabs',
     ref: '/tab',
   },
+  {
+    name: 'Calendar',
+    ref: '/calendar',
+  },
 ];
 
 export const cssNavLink = css`
