@@ -20,14 +20,33 @@ Primitive Tab component styled as tabs.
 
 </Editor>
 
+<Editor>
+
+```jsx
+<Tabs onChange={index => alert('Selected tab ' + index)}>
+  <Tabs.tab label="Tab 1">
+    <h2>This is tab 1 content</h2>
+  </Tabs.tab>
+  <Tabs.tab label="Tab 2">
+    <h2>you can render anything you want here</h2>
+  </Tabs.tab>
+  <Tabs.tab label="Tab 3">
+    <h2>This is tab 3 content</h2>
+  </Tabs.tab>
+</Tabs>
+```
+
+</Editor>
+
 # Props
 
 ---
 
-| Prop     | Type            | Default Prop | Desc                                                        |
-| -------- | --------------- | ------------ | ----------------------------------------------------------- |
-| selected | string / number | 1            | To determine which tab should be displayed on initial mount |
-| varaint  | string          | 'primary'    | set's the default state of collapse open/close              |
+| Prop     | Type            | Default Prop | Desc                                                                              |
+| -------- | --------------- | ------------ | --------------------------------------------------------------------------------- |
+| selected | string / number | 1            | To determine which tab should be displayed on initial mount                       |
+| onChange | func            | null         | Callback triggered with the newly selected tab's index when the selection changes |
+| varaint  | string          | 'primary'    | set's the default state of collapse open/close                                    |
 
 ## Tabs.tab
 

@@ -39,8 +39,14 @@ const Content = styled(Box)`
   ${({ theme, variant }) => applyVariation(theme, `${variant}.content`, "tabs")}
 `;
 
-const Tabs = ({ children, selected, variant, ...otherProps }) => {
+const Tabs = ({ children, selected, variant, onChange, ...otherProps }) => {
   const [tabSelected, setTabSelected] = useState(parseInt(selected));
+
+  const selectTab = i => {
+    setTabSelected(i);
+    onChange && onChange(i);
+  };
+
   const labels = children.map(({ props: { label } }) => label);
 
   return (
@@ -51,11 +57,11 @@ const Tabs = ({ children, selected, variant, ...otherProps }) => {
             <Tab
               variant={variant}
               selected={i + 1 === tabSelected}
-              onClick={() => setTabSelected(i + 1)}
+              onClick={() => selectTab(i + 1)}
               key={label}
               tabIndex="0"
               onKeyDown={(e) =>
-                e.keyCode === ENTER_KEY ? setTabSelected(i + 1) : null
+                e.keyCode === ENTER_KEY ? selectTab(i + 1) : null
               }
             >
               {typeof label === "function" ? label() : label}
@@ -78,10 +84,12 @@ Tabs.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
   selected: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   variant: PropTypes.string,
+  onChange: PropTypes.func,
 };
 Tabs.defaultProps = {
   selected: 1,
   variant: "primary",
+  onChange: null,
 };
 
 export default Tabs;
